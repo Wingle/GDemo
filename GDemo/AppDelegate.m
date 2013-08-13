@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
-
 #import "FirstViewController.h"
-
 #import "SecondViewController.h"
+#import "ThirdViewController.h"
+#import "FourthViewController.h"
+#import "LoginViewController.h"
+
+#import "CCRGlobalConf.h"
 
 @implementation AppDelegate
 
@@ -18,18 +21,44 @@
 {
     [_window release];
     [_tabBarController release];
+    [_navigationController release];
     [super dealloc];
+}
+
+- (void) loginSuccess {
+    if (_navigationController) {
+        [_navigationController.view removeFromSuperview];
+        [_navigationController release];
+        _navigationController =nil;
+    }
+    [self.tabBarController.view removeFromSuperview];
+    UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease]];
+    UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil] autorelease]];
+    UINavigationController *viewController3 = [[UINavigationController alloc] initWithRootViewController:[[[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil] autorelease]];
+    UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithNibName:@"FourthViewController" bundle:nil] autorelease]];
+    
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
+    [viewController1 release];
+    [viewController2 release];
+    [viewController3 release];
+    [viewController4 release];
+    self.window.rootViewController = self.tabBarController;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    UIViewController *viewController1 = [[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease];
-    UIViewController *viewController2 = [[[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil] autorelease];
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = @[viewController1, viewController2];
-    self.window.rootViewController = self.tabBarController;
+    if (CCRConf.isLogin) {
+        [self loginSuccess];
+    }else {
+        UINavigationController *viewController0 = [[UINavigationController alloc] initWithRootViewController:[[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease]];
+        self.navigationController = viewController0;
+        [viewController0 release];
+        [self.window addSubview:self.navigationController.view];
+    }
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

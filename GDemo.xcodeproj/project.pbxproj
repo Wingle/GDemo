@@ -24,6 +24,20 @@
 		98D6DCA317B9C1620080DAC5 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA217B9C1620080DAC5 /* second@2x.png */; };
 		98D6DCA617B9C1620080DAC5 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA417B9C1620080DAC5 /* FirstViewController.xib */; };
 		98D6DCA917B9C1620080DAC5 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA717B9C1620080DAC5 /* SecondViewController.xib */; };
+		98D6DCB517B9E1B80080DAC5 /* CCRGlobalConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCB417B9E1B80080DAC5 /* CCRGlobalConf.m */; };
+		98D6DCB717B9E2720080DAC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DCB617B9E2720080DAC5 /* MapKit.framework */; };
+		98D6DCBB17B9FF570080DAC5 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCB917B9FF560080DAC5 /* ThirdViewController.m */; };
+		98D6DCBC17B9FF570080DAC5 /* ThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCBA17B9FF570080DAC5 /* ThirdViewController.xib */; };
+		98D6DCC017B9FF920080DAC5 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCBE17B9FF920080DAC5 /* FourthViewController.m */; };
+		98D6DCC117B9FF920080DAC5 /* FourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCBF17B9FF920080DAC5 /* FourthViewController.xib */; };
+		98D6DCC517BA04410080DAC5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCC317BA04410080DAC5 /* LoginViewController.m */; };
+		98D6DCC617BA04410080DAC5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCC417BA04410080DAC5 /* LoginViewController.xib */; };
+		98D6DCD017BA10580080DAC5 /* RegsiterStepFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCCE17BA10580080DAC5 /* RegsiterStepFirstViewController.m */; };
+		98D6DCD117BA10580080DAC5 /* RegsiterStepFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCCF17BA10580080DAC5 /* RegsiterStepFirstViewController.xib */; };
+		98D6DCD517BA108C0080DAC5 /* RegsiterStepSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCD317BA108C0080DAC5 /* RegsiterStepSecondViewController.m */; };
+		98D6DCD617BA108C0080DAC5 /* RegsiterStepSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCD417BA108C0080DAC5 /* RegsiterStepSecondViewController.xib */; };
+		98D6DCDA17BA10AA0080DAC5 /* RegsiterStepThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCD817BA10AA0080DAC5 /* RegsiterStepThirdViewController.m */; };
+		98D6DCDB17BA10AA0080DAC5 /* RegsiterStepThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCD917BA10AA0080DAC5 /* RegsiterStepThirdViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +64,27 @@
 		98D6DCA217B9C1620080DAC5 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		98D6DCA517B9C1620080DAC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
 		98D6DCA817B9C1620080DAC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
+		98D6DCB317B9E1B80080DAC5 /* CCRGlobalConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRGlobalConf.h; sourceTree = "<group>"; };
+		98D6DCB417B9E1B80080DAC5 /* CCRGlobalConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRGlobalConf.m; sourceTree = "<group>"; };
+		98D6DCB617B9E2720080DAC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		98D6DCB817B9FF560080DAC5 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		98D6DCB917B9FF560080DAC5 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		98D6DCBA17B9FF570080DAC5 /* ThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdViewController.xib; sourceTree = "<group>"; };
+		98D6DCBD17B9FF920080DAC5 /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
+		98D6DCBE17B9FF920080DAC5 /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
+		98D6DCBF17B9FF920080DAC5 /* FourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourthViewController.xib; sourceTree = "<group>"; };
+		98D6DCC217BA04410080DAC5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		98D6DCC317BA04410080DAC5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		98D6DCC417BA04410080DAC5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		98D6DCCD17BA10580080DAC5 /* RegsiterStepFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegsiterStepFirstViewController.h; sourceTree = "<group>"; };
+		98D6DCCE17BA10580080DAC5 /* RegsiterStepFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegsiterStepFirstViewController.m; sourceTree = "<group>"; };
+		98D6DCCF17BA10580080DAC5 /* RegsiterStepFirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegsiterStepFirstViewController.xib; sourceTree = "<group>"; };
+		98D6DCD217BA108C0080DAC5 /* RegsiterStepSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegsiterStepSecondViewController.h; sourceTree = "<group>"; };
+		98D6DCD317BA108C0080DAC5 /* RegsiterStepSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegsiterStepSecondViewController.m; sourceTree = "<group>"; };
+		98D6DCD417BA108C0080DAC5 /* RegsiterStepSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegsiterStepSecondViewController.xib; sourceTree = "<group>"; };
+		98D6DCD717BA10AA0080DAC5 /* RegsiterStepThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegsiterStepThirdViewController.h; sourceTree = "<group>"; };
+		98D6DCD817BA10AA0080DAC5 /* RegsiterStepThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegsiterStepThirdViewController.m; sourceTree = "<group>"; };
+		98D6DCD917BA10AA0080DAC5 /* RegsiterStepThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegsiterStepThirdViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98D6DCB717B9E2720080DAC5 /* MapKit.framework in Frameworks */,
 				98D6DC7F17B9C1620080DAC5 /* UIKit.framework in Frameworks */,
 				98D6DC8117B9C1620080DAC5 /* Foundation.framework in Frameworks */,
 				98D6DC8317B9C1620080DAC5 /* CoreGraphics.framework in Frameworks */,
@@ -86,6 +122,7 @@
 		98D6DC7D17B9C1620080DAC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98D6DCB617B9E2720080DAC5 /* MapKit.framework */,
 				98D6DC7E17B9C1620080DAC5 /* UIKit.framework */,
 				98D6DC8017B9C1620080DAC5 /* Foundation.framework */,
 				98D6DC8217B9C1620080DAC5 /* CoreGraphics.framework */,
@@ -96,19 +133,25 @@
 		98D6DC8417B9C1620080DAC5 /* GDemo */ = {
 			isa = PBXGroup;
 			children = (
+				98D6DCB217B9E0E90080DAC5 /* Foundation */,
+				98D6DCCC17BA0EE70080DAC5 /* Register */,
+				98D6DCAF17B9DF8C0080DAC5 /* Login */,
 				98D6DC8D17B9C1620080DAC5 /* AppDelegate.h */,
 				98D6DC8E17B9C1620080DAC5 /* AppDelegate.m */,
 				98D6DC9617B9C1620080DAC5 /* FirstViewController.h */,
 				98D6DC9717B9C1620080DAC5 /* FirstViewController.m */,
-				98D6DC9917B9C1620080DAC5 /* first.png */,
-				98D6DC9B17B9C1620080DAC5 /* first@2x.png */,
 				98D6DC9D17B9C1620080DAC5 /* SecondViewController.h */,
 				98D6DC9E17B9C1620080DAC5 /* SecondViewController.m */,
-				98D6DCA017B9C1620080DAC5 /* second.png */,
-				98D6DCA217B9C1620080DAC5 /* second@2x.png */,
 				98D6DCA417B9C1620080DAC5 /* FirstViewController.xib */,
 				98D6DCA717B9C1620080DAC5 /* SecondViewController.xib */,
 				98D6DC8517B9C1620080DAC5 /* Supporting Files */,
+				98D6DCB017B9DFA00080DAC5 /* Source */,
+				98D6DCB817B9FF560080DAC5 /* ThirdViewController.h */,
+				98D6DCB917B9FF560080DAC5 /* ThirdViewController.m */,
+				98D6DCBA17B9FF570080DAC5 /* ThirdViewController.xib */,
+				98D6DCBD17B9FF920080DAC5 /* FourthViewController.h */,
+				98D6DCBE17B9FF920080DAC5 /* FourthViewController.m */,
+				98D6DCBF17B9FF920080DAC5 /* FourthViewController.xib */,
 			);
 			path = GDemo;
 			sourceTree = "<group>";
@@ -125,6 +168,60 @@
 				98D6DC9417B9C1620080DAC5 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		98D6DCAF17B9DF8C0080DAC5 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				98D6DCC217BA04410080DAC5 /* LoginViewController.h */,
+				98D6DCC317BA04410080DAC5 /* LoginViewController.m */,
+				98D6DCC417BA04410080DAC5 /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		98D6DCB017B9DFA00080DAC5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				98D6DCB117B9DFB90080DAC5 /* imgs */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		98D6DCB117B9DFB90080DAC5 /* imgs */ = {
+			isa = PBXGroup;
+			children = (
+				98D6DC9917B9C1620080DAC5 /* first.png */,
+				98D6DC9B17B9C1620080DAC5 /* first@2x.png */,
+				98D6DCA017B9C1620080DAC5 /* second.png */,
+				98D6DCA217B9C1620080DAC5 /* second@2x.png */,
+			);
+			name = imgs;
+			sourceTree = "<group>";
+		};
+		98D6DCB217B9E0E90080DAC5 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				98D6DCB317B9E1B80080DAC5 /* CCRGlobalConf.h */,
+				98D6DCB417B9E1B80080DAC5 /* CCRGlobalConf.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		98D6DCCC17BA0EE70080DAC5 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				98D6DCCD17BA10580080DAC5 /* RegsiterStepFirstViewController.h */,
+				98D6DCCE17BA10580080DAC5 /* RegsiterStepFirstViewController.m */,
+				98D6DCCF17BA10580080DAC5 /* RegsiterStepFirstViewController.xib */,
+				98D6DCD217BA108C0080DAC5 /* RegsiterStepSecondViewController.h */,
+				98D6DCD317BA108C0080DAC5 /* RegsiterStepSecondViewController.m */,
+				98D6DCD417BA108C0080DAC5 /* RegsiterStepSecondViewController.xib */,
+				98D6DCD717BA10AA0080DAC5 /* RegsiterStepThirdViewController.h */,
+				98D6DCD817BA10AA0080DAC5 /* RegsiterStepThirdViewController.m */,
+				98D6DCD917BA10AA0080DAC5 /* RegsiterStepThirdViewController.xib */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +285,12 @@
 				98D6DCA317B9C1620080DAC5 /* second@2x.png in Resources */,
 				98D6DCA617B9C1620080DAC5 /* FirstViewController.xib in Resources */,
 				98D6DCA917B9C1620080DAC5 /* SecondViewController.xib in Resources */,
+				98D6DCBC17B9FF570080DAC5 /* ThirdViewController.xib in Resources */,
+				98D6DCC117B9FF920080DAC5 /* FourthViewController.xib in Resources */,
+				98D6DCC617BA04410080DAC5 /* LoginViewController.xib in Resources */,
+				98D6DCD117BA10580080DAC5 /* RegsiterStepFirstViewController.xib in Resources */,
+				98D6DCD617BA108C0080DAC5 /* RegsiterStepSecondViewController.xib in Resources */,
+				98D6DCDB17BA10AA0080DAC5 /* RegsiterStepThirdViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +305,13 @@
 				98D6DC8F17B9C1620080DAC5 /* AppDelegate.m in Sources */,
 				98D6DC9817B9C1620080DAC5 /* FirstViewController.m in Sources */,
 				98D6DC9F17B9C1620080DAC5 /* SecondViewController.m in Sources */,
+				98D6DCB517B9E1B80080DAC5 /* CCRGlobalConf.m in Sources */,
+				98D6DCBB17B9FF570080DAC5 /* ThirdViewController.m in Sources */,
+				98D6DCC017B9FF920080DAC5 /* FourthViewController.m in Sources */,
+				98D6DCC517BA04410080DAC5 /* LoginViewController.m in Sources */,
+				98D6DCD017BA10580080DAC5 /* RegsiterStepFirstViewController.m in Sources */,
+				98D6DCD517BA108C0080DAC5 /* RegsiterStepSecondViewController.m in Sources */,
+				98D6DCDA17BA10AA0080DAC5 /* RegsiterStepThirdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +442,7 @@
 				98D6DCAE17B9C1620080DAC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
