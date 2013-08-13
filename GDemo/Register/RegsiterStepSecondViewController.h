@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegsiterStepSecondViewController : UIViewController
+@interface RegsiterStepSecondViewController : UIViewController <UIAlertViewDelegate>
 @property (retain, nonatomic) IBOutlet UITextField *codeTextField;
 
 @end

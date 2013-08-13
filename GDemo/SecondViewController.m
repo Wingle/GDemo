@@ -18,8 +18,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Second", @"Second");
+        NSString *str = @"好友";
+        self.title = str;
         self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.tabBarItem.title = str;
     }
     return self;
 }

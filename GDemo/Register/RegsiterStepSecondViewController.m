@@ -8,6 +8,7 @@
 
 #import "RegsiterStepSecondViewController.h"
 #import "RegsiterStepThirdViewController.h"
+#import "AppDelegate.h"
 
 @interface RegsiterStepSecondViewController ()
 
@@ -20,7 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步"
+        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成"
                                                                        style:UIBarButtonItemStylePlain target:self action:@selector(nextStep:)];
         self.navigationItem.rightBarButtonItem = barBtnItem;
         [barBtnItem release];
@@ -55,10 +56,19 @@
         alter = nil;
         return;
     }
-    RegsiterStepThirdViewController *regsiter = [[RegsiterStepThirdViewController alloc] initWithNibName:@"RegsiterStepThirdViewController" bundle:nil];
-    [self.navigationController pushViewController:regsiter animated:YES];
-    [regsiter release];
-    regsiter = nil;
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"注册成功"
+                                                    message:@"亲，进入软件后请到“设置”里面填写详细的个人信息，以便让更多志同道合的朋友能找到你哦！"
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
+//    RegsiterStepThirdViewController *regsiter = [[RegsiterStepThirdViewController alloc] initWithNibName:@"RegsiterStepThirdViewController" bundle:nil];
+//    [self.navigationController pushViewController:regsiter animated:YES];
+//    [regsiter release];
+//    regsiter = nil;
 }
 
 - (void)dealloc {
@@ -69,4 +79,12 @@
     [self setCodeTextField:nil];
     [super viewDidUnload];
 }
+
+#pragma mark - 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [APP_DELEGATE loginSuccess];
+}
+
+
 @end

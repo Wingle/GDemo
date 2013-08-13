@@ -19,6 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        NSString *str = @"发现";
+        self.title = str;
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.title = str;
     }
     return self;
 }

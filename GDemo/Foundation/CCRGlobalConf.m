@@ -24,15 +24,7 @@
 }
 
 -(BOOL)isLogin{
-    NSString * stat=[[NSUserDefaults standardUserDefaults] stringForKey:gHAVE_LOGIN];
-    if (stat==nil) {
-        return NO;
-    }
-    if ([stat isEqualToString:@"YES"]) {
-        return YES;
-    }else{
-        return NO;
-    }
+    return [[NSUserDefaults standardUserDefaults] boolForKey:gHAVE_LOGIN];
 }
 
 - (NSInteger) userId {

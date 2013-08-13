@@ -8,6 +8,7 @@
 
 #import "RegsiterStepFirstViewController.h"
 #import "RegsiterStepSecondViewController.h"
+#import "CCRGlobalConf.h"
 
 @interface RegsiterStepFirstViewController ()
 
@@ -58,6 +59,9 @@
         alter = nil;
         return;
     }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gHAVE_LOGIN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     RegsiterStepSecondViewController *rsVC = [[RegsiterStepSecondViewController alloc] initWithNibName:@"RegsiterStepSecondViewController" bundle:nil];
     [self.navigationController pushViewController:rsVC animated:YES];
     [rsVC release];
