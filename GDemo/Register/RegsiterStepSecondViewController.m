@@ -21,7 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步"
                                                                        style:UIBarButtonItemStylePlain target:self action:@selector(nextStep:)];
         self.navigationItem.rightBarButtonItem = barBtnItem;
         [barBtnItem release];
@@ -36,6 +36,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.codeTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,19 +57,19 @@
         alter = nil;
         return;
     }
-    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"注册成功"
-                                                    message:@"亲，进入软件后请到“设置”里面填写详细的个人信息，以便让更多志同道合的朋友能找到你哦！"
-                                                   delegate:self
-                                          cancelButtonTitle:@"确定"
-                                          otherButtonTitles:nil, nil];
-    [alter show];
-    [alter release];
-    alter = nil;
-    return;
-//    RegsiterStepThirdViewController *regsiter = [[RegsiterStepThirdViewController alloc] initWithNibName:@"RegsiterStepThirdViewController" bundle:nil];
-//    [self.navigationController pushViewController:regsiter animated:YES];
-//    [regsiter release];
-//    regsiter = nil;
+//    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"注册成功"
+//                                                    message:@"亲，进入软件后请到“设置”里面填写详细的个人信息，以便让更多志同道合的朋友能找到你哦！"
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"确定"
+//                                          otherButtonTitles:nil, nil];
+//    [alter show];
+//    [alter release];
+//    alter = nil;
+//    return;
+    RegsiterStepThirdViewController *regsiter = [[RegsiterStepThirdViewController alloc] initWithNibName:@"RegsiterStepThirdViewController" bundle:nil];
+    [self.navigationController pushViewController:regsiter animated:YES];
+    [regsiter release];
+    regsiter = nil;
 }
 
 - (void)dealloc {

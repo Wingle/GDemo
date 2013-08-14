@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FourthViewController : UIViewController
+@interface FourthViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 
 @end

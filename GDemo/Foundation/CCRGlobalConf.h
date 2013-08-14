@@ -16,9 +16,11 @@
 #define gNICK_NAME      @"nickName"
 #define gPASSWORD       @"passWord"
 #define gHAVE_LOGIN     @"logIn"
+#define gUSER_GENDER    @"gender"
 
 @interface CCRGlobalConf : NSObject
 @property(nonatomic,retain) CLLocation *myLocation;
+@property (nonatomic, retain, readonly) NSString *strGender;
 
 +(CCRGlobalConf *)share;
 
@@ -26,6 +28,8 @@
 - (NSString *) loginName;
 - (NSString *) password;
 - (NSString *) nickName;
+- (UIImage *) image;
+- (NSString *) strGender;
 - (BOOL) isLogin;
 
 @end
