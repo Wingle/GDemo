@@ -16,7 +16,12 @@
 #define gNICK_NAME      @"nickName"
 #define gPASSWORD       @"passWord"
 #define gHAVE_LOGIN     @"logIn"
-#define gUSER_GENDER    @"gender"
+#define gUSER_GENDER    @"userGender"
+#define gUSER_AREA      @"userArea"
+#define gUSER_GAMESERVER    @"gameServer"
+#define gUSER_CONTACT       @"userContact"
+#define gUSER_SIGN          @"userSign"
+#define gUSER_CODE          @"userCode"
 
 @interface CCRGlobalConf : NSObject
 @property(nonatomic,retain) CLLocation *myLocation;
@@ -31,5 +36,10 @@
 - (UIImage *) image;
 - (NSString *) strGender;
 - (BOOL) isLogin;
+- (NSString *) userArea;
+- (NSString *) userGameServer;
+- (NSString *) userContact;
+- (NSString *) userSign;
+- (NSString *) userCode;
 
 @end

@@ -2,11 +2,12 @@
 //  FourthViewController.m
 //  GDemo
 //
-//  Created by Wingle Wong on 8/13/13.
+//  Created by Wingle Wong on 8/15/13.
 //  Copyright (c) 2013 Wingle. All rights reserved.
 //
 
 #import "FourthViewController.h"
+#import "CCRGlobalConf.h"
 
 @interface FourthViewController ()
 @property (nonatomic, retain) NSMutableArray *dataSource;
@@ -15,9 +16,9 @@
 
 @implementation FourthViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
         NSString *str = @"设置";
@@ -30,39 +31,37 @@
     return self;
 }
 
+- (void) dealloc {
+    [_dataSource release];
+    [super dealloc];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    NSArray *section0SubArray0 = [[NSArray alloc] initWithObjects: @"头像",@"headImageClick:",nil];
-    NSArray *section0SubArray1 = [[NSArray alloc] initWithObjects: @"昵称",@"nickNameClick:",nil];
-    NSArray *section0SubArray2 = [[NSArray alloc] initWithObjects: @"性别",@"genderClick:",nil];
-    NSArray *section0 = [NSArray arrayWithObjects:section0SubArray0,section0SubArray1,section0SubArray2, nil];
-    [section0SubArray0 release];
-    [section0SubArray1 release];
-    [section0SubArray2 release];
-    
-    [self.dataSource addObject:section0];
-    
-    NSArray *section1SubArray0 = [[NSArray alloc] initWithObjects: @"地区",@"areaClick:",nil];
-    NSArray *section1SubArray1 = [[NSArray alloc] initWithObjects: @"游戏信息",@"gameClick:",nil];
-    NSArray *setcion1 = [NSArray arrayWithObjects:section1SubArray0,section1SubArray1, nil];
-    [section1SubArray0 release];
-    [section1SubArray1 release];
-    
-    [self.dataSource addObject:setcion1];
-    
-    NSArray *section2SubArray0 = [[NSArray alloc] initWithObjects: @"个性签名",@"signClick:",nil];
-    NSArray *section2SubArray1 = [[NSArray alloc] initWithObjects: @"联系方式",@"contactClick:",nil];
-    NSArray *section2SubArray2 = [[NSArray alloc] initWithObjects: @"编号",@"numbaClick:",nil];
-    NSArray *section2 = [NSArray arrayWithObjects:section0SubArray0,section0SubArray1,section0SubArray2, nil];
-    [section2SubArray0 release];
-    [section2SubArray1 release];
-    [section2SubArray2 release];
-    
-    [self.dataSource addObject:section2];
 
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSArray *s0a0 = [NSArray arrayWithObjects:@"头像",@"headImgClick:",CCRConf.image ? CCRConf.image : @"", nil];
+    NSArray *s0a1 = [NSArray arrayWithObjects:@"昵称",@"nickNameClick:",CCRConf.nickName ? CCRConf.nickName : @"", nil];
+    NSArray *s0a2 = [NSArray arrayWithObjects:@"性别",@"genderClick:",CCRConf.strGender ? CCRConf.strGender : @"", nil];
+    NSArray *s0a3 = [NSArray arrayWithObjects:@"联系方式",@"contactClick:",CCRConf.userContact ? CCRConf.userContact : @"", nil];
+    NSArray *s0 = [NSArray arrayWithObjects:s0a0,s0a1,s0a2,s0a3, nil];
+    [self.dataSource addObject:s0];
+    
+    NSArray *s1a0 = [NSArray arrayWithObjects:@"地区",@"areaClick:",CCRConf.userArea ? CCRConf.userArea : @"", nil];
+    NSArray *s1a1 = [NSArray arrayWithObjects:@"游戏",@"gameClick:",CCRConf.userGameServer ? CCRConf.userGameServer : @"", nil];
+    NSArray *s1a2 = [NSArray arrayWithObjects:@"个性签名",@"signClick:",CCRConf.userSign ? CCRConf.userSign : @"", nil];
+    NSArray *s1 = [NSArray arrayWithObjects:s1a0,s1a1,s1a2, nil];
+    [self.dataSource addObject:s1];
+    
+    NSArray *s2a0 = [NSArray arrayWithObjects:@"编号",@"codeClick:",CCRConf.userCode ? CCRConf.userCode : @"", nil];
+    NSArray *s2 = [NSArray arrayWithObjects:s2a0, nil];
+    [self.dataSource addObject:s2];
     
     
 }
@@ -73,43 +72,130 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_tableView release];
-    [_dataSource release];
-    [super dealloc];
-}
-- (void)viewDidUnload {
-    [self setTableView:nil];
-    [super viewDidUnload];
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return [self.dataSource count];
 }
 
-#pragma mark - UITableView Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
     return [[self.dataSource objectAtIndex:section] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"moreViewCell";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell==nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:identifier] autorelease];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
-    NSArray *keyArray = [self.dataSource objectAtIndex:section];
-    if (section == 0 && row == 0) {
-        
-        
+    
+    // Configure the cell...
+    cell.textLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:0];
+    if (section == 2) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
+    if (section == 0 && row == 0) {
+        [cell.imageView setImage:CCRConf.image ? CCRConf.image : [UIImage imageNamed:@"first"]];
+    }else {
+        cell.detailTextLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:2];
+    }
+    
+    return cell;
 }
 
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+#pragma mark - Table view delegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = [indexPath section];
+    NSInteger row = [indexPath row];
+    if (section == 0 && row == 0) {
+        return 90.0;
+    }
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSArray *oneRecord = [[self.dataSource objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+    SEL function = NSSelectorFromString([oneRecord objectAtIndex:1]);
+    [self performSelector:function];
+}
+
+#pragma mark - functions 
+- (IBAction)headImgClick:(id)sender {
+    
+}
+- (IBAction)nickNameClick:(id)sender {
+    
+}
+- (IBAction)genderClick:(id)sender {
+    
+}
+- (IBAction)contactClick:(id)sender {
+    
+}
+- (IBAction)areaClick:(id)sender {
+    
+}
+- (IBAction)gameClick:(id)sender {
+    
+}
+- (IBAction)signClick:(id)sender {
+    
+}
+- (IBAction)codeClick:(id)sender {
+    
+}
 
 @end

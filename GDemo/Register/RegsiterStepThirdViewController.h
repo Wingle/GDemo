@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "EGOImageButton.h"
+#import "FillInBlankViewController.h"
+#import "SelectViewController.h"
 
-@protocol FillInBlankDelegate;
-
-
-@interface RegsiterStepThirdViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, FillInBlankDelegate>
+@interface RegsiterStepThirdViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, FillInBlankDelegate, SelectCellDelegate, UITextFieldDelegate>
 @property (retain, nonatomic) IBOutlet EGOImageButton *imageBtn;
 @property (retain, nonatomic) IBOutlet UITextField *nickNameTextFiled;
 @property (retain, nonatomic) IBOutlet UITextField *phoneTextField;

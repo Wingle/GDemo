@@ -14,6 +14,11 @@
 		9812986D17BB9B2500274C5B /* FillInBlankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9812986B17BB9B2500274C5B /* FillInBlankViewController.xib */; };
 		9812987017BBA16B00274C5B /* GDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9812986F17BBA16B00274C5B /* GDUserInfo.m */; };
 		9812987317BBA48200274C5B /* GDUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9812987217BBA48200274C5B /* GDUtility.m */; };
+		9812987C17BBC6D900274C5B /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9812987A17BBC6D800274C5B /* SelectViewController.m */; };
+		9812987D17BBC6D900274C5B /* SelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9812987B17BBC6D800274C5B /* SelectViewController.xib */; };
+		9812987F17BBD33C00274C5B /* gameServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9812987E17BBD33C00274C5B /* gameServer.plist */; };
+		9812988317BBE7AC00274C5B /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9812988117BBE7AB00274C5B /* FourthViewController.m */; };
+		9812988417BBE7AC00274C5B /* FourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9812988217BBE7AB00274C5B /* FourthViewController.xib */; };
 		98D6DC7F17B9C1620080DAC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC7E17B9C1620080DAC5 /* UIKit.framework */; };
 		98D6DC8117B9C1620080DAC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8017B9C1620080DAC5 /* Foundation.framework */; };
 		98D6DC8317B9C1620080DAC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8217B9C1620080DAC5 /* CoreGraphics.framework */; };
@@ -35,8 +40,6 @@
 		98D6DCB717B9E2720080DAC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DCB617B9E2720080DAC5 /* MapKit.framework */; };
 		98D6DCBB17B9FF570080DAC5 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCB917B9FF560080DAC5 /* ThirdViewController.m */; };
 		98D6DCBC17B9FF570080DAC5 /* ThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCBA17B9FF570080DAC5 /* ThirdViewController.xib */; };
-		98D6DCC017B9FF920080DAC5 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCBE17B9FF920080DAC5 /* FourthViewController.m */; };
-		98D6DCC117B9FF920080DAC5 /* FourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCBF17B9FF920080DAC5 /* FourthViewController.xib */; };
 		98D6DCC517BA04410080DAC5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCC317BA04410080DAC5 /* LoginViewController.m */; };
 		98D6DCC617BA04410080DAC5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCC417BA04410080DAC5 /* LoginViewController.xib */; };
 		98D6DCD017BA10580080DAC5 /* RegsiterStepFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCCE17BA10580080DAC5 /* RegsiterStepFirstViewController.m */; };
@@ -65,6 +68,13 @@
 		9812986F17BBA16B00274C5B /* GDUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDUserInfo.m; sourceTree = "<group>"; };
 		9812987117BBA48100274C5B /* GDUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDUtility.h; sourceTree = "<group>"; };
 		9812987217BBA48200274C5B /* GDUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDUtility.m; sourceTree = "<group>"; };
+		9812987917BBC6D800274C5B /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
+		9812987A17BBC6D800274C5B /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
+		9812987B17BBC6D800274C5B /* SelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectViewController.xib; sourceTree = "<group>"; };
+		9812987E17BBD33C00274C5B /* gameServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = gameServer.plist; sourceTree = "<group>"; };
+		9812988017BBE7AB00274C5B /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
+		9812988117BBE7AB00274C5B /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
+		9812988217BBE7AB00274C5B /* FourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourthViewController.xib; sourceTree = "<group>"; };
 		98D6DC7B17B9C1620080DAC5 /* GDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98D6DC7E17B9C1620080DAC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		98D6DC8017B9C1620080DAC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,9 +104,6 @@
 		98D6DCB817B9FF560080DAC5 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		98D6DCB917B9FF560080DAC5 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		98D6DCBA17B9FF570080DAC5 /* ThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdViewController.xib; sourceTree = "<group>"; };
-		98D6DCBD17B9FF920080DAC5 /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
-		98D6DCBE17B9FF920080DAC5 /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
-		98D6DCBF17B9FF920080DAC5 /* FourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourthViewController.xib; sourceTree = "<group>"; };
 		98D6DCC217BA04410080DAC5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		98D6DCC317BA04410080DAC5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		98D6DCC417BA04410080DAC5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -192,6 +199,7 @@
 				98D6DC9217B9C1620080DAC5 /* Default@2x.png */,
 				98D6DC9417B9C1620080DAC5 /* Default-568h@2x.png */,
 				9812985D17BB785100274C5B /* citys.plist */,
+				9812987E17BBD33C00274C5B /* gameServer.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -237,6 +245,9 @@
 				9812986F17BBA16B00274C5B /* GDUserInfo.m */,
 				9812987117BBA48100274C5B /* GDUtility.h */,
 				9812987217BBA48200274C5B /* GDUtility.m */,
+				9812987917BBC6D800274C5B /* SelectViewController.h */,
+				9812987A17BBC6D800274C5B /* SelectViewController.m */,
+				9812987B17BBC6D800274C5B /* SelectViewController.xib */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -322,15 +333,15 @@
 				98D6DCB817B9FF560080DAC5 /* ThirdViewController.h */,
 				98D6DCB917B9FF560080DAC5 /* ThirdViewController.m */,
 				98D6DCBA17B9FF570080DAC5 /* ThirdViewController.xib */,
-				98D6DCBD17B9FF920080DAC5 /* FourthViewController.h */,
-				98D6DCBE17B9FF920080DAC5 /* FourthViewController.m */,
-				98D6DCBF17B9FF920080DAC5 /* FourthViewController.xib */,
 				98D6DC9617B9C1620080DAC5 /* FirstViewController.h */,
 				98D6DC9717B9C1620080DAC5 /* FirstViewController.m */,
 				98D6DCA417B9C1620080DAC5 /* FirstViewController.xib */,
 				98D6DC9D17B9C1620080DAC5 /* SecondViewController.h */,
 				98D6DC9E17B9C1620080DAC5 /* SecondViewController.m */,
 				98D6DCA717B9C1620080DAC5 /* SecondViewController.xib */,
+				9812988017BBE7AB00274C5B /* FourthViewController.h */,
+				9812988117BBE7AB00274C5B /* FourthViewController.m */,
+				9812988217BBE7AB00274C5B /* FourthViewController.xib */,
 			);
 			name = Frame;
 			sourceTree = "<group>";
@@ -407,7 +418,6 @@
 				98D6DCA617B9C1620080DAC5 /* FirstViewController.xib in Resources */,
 				98D6DCA917B9C1620080DAC5 /* SecondViewController.xib in Resources */,
 				98D6DCBC17B9FF570080DAC5 /* ThirdViewController.xib in Resources */,
-				98D6DCC117B9FF920080DAC5 /* FourthViewController.xib in Resources */,
 				98D6DCC617BA04410080DAC5 /* LoginViewController.xib in Resources */,
 				98D6DCD117BA10580080DAC5 /* RegsiterStepFirstViewController.xib in Resources */,
 				98D6DCD617BA108C0080DAC5 /* RegsiterStepSecondViewController.xib in Resources */,
@@ -416,6 +426,9 @@
 				9812985E17BB785100274C5B /* citys.plist in Resources */,
 				9812986817BB7C4800274C5B /* RegsiterStepThirdViewController.xib in Resources */,
 				9812986D17BB9B2500274C5B /* FillInBlankViewController.xib in Resources */,
+				9812987D17BBC6D900274C5B /* SelectViewController.xib in Resources */,
+				9812987F17BBD33C00274C5B /* gameServer.plist in Resources */,
+				9812988417BBE7AC00274C5B /* FourthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +445,6 @@
 				98D6DC9F17B9C1620080DAC5 /* SecondViewController.m in Sources */,
 				98D6DCB517B9E1B80080DAC5 /* CCRGlobalConf.m in Sources */,
 				98D6DCBB17B9FF570080DAC5 /* ThirdViewController.m in Sources */,
-				98D6DCC017B9FF920080DAC5 /* FourthViewController.m in Sources */,
 				98D6DCC517BA04410080DAC5 /* LoginViewController.m in Sources */,
 				98D6DCD017BA10580080DAC5 /* RegsiterStepFirstViewController.m in Sources */,
 				98D6DCD517BA108C0080DAC5 /* RegsiterStepSecondViewController.m in Sources */,
@@ -446,6 +458,8 @@
 				9812986C17BB9B2500274C5B /* FillInBlankViewController.m in Sources */,
 				9812987017BBA16B00274C5B /* GDUserInfo.m in Sources */,
 				9812987317BBA48200274C5B /* GDUtility.m in Sources */,
+				9812987C17BBC6D900274C5B /* SelectViewController.m in Sources */,
+				9812988317BBE7AC00274C5B /* FourthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

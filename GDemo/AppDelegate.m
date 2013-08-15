@@ -35,7 +35,7 @@
     UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease]];
     UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil] autorelease]];
     UINavigationController *viewController3 = [[UINavigationController alloc] initWithRootViewController:[[[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil] autorelease]];
-    UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithNibName:@"FourthViewController" bundle:nil] autorelease]];
+    UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];

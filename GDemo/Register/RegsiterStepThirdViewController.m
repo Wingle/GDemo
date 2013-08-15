@@ -10,6 +10,8 @@
 #import "CCRGlobalConf.h"
 #import "GDUtility.h"
 #import "FillInBlankViewController.h"
+#import "SelectViewController.h"
+#import "AppDelegate.h"
 
 #define IMAGE_SHEET_TAG         2013081401
 #define GENDER_SHEET_TAG        2013081402
@@ -68,6 +70,14 @@
     [self setAreaBtn:nil];
     [super viewDidUnload];
 }
+#pragma mark - 
+- (IBAction) nextStep:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gHAVE_LOGIN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [APP_DELEGATE loginSuccess];
+}
+
+#pragma mark - IBAction 
 - (IBAction)imageBtnClick:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"选择"
@@ -97,6 +107,13 @@
 }
 
 - (IBAction)gameBtnClick:(id)sender {
+    SelectViewController *select = [[SelectViewController alloc] initWithNibName:@"SelectViewController" bundle:nil];
+    select.title = @"游戏";
+    select.delegate = self;
+    select.type = kLoad_game;
+    [self.navigationController pushViewController:select animated:YES];
+    [select release];
+    select = nil;
 }
 
 - (IBAction)signBtnClick:(id)sender {
@@ -109,6 +126,13 @@
 }
 
 - (IBAction)areaBtnClick:(id)sender {
+    SelectViewController *select = [[SelectViewController alloc] initWithNibName:@"SelectViewController" bundle:nil];
+    select.title = @"地区";
+    select.delegate = self;
+    select.type = kLoad_area;
+    [self.navigationController pushViewController:select animated:YES];
+    [select release];
+    select = nil;
 }
 
 #pragma mark - methods 
@@ -190,9 +214,25 @@
 
 }
 
-#pragma mark - 
+#pragma mark - fill 
 - (void) fillInBlankFinished:(NSString *) text {
     [self.signBtn setTitle:text forState:UIControlStateNormal];
+}
+
+#pragma mark - select
+- (void) didSelectedString:(NSString *)text {
+    [self.areaBtn setTitle:text forState:UIControlStateNormal];
+}
+
+#pragma mark - text 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 10) {
+        [[NSUserDefaults standardUserDefaults] setValue:textField.text forKeyPath:gNICK_NAME];
+    }else if (textField.tag == 20) {
+        [[NSUserDefaults standardUserDefaults] setValue:textField.text forKeyPath:gUSER_CONTACT];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [textField resignFirstResponder];
 }
 
 @end

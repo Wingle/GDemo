@@ -34,13 +34,13 @@
 }
 
 - (NSString *) loginName {
-    return (NSString *) [[NSUserDefaults standardUserDefaults] stringForKey:gLOGIN_NAME];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:gLOGIN_NAME];
 }
 - (NSString *) password {
-    return (NSString *) [[NSUserDefaults standardUserDefaults] stringForKey:gPASSWORD];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:gPASSWORD];
 }
 - (NSString *) nickName {
-    return (NSString *) [[NSUserDefaults standardUserDefaults] stringForKey:gNICK_NAME];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:gNICK_NAME];
 }
 
 - (UIImage *) image {
@@ -54,6 +54,32 @@
     }else {
         return @"女";
     }
+}
+
+- (NSString *) userContact {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:gUSER_CONTACT];
+}
+
+- (NSString *) userArea {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"citys.plist"]];
+    NSInteger area = [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_AREA];
+    NSArray *areaArray = [dic objectForKey:@"city"];
+    return [areaArray objectAtIndex:area];
+}
+
+- (NSString *) userSign {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:gUSER_SIGN];
+}
+
+- (NSString *) userCode {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:gUSER_CODE];
+}
+
+- (NSString *) userGameServer {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gameSever.plist"]];
+    NSInteger area = [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_GAMESERVER];
+    NSArray *areaArray = [dic objectForKey:@"server"];
+    return [areaArray objectAtIndex:area];
 }
 
 -(void)dealloc{
