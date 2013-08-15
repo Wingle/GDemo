@@ -10,11 +10,13 @@
 
 @protocol FillInBlankDelegate <NSObject>
 
-- (void) fillInBlankFinished:(NSString *) text;
+- (void) fillInBlankFinished:(UITextField *) textField;
 
 @end
 
-@interface FillInBlankViewController : UIViewController
+@interface FillInBlankViewController : UIViewController <UITextFieldDelegate>
 @property (nonatomic, assign) id <FillInBlankDelegate> delegate;
-@property (retain, nonatomic) IBOutlet UITextView *fillTextView;
+@property (retain, nonatomic) IBOutlet UITextField *fillTextFiled;
+@property (nonatomic, assign) NSInteger textTag;
+
 @end

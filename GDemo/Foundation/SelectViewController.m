@@ -46,12 +46,12 @@
     if (self.type == kLoad_area) {
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"citys.plist"]];
         self.dataSource = [dic objectForKey:@"city"];
-        
     }else if (self.type == kLoad_game) {
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gameServer.plist"]];
         self.dataSource = [dic objectForKey:@"server"];
     }
     [self.tableView reloadData];
+
     
 }
 
@@ -148,15 +148,15 @@
     self.preSelect = indexPath;
     
     if (self.type == kLoad_area) {
+        [[NSUserDefaults standardUserDefaults] setInteger:row forKey:gUSER_AREA];
         if (_delegate && [_delegate respondsToSelector:@selector(didSelectedAreaString:)]) {
             [_delegate didSelectedAreaString:[self.dataSource objectAtIndex:row]];
         }
-        [[NSUserDefaults standardUserDefaults] setInteger:row forKey:gUSER_AREA];
     }else if (self.type == kLoad_game) {
+        [[NSUserDefaults standardUserDefaults] setInteger:row forKey:gUSER_GAMESERVER];
         if (_delegate && [_delegate respondsToSelector:@selector(didSelectedGameString:)]) {
             [_delegate didSelectedGameString:[self.dataSource objectAtIndex:row]];
-        }
-        [[NSUserDefaults standardUserDefaults] setInteger:row forKey:gUSER_GAMESERVER];
+        } 
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     

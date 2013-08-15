@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageButton.h"
+#import "FillInBlankViewController.h"
+#import "SelectViewController.h"
 
-@interface FourthViewController : UITableViewController
+@interface FourthViewController : UITableViewController <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FillInBlankDelegate, SelectCellDelegate>
 
 @end

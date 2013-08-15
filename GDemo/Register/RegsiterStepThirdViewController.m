@@ -16,6 +16,10 @@
 #define IMAGE_SHEET_TAG         2013081401
 #define GENDER_SHEET_TAG        2013081402
 
+#define NICKNAME_TAG            2013081510
+#define CONTANCT_TAG            2013081520
+#define SIGN_TAG                2013081530
+
 @interface RegsiterStepThirdViewController ()
 
 @end
@@ -120,6 +124,7 @@
     FillInBlankViewController *fill = [[FillInBlankViewController alloc] initWithNibName:@"FillInBlankViewController" bundle:nil];
     fill.title = @"个性签名";
     fill.delegate = self;
+    fill.fillTextFiled.tag = SIGN_TAG;
     [self.navigationController pushViewController:fill animated:YES];
     [fill release];
     fill = nil;
@@ -215,13 +220,16 @@
 }
 
 #pragma mark - fill 
-- (void) fillInBlankFinished:(NSString *) text {
-    [self.signBtn setTitle:text forState:UIControlStateNormal];
+- (void) fillInBlankFinished:(UITextField *) textField {
+    [self.signBtn setTitle:textField.text forState:UIControlStateNormal];
 }
 
 #pragma mark - select
-- (void) didSelectedString:(NSString *)text {
+- (void) didSelectedAreaString:(NSString *) text {
     [self.areaBtn setTitle:text forState:UIControlStateNormal];
+}
+- (void) didSelectedGameString:(NSString *) text {
+    [self.gameBtn setTitle:text forState:UIControlStateNormal];
 }
 
 #pragma mark - text 

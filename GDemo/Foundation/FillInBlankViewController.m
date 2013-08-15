@@ -28,11 +28,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.fillTextFiled becomeFirstResponder];
+    self.fillTextFiled.tag = self.textTag;
+    NSLog(@"self.fill tag = %d",self.fillTextFiled.tag);
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+    if ([self.fillTextFiled.text length] == 0) {
+        return;
+    }
     if (_delegate && [_delegate respondsToSelector:@selector(fillInBlankFinished:)]) {
-        [_delegate fillInBlankFinished:self.fillTextView.text];
+        [_delegate fillInBlankFinished:self.fillTextFiled];
     }
 }
 
@@ -43,11 +49,23 @@
 }
 
 - (void)dealloc {
-    [_fillTextView release];
+    [_fillTextFiled release];
     [super dealloc];
 }
 - (void)viewDidUnload {
-    [self setFillTextView:nil];
+    [self setFillTextFiled:nil];
     [super viewDidUnload];
 }
+
+#pragma mark - 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 @end

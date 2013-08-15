@@ -76,10 +76,10 @@
 }
 
 - (NSString *) userGameServer {
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gameSever.plist"]];
-    NSInteger area = [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_GAMESERVER];
-    NSArray *areaArray = [dic objectForKey:@"server"];
-    return [areaArray objectAtIndex:area];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gameServer.plist"]];
+    NSInteger game = [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_GAMESERVER];
+    NSArray *gameArray = [dic objectForKey:@"server"];
+    return [gameArray objectAtIndex:game];
 }
 
 -(void)dealloc{

@@ -8,10 +8,19 @@
 
 #import "FourthViewController.h"
 #import "CCRGlobalConf.h"
+#import "GDUtility.h"
+
+#define IMAGE_SHEET_TAG         2013081401
+#define GENDER_SHEET_TAG        2013081402
+
+#define NICKNAME_TAG            2013081510
+#define CONTANCT_TAG            2013081520
+#define SIGN_TAG                2013081530
 
 @interface FourthViewController ()
 @property (nonatomic, retain) NSMutableArray *dataSource;
 
+- (void) updateDataSource;
 @end
 
 @implementation FourthViewController
@@ -45,6 +54,20 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self updateDataSource];
+    
+    [self.tableView reloadData];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - methods 
+- (void) updateDataSource {
+    [self.dataSource removeAllObjects];
     
     NSArray *s0a0 = [NSArray arrayWithObjects:@"头像",@"headImgClick:",CCRConf.image ? CCRConf.image : @"", nil];
     NSArray *s0a1 = [NSArray arrayWithObjects:@"昵称",@"nickNameClick:",CCRConf.nickName ? CCRConf.nickName : @"", nil];
@@ -52,6 +75,11 @@
     NSArray *s0a3 = [NSArray arrayWithObjects:@"联系方式",@"contactClick:",CCRConf.userContact ? CCRConf.userContact : @"", nil];
     NSArray *s0 = [NSArray arrayWithObjects:s0a0,s0a1,s0a2,s0a3, nil];
     [self.dataSource addObject:s0];
+    
+    // --
+    NSLog(@"CCRConf.userArea = %@",CCRConf.userArea);
+    NSLog(@"CCRConf.userGameServer = %@",CCRConf.userGameServer);
+    
     
     NSArray *s1a0 = [NSArray arrayWithObjects:@"地区",@"areaClick:",CCRConf.userArea ? CCRConf.userArea : @"", nil];
     NSArray *s1a1 = [NSArray arrayWithObjects:@"游戏",@"gameClick:",CCRConf.userGameServer ? CCRConf.userGameServer : @"", nil];
@@ -63,15 +91,12 @@
     NSArray *s2 = [NSArray arrayWithObjects:s2a0, nil];
     [self.dataSource addObject:s2];
     
-    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)updateTableView:(id)sender {
+    [self updateDataSource];
+    [self.tableView reloadData];
 }
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -93,6 +118,8 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0];
+        cell.detailTextLabel.numberOfLines = 2;
     }
     
     NSInteger section = [indexPath section];
@@ -160,8 +187,7 @@
     if (section == 0 && row == 0) {
         return 90.0;
     }
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    return 44.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,28 +200,180 @@
 
 #pragma mark - functions 
 - (IBAction)headImgClick:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"选择"
+                                  delegate:self
+                                  cancelButtonTitle:@"取 消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"图 库",
+                                  @"拍 照",nil];
+    actionSheet.tag = IMAGE_SHEET_TAG;
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+    actionSheet = nil;
     
 }
 - (IBAction)nickNameClick:(id)sender {
+    FillInBlankViewController *fill = [[FillInBlankViewController alloc] initWithNibName:@"FillInBlankViewController" bundle:nil];
+    fill.title = @"昵称";
+    fill.delegate = self;
+    fill.textTag = NICKNAME_TAG;
+    fill.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:fill animated:YES];
+    [fill release];
+    fill = nil;
     
 }
 - (IBAction)genderClick:(id)sender {
     
 }
 - (IBAction)contactClick:(id)sender {
+    FillInBlankViewController *fill = [[FillInBlankViewController alloc] initWithNibName:@"FillInBlankViewController" bundle:nil];
+    fill.title = @"联系方式";
+    fill.fillTextFiled.keyboardType = UIKeyboardTypeEmailAddress;
+    fill.delegate = self;
+    fill.textTag = CONTANCT_TAG;
+    fill.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:fill animated:YES];
+    [fill release];
+    fill = nil;
     
 }
 - (IBAction)areaClick:(id)sender {
+    SelectViewController *select = [[SelectViewController alloc] initWithNibName:@"SelectViewController" bundle:nil];
+    select.title = @"地区";
+    select.delegate = self;
+    select.type = kLoad_area;
+    select.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:select animated:YES];
+    [select release];
+    select = nil;
     
 }
 - (IBAction)gameClick:(id)sender {
-    
+    SelectViewController *select = [[SelectViewController alloc] initWithNibName:@"SelectViewController" bundle:nil];
+    select.title = @"游戏";
+    select.delegate = self;
+    select.type = kLoad_game;
+    select.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:select animated:YES];
+    [select release];
+    select = nil;
 }
 - (IBAction)signClick:(id)sender {
+    FillInBlankViewController *fill = [[FillInBlankViewController alloc] initWithNibName:@"FillInBlankViewController" bundle:nil];
+    fill.title = @"个性签名";
+    fill.delegate = self;
+    fill.textTag = SIGN_TAG;
+    fill.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:fill animated:YES];
+    [fill release];
+    fill = nil;
     
 }
 - (IBAction)codeClick:(id)sender {
     
 }
+
+#pragma mark ------ UIActionSheet Delegate Methods ------
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != [actionSheet cancelButtonIndex])
+    {
+        switch (buttonIndex) {
+            case 0:
+            {
+                if (actionSheet.tag == IMAGE_SHEET_TAG) {
+                    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    picker.allowsEditing = YES;
+                    picker.delegate = self;
+                    [self.navigationController presentModalViewController:picker animated:YES];
+                    [picker release];
+                    picker = nil;
+                }else if (actionSheet.tag == GENDER_SHEET_TAG) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:gUSER_GENDER];
+                    [self performSelectorOnMainThread:@selector(updateGender) withObject:nil waitUntilDone:YES];
+                }
+                break;
+            }
+            case 1:
+            {
+                if (actionSheet.tag == IMAGE_SHEET_TAG) {
+                    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    picker.allowsEditing = YES;
+                    picker.delegate = self;
+                    [self.navigationController presentModalViewController:picker animated:YES];
+                    [picker release];
+                    picker = nil;
+                }else if (actionSheet.tag == GENDER_SHEET_TAG) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:gUSER_GENDER];
+                    [self performSelectorOnMainThread:@selector(updateGender) withObject:nil waitUntilDone:YES];
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        
+    }
+    return;
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+-(void) removePicker:(UIImagePickerController *)picker{
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage * img = [[info objectForKey:UIImagePickerControllerEditedImage] retain];
+    [picker dismissModalViewControllerAnimated:NO];
+    [GDUtility saveImage:img imageKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
+    [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
+    
+}
+
+#pragma mark - fill
+- (void) fillInBlankFinished:(UITextField *) textField {
+    [textField retain];
+    NSLog(@"tag = %d",textField.tag);
+    switch (textField.tag) {
+        case NICKNAME_TAG:
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:gNICK_NAME];
+            break;
+        }
+        case CONTANCT_TAG:
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:gUSER_CONTACT];
+            break;
+        }
+        case SIGN_TAG:
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:gUSER_SIGN];
+            break;
+        }
+        default:
+            break;
+    }
+    [textField release];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
+}
+
+#pragma mark - select
+- (void) didSelectedAreaString:(NSString *) text {
+    [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
+}
+- (void) didSelectedGameString:(NSString *) text {
+    [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
+}
+
 
 @end
