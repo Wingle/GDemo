@@ -1,5 +1,5 @@
 //
-//  ThirdViewController.h
+//  PengyouqunCellView.h
 //  GDemo
 //
 //  Created by Wingle Wong on 8/15/13.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DEYRefreshTableViewController.h"
 
-@interface ThirdViewController : DEYRefreshTableViewController
+@interface PengyouqunCellView : UIView
 
 @end
