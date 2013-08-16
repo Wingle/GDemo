@@ -94,6 +94,11 @@
 		98F92E2D17BD296C00D0715F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F92E2C17BD296C00D0715F /* MobileCoreServices.framework */; };
 		98F92E2F17BD298C00D0715F /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F92E2E17BD298C00D0715F /* libz.1.2.5.dylib */; };
 		98F92E3017BD2A4200D0715F /* DEYRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 980EA78717BD0FAA000C80EC /* DEYRefreshTableViewController.m */; };
+		98F92E3417BD3D0E00D0715F /* PengyouquanDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E3317BD3D0E00D0715F /* PengyouquanDataModel.m */; };
+		98F92E4617BDEC8600D0715F /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E4317BDEC8600D0715F /* TPKeyboardAvoidingScrollView.m */; };
+		98F92E4717BDEC8600D0715F /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E4517BDEC8600D0715F /* TPKeyboardAvoidingTableView.m */; };
+		98F92E4C17BDED4800D0715F /* DistrubiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E4A17BDED4800D0715F /* DistrubiteViewController.m */; };
+		98F92E4D17BDED4800D0715F /* DistrubiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98F92E4B17BDED4800D0715F /* DistrubiteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -238,6 +243,15 @@
 		98F92E2A17BD296300D0715F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		98F92E2C17BD296C00D0715F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		98F92E2E17BD298C00D0715F /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		98F92E3217BD3D0E00D0715F /* PengyouquanDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PengyouquanDataModel.h; sourceTree = "<group>"; };
+		98F92E3317BD3D0E00D0715F /* PengyouquanDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PengyouquanDataModel.m; sourceTree = "<group>"; };
+		98F92E4217BDEC8600D0715F /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		98F92E4317BDEC8600D0715F /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		98F92E4417BDEC8600D0715F /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		98F92E4517BDEC8600D0715F /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		98F92E4917BDED4800D0715F /* DistrubiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrubiteViewController.h; sourceTree = "<group>"; };
+		98F92E4A17BDED4800D0715F /* DistrubiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrubiteViewController.m; sourceTree = "<group>"; };
+		98F92E4B17BDED4800D0715F /* DistrubiteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistrubiteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +441,7 @@
 		98D6DC8417B9C1620080DAC5 /* GDemo */ = {
 			isa = PBXGroup;
 			children = (
+				98F92E4817BDED0F00D0715F /* Distribute */,
 				98D6DCF917BA64260080DAC5 /* Frame */,
 				98D6DCE217BA4AF70080DAC5 /* ThirdPart */,
 				98D6DCB217B9E0E90080DAC5 /* Foundation */,
@@ -523,6 +538,7 @@
 		98D6DCE217BA4AF70080DAC5 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				98F92E4117BDEC8600D0715F /* TPKeyboardAvoiding */,
 				980EA78317BD0F34000C80EC /* MBProgressHUD */,
 				980EA75D17BD0F2A000C80EC /* JSON */,
 				980EA73B17BD0EE6000C80EC /* ASIHTTPRequest */,
@@ -585,6 +601,7 @@
 		98D6DCF917BA64260080DAC5 /* Frame */ = {
 			isa = PBXGroup;
 			children = (
+				98F92E3117BD3CBD00D0715F /* Model */,
 				98D6DCFA17BA92C60080DAC5 /* CellView */,
 				98D6DC9617B9C1620080DAC5 /* FirstViewController.h */,
 				98D6DC9717B9C1620080DAC5 /* FirstViewController.m */,
@@ -613,6 +630,36 @@
 				98F92E2017BD205F00D0715F /* PengyouqunCellView.xib */,
 			);
 			name = CellView;
+			sourceTree = "<group>";
+		};
+		98F92E3117BD3CBD00D0715F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				98F92E3217BD3D0E00D0715F /* PengyouquanDataModel.h */,
+				98F92E3317BD3D0E00D0715F /* PengyouquanDataModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		98F92E4117BDEC8600D0715F /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				98F92E4217BDEC8600D0715F /* TPKeyboardAvoidingScrollView.h */,
+				98F92E4317BDEC8600D0715F /* TPKeyboardAvoidingScrollView.m */,
+				98F92E4417BDEC8600D0715F /* TPKeyboardAvoidingTableView.h */,
+				98F92E4517BDEC8600D0715F /* TPKeyboardAvoidingTableView.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
+		98F92E4817BDED0F00D0715F /* Distribute */ = {
+			isa = PBXGroup;
+			children = (
+				98F92E4917BDED4800D0715F /* DistrubiteViewController.h */,
+				98F92E4A17BDED4800D0715F /* DistrubiteViewController.m */,
+				98F92E4B17BDED4800D0715F /* DistrubiteViewController.xib */,
+			);
+			name = Distribute;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -697,6 +744,7 @@
 				980EA73817BD01EF000C80EC /* whiteArrow@2x.png in Resources */,
 				98F92E1C17BD1A1C00D0715F /* ThirdViewController.xib in Resources */,
 				98F92E2117BD205F00D0715F /* PengyouqunCellView.xib in Resources */,
+				98F92E4D17BDED4800D0715F /* DistrubiteViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +802,10 @@
 				98F92E1B17BD1A1C00D0715F /* ThirdViewController.m in Sources */,
 				98F92E1F17BD204A00D0715F /* PengyouqunCellView.m in Sources */,
 				98F92E2617BD285C00D0715F /* DEYRefreshTableFooterView.m in Sources */,
+				98F92E3417BD3D0E00D0715F /* PengyouquanDataModel.m in Sources */,
+				98F92E4617BDEC8600D0715F /* TPKeyboardAvoidingScrollView.m in Sources */,
+				98F92E4717BDEC8600D0715F /* TPKeyboardAvoidingTableView.m in Sources */,
+				98F92E4C17BDED4800D0715F /* DistrubiteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,6 +35,12 @@
         self.tabBarItem.image = [UIImage imageNamed:@"second"];
         self.tabBarItem.title = str;
         
+        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+                                                                       style:UIBarButtonItemStylePlain target:self action:@selector(nextStep:)];
+        self.navigationItem.rightBarButtonItem = barBtnItem;
+        [barBtnItem release];
+        barBtnItem = nil;
+        
         _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -75,11 +81,6 @@
     NSArray *s0a3 = [NSArray arrayWithObjects:@"联系方式",@"contactClick:",CCRConf.userContact ? CCRConf.userContact : @"", nil];
     NSArray *s0 = [NSArray arrayWithObjects:s0a0,s0a1,s0a2,s0a3, nil];
     [self.dataSource addObject:s0];
-    
-    // --
-    NSLog(@"CCRConf.userArea = %@",CCRConf.userArea);
-    NSLog(@"CCRConf.userGameServer = %@",CCRConf.userGameServer);
-    
     
     NSArray *s1a0 = [NSArray arrayWithObjects:@"地区",@"areaClick:",CCRConf.userArea ? CCRConf.userArea : @"", nil];
     NSArray *s1a1 = [NSArray arrayWithObjects:@"游戏",@"gameClick:",CCRConf.userGameServer ? CCRConf.userGameServer : @"", nil];
@@ -225,6 +226,17 @@
     
 }
 - (IBAction)genderClick:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"选择"
+                                  delegate:self
+                                  cancelButtonTitle:@"取 消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"男",
+                                  @"女",nil];
+    actionSheet.tag = GENDER_SHEET_TAG;
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    [actionSheet release];
+    actionSheet = nil;
     
 }
 - (IBAction)contactClick:(id)sender {
@@ -275,6 +287,11 @@
     
 }
 
+- (IBAction)nextStep:(id)sender {
+    // save info--
+}
+
+
 #pragma mark ------ UIActionSheet Delegate Methods ------
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex != [actionSheet cancelButtonIndex])
@@ -292,7 +309,8 @@
                     picker = nil;
                 }else if (actionSheet.tag == GENDER_SHEET_TAG) {
                     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:gUSER_GENDER];
-                    [self performSelectorOnMainThread:@selector(updateGender) withObject:nil waitUntilDone:YES];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
                 }
                 break;
             }
@@ -308,7 +326,8 @@
                     picker = nil;
                 }else if (actionSheet.tag == GENDER_SHEET_TAG) {
                     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:gUSER_GENDER];
-                    [self performSelectorOnMainThread:@selector(updateGender) withObject:nil waitUntilDone:YES];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
                 }
                 break;
             }

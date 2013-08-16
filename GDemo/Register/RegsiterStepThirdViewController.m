@@ -172,6 +172,7 @@
                     picker = nil;
                 }else if (actionSheet.tag == GENDER_SHEET_TAG) {
                     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:gUSER_GENDER];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     [self performSelectorOnMainThread:@selector(updateGender) withObject:nil waitUntilDone:YES];
                 }
                 break;
@@ -188,6 +189,7 @@
                     picker = nil;
                 }else if (actionSheet.tag == GENDER_SHEET_TAG) {
                     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:gUSER_GENDER];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     [self performSelectorOnMainThread:@selector(updateGender) withObject:nil waitUntilDone:YES];
                 }
                 break;
