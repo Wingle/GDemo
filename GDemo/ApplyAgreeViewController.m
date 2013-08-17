@@ -105,21 +105,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.frame = CGRectZero;
         ApplyAgreeCellView *viewCell = [ApplyAgreeCellView cellView];
         viewCell.tag = CELL_TAG;
         [cell.contentView addSubview:viewCell];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     // Configure the cell...
     GDUserInfo *userinfo = [self.dataSource objectAtIndex:[indexPath row]];
     ApplyAgreeCellView *viewCell = (ApplyAgreeCellView *) [cell.contentView viewWithTag:CELL_TAG];
-//    viewCell.delegate = self;
-//    [viewCell setUserInfo:userinfo withIndexPath:indexPath];
-    [viewCell.nameLabel setText:userinfo.nickName];
-    [viewCell.imgBtn setImageURL:[NSURL URLWithString:userinfo.imagestringURL]];
-//    viewCell.userInfo = userinfo;
-    cell.frame = viewCell.frame;
+    viewCell.delegate = self;
+    [viewCell setUserInfo:userinfo withIndexPath:indexPath];
+    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, viewCell.frame.size.height);
     
     
     return cell;
