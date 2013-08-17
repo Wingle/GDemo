@@ -8,8 +8,11 @@
 
 #import "CCRGlobalConf.h"
 #import "GDUtility.h"
+#import "ASIHTTPRequest.h"
+#import "SBJson.h"
 
 @interface CCRGlobalConf ()
+- (void)updateMyLocation:(CLLocation *) location;
 
 @end
 
@@ -90,10 +93,104 @@
     return [gameArray objectAtIndex:game];
 }
 
+- (CLLocationManager *) locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    }
+    return _locationManager;
+}
+
 -(void)dealloc{
     [_myLocation release];
+    _locationManager.delegate = nil;
+    [_locationManager release];
     [super dealloc];
-}	
+}
+
+#pragma mark - Methods 
+- (void)updateMyLocation:(CLLocation *) location {
+    self.myLocation = location;
+    [self stopLocationManagerService];
+    
+    NSString *strURL = [NSString stringWithFormat:@"%@/myLocation.do?userId=%d&lat=%.6f&lng=%.6f",
+                         CR_REQUEST_URL,
+                         CCRConf.userId,
+                         self.myLocation.coordinate.latitude,
+                         self.myLocation.coordinate.longitude];
+    NSLog(@"strurl = %@",strURL);
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
+    [request setDelegate:self];
+    [request setTimeOutSeconds:5];
+    [request startAsynchronous];
+    
+}
+
+- (BOOL) startLocationManagerService {
+    [self.locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingHeading];
+    return YES;
+}
+
+- (BOOL) stopLocationManagerService {
+    [self.locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingHeading];
+    return YES;
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    CLLocationAccuracy horAccuracy = newLocation.horizontalAccuracy;
+    if (horAccuracy > 100.0) {
+        return;
+    }
+    NSTimeInterval age = [newLocation.timestamp timeIntervalSinceNow];
+	if (age < -20.0f) {
+		return;
+	}
+    [self performSelectorOnMainThread:@selector(updateMyLocation:) withObject:newLocation waitUntilDone:YES];
+    
+}
+
+
+#pragma mark - ASIHttp---
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSString *string = [request responseString];
+    NSLog(@"string = %@",string);
+//    NSMutableDictionary * dataDict = [string JSONValue];
+//    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+//    if (status != 0) {
+//        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                        message:@"亲，账号密码错误啊"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"确定"
+//                                              otherButtonTitles:nil, nil];
+//        [alter show];
+//        [alter release];
+//        alter = nil;
+//        return;
+//    }
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+//    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                    message:@"亲，网络不通哦"
+//                                                   delegate:nil
+//                                          cancelButtonTitle:@"确定"
+//                                          otherButtonTitles:nil, nil];
+//    [alter show];
+//    [alter release];
+//    alter = nil;
+//    return;
+    
+}
+
 
 
 @end

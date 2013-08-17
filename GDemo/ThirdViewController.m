@@ -172,6 +172,10 @@
                                  msgView.frame.origin.y,
                                  msgView.frame.size.width,
                                  msgView.frame.size.height+ apal)];
+    [msgView.newDateLabel setFrame:CGRectMake(msgView.newDateLabel.frame.origin.x,
+                                              msgView.contentImgView.frame.origin.y+msgView.contentImgView.frame.size.height,
+                                              msgView.newDateLabel.frame.size.width,
+                                              msgView.newDateLabel.frame.size.height)];
     [cell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, msgView.frame.size.height)];
     cell.backgroundColor = [UIColor blueColor];
 

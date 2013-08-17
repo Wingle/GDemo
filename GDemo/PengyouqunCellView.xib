@@ -46,10 +46,10 @@
 						<reference key="NSNextKeyView" ref="252729860"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<int key="IBUIContentMode">1</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">Button</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -339,6 +339,7 @@
 						<string key="contentTextLabel">UILabel</string>
 						<string key="headImgBtn">EGOImageButton</string>
 						<string key="nameLabel">UILabel</string>
+						<string key="newDateLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="contentImgView">
@@ -355,6 +356,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="nameLabel">
 							<string key="name">nameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="newDateLabel">
+							<string key="name">newDateLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 					</dictionary>

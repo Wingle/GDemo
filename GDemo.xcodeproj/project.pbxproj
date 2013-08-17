@@ -51,6 +51,7 @@
 		9812987F17BBD33C00274C5B /* gameServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9812987E17BBD33C00274C5B /* gameServer.plist */; };
 		9812988317BBE7AC00274C5B /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9812988117BBE7AB00274C5B /* FourthViewController.m */; };
 		9812988417BBE7AC00274C5B /* FourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9812988217BBE7AB00274C5B /* FourthViewController.xib */; };
+		982CE72117BFBC9300EED11E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 982CE72017BFBC9300EED11E /* CoreLocation.framework */; };
 		98D6DC7F17B9C1620080DAC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC7E17B9C1620080DAC5 /* UIKit.framework */; };
 		98D6DC8117B9C1620080DAC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8017B9C1620080DAC5 /* Foundation.framework */; };
 		98D6DC8317B9C1620080DAC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8217B9C1620080DAC5 /* CoreGraphics.framework */; };
@@ -234,6 +235,7 @@
 		9812988017BBE7AB00274C5B /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
 		9812988117BBE7AB00274C5B /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
 		9812988217BBE7AB00274C5B /* FourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourthViewController.xib; sourceTree = "<group>"; };
+		982CE72017BFBC9300EED11E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		98D6DC7B17B9C1620080DAC5 /* GDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98D6DC7E17B9C1620080DAC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		98D6DC8017B9C1620080DAC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -375,6 +377,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				982CE72117BFBC9300EED11E /* CoreLocation.framework in Frameworks */,
 				98F92E2F17BD298C00D0715F /* libz.1.2.5.dylib in Frameworks */,
 				98D6DC8317B9C1620080DAC5 /* CoreGraphics.framework in Frameworks */,
 				98F92E2D17BD296C00D0715F /* MobileCoreServices.framework in Frameworks */,
@@ -541,6 +544,7 @@
 		98D6DC7D17B9C1620080DAC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				982CE72017BFBC9300EED11E /* CoreLocation.framework */,
 				98F92E2E17BD298C00D0715F /* libz.1.2.5.dylib */,
 				98F92E2C17BD296C00D0715F /* MobileCoreServices.framework */,
 				98F92E2A17BD296300D0715F /* SystemConfiguration.framework */,

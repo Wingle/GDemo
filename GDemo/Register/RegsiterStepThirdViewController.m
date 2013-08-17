@@ -227,10 +227,15 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     UIImage * img = [[info objectForKey:UIImagePickerControllerEditedImage] retain];
     [picker dismissModalViewControllerAnimated:NO];
     [GDUtility saveImage:img imageKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
     [self performSelectorOnMainThread:@selector(updateHeadImageView:) withObject:img waitUntilDone:YES];
+    [img release];
+    img = nil;
+    [pool release];
+    pool = nil;
 
 }
 

@@ -353,9 +353,11 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     UIImage * img = [[info objectForKey:UIImagePickerControllerEditedImage] retain];
-//    [picker dismissModalViewControllerAnimated:NO];
+    [picker dismissModalViewControllerAnimated:NO];
     [GDUtility saveImage:img imageKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
     [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
+    [img release];
+    img = nil;
     [pool release];
     pool = nil;
     

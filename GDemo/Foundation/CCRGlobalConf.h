@@ -23,11 +23,15 @@
 #define gUSER_SIGN          @"userSign"
 #define gUSER_CODE          @"userCode"
 
-@interface CCRGlobalConf : NSObject
+@interface CCRGlobalConf : NSObject <CLLocationManagerDelegate>
+@property (nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic,retain) CLLocation *myLocation;
 @property (nonatomic, retain, readonly) NSString *strGender;
 
 +(CCRGlobalConf *)share;
+
+- (BOOL) startLocationManagerService;
+- (BOOL) stopLocationManagerService;
 
 - (NSInteger) userId;
 - (NSString *) loginName;

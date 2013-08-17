@@ -10,7 +10,6 @@
 #import "CCRGlobalConf.h"
 #import "GDUserInfo.h"
 #import "DEYChatViewController.h"
-#import "ApplyAgreeViewController.h"
 
 @interface FirstViewController ()
 
@@ -26,11 +25,6 @@
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         self.tabBarItem.title = str;
         
-        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"通知"
-                                                                       style:UIBarButtonItemStylePlain target:self action:@selector(nextStep:)];
-        self.navigationItem.rightBarButtonItem = barBtnItem;
-        [barBtnItem release];
-        barBtnItem = nil;
     }
     return self;
 }
@@ -65,16 +59,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-#pragma mark - IBAction 
-- (IBAction) nextStep:(id)sender {
-    ApplyAgreeViewController *vc = [[ApplyAgreeViewController alloc] initWithNibName:@"ApplyAgreeViewController" bundle:nil];
-    vc.title = @"通知";
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
-    vc = nil;
-    
 }
 
 #pragma mark - Table view data source

@@ -44,6 +44,9 @@
     [viewController3 release];
     [viewController4 release];
     self.window.rootViewController = self.tabBarController;
+    
+    //location update--
+    [CCRConf startLocationManagerService];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -78,6 +81,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [CCRConf startLocationManagerService];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
