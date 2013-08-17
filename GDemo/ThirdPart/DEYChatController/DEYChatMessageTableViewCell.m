@@ -8,6 +8,8 @@
 
 #import "DEYChatMessageTableViewCell.h"
 #import <AVFoundation/AvFoundation.h>
+#import "CCRGlobalConf.h"
+#import "GDUtility.h"
 
 #define Font_Heit_SC @"STHeitiSC-Light"
 #define Message_Height_One 37
@@ -19,6 +21,7 @@
 #define ImageDownloadHighParam @"%@/downloadImage.do?appId=%@&type=0&size=1&imgVersion=%@&id=%@"
 #define ImageDownloadLowParam @"%@/downloadImage.do?appId=%@&type=0&size=0&imgVersion=%@&id=%@"
 #define MESSAGE_CELL_HEIGHT     90
+
 
 @interface  DEYChatMessageTableViewCell (private)
 
@@ -124,8 +127,13 @@
     btnFaceImage.layer.borderColor = [[UIColor colorWithRed:170.0f/255.0f green:170.0f/255.0f blue:170.0f/255.0f alpha:1.0f] CGColor];
     
     [btnFaceImage setPlaceholderImage:[UIImage imageNamed:@"user_head.png"]];
-    NSString *imgURL = [NSString stringWithFormat:ImageDownloadLowParam,CR_REQUEST_URL,APPID,[NSString stringWithFormat:@"%d",message.iImageVersion],message.strUserId];
-    [btnFaceImage setImageURL:[NSURL URLWithString:imgURL]];
+    if ([message.strUserId integerValue] == CCRConf.userId) {
+        UIImage *img = [GDUtility loadImageForKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
+        [btnFaceImage setImage:img forState:UIControlStateNormal];
+    }else {
+        NSString *imgURL = [NSString stringWithFormat:ImageDownloadLowParam,CR_REQUEST_URL,APPID,[NSString stringWithFormat:@"%d",message.iImageVersion],message.strUserId];
+        [btnFaceImage setImageURL:[NSURL URLWithString:imgURL]];
+    }
     
     m_userNameLable.text = message.strUserName;
     

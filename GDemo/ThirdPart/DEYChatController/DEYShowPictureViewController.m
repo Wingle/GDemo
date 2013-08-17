@@ -120,6 +120,7 @@
                                               otherButtonTitles:nil, nil];
     [alertView show];
     [alertView release];
+    alertView = nil;
 }
 
 @end

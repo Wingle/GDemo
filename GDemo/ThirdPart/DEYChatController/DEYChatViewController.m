@@ -8,11 +8,11 @@
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "DEYChatViewController.h"
-#import "DEYMessageDBManager.h"
 #import "DEYChatMessage.h"
 #import "DEYShowPictureViewController.h"
 #import "MBProgressHUD.h"
 #import "EGORefreshTableHeaderView.h"
+#import "ASIHTTPRequest.h"
 
 #define ImageViewTag 20120813
 #define kMessageFontSize    14.0f 
@@ -66,9 +66,12 @@ typedef enum{
         if (!m_arrAudioAnimationView) {
             m_arrAudioAnimationView = [[NSMutableArray alloc] initWithCapacity:0];
         }
-        if (!audiocontroller) {
-            audiocontroller = [[DEYAudioController alloc] init];
-        }
+    
+        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"消息"
+                                                                       style:UIBarButtonItemStylePlain target:self action:@selector(beBack:)];
+        self.navigationItem.leftBarButtonItem = barBtnItem;
+        [barBtnItem release];
+        barBtnItem = nil;
     }
     return self;
 }
@@ -93,6 +96,10 @@ typedef enum{
 
 #pragma mark - View lifecycle
 
+- (IBAction)beBack:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     
     [self.chatMessagetableView reloadData];
@@ -101,14 +108,11 @@ typedef enum{
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    [[DEYChatManager shareChatManager] startReceiveChatMessage:[self.strUserId intValue]];
     
     NSArray *latestMessages = nil;
-    if (self.chatType == eChatTypeGroup) {
-        latestMessages = [[DEYChatManager shareChatManager] getGroupLatestMessages:self.strChatRoomID ByTotalNum:15];
-    } else {
-        latestMessages = [[DEYChatManager shareChatManager] getP2PLatestMessages:self.strChatRoomID ByTotalNum:15];
-    }
+    // --- request network;
+    
+    // ----
     
     [self addLatestMessageToChatViewList:latestMessages];
     
@@ -130,13 +134,11 @@ typedef enum{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    [super viewDidDisappear:animated];    
-    if ([audiocontroller isPlaying]) {
-        [audiocontroller stopPlay];
-        [audioPlayCell stopPlayAnimation];
-        audioPlayCell = nil;
-    }
+    [super viewDidDisappear:animated];
+    self.tabBarController.selectedIndex = 0;
+    
 }
+
 
 - (void)viewDidLoad
 {
@@ -161,23 +163,12 @@ typedef enum{
     [messageTextView sendSubviewToBack:imageView];
     [imageView release];
 
-    [DEYChatManager shareChatManager].delegate = self;
     
     //添加聊天页面的手势处理
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.chatMessagetableView addGestureRecognizer:gestureRecognizer];
     [gestureRecognizer release];
-    
-    //对语音进行录制时的动画页面处理
-    for (int i = 0; i<10; i++) {
-        UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(17 + i*12, 90, 6 ,12)];
-        
-        [m_arrAudioAnimationView addObject:imageview];
-        imageview.image = [UIImage imageNamed:UI_ImageName_RecBlackAnimation];
-        [m_recordVoiceView addSubview:imageview];
-        [imageview release];
-    }
     
     //下拉刷新处理
     if (self.m_refreshChatListHeaderView == nil) {
@@ -239,12 +230,7 @@ typedef enum{
 - (void)dealloc {
     self.strUserId = nil;
     self.strChatRoomID = nil;
-    
-    if (audiocontroller != nil) {
-        [audiocontroller setPlayerDelegate:nil];
-        [audiocontroller release];
-    }
-    [DEYChatManager shareChatManager].delegate = nil;
+
     
     [groupMessagesArray release];
     
@@ -586,161 +572,15 @@ typedef enum{
 //start Record when the button of voice click
 - (IBAction)startRecord:(id)sender {
     //对按钮进行图片替换
-    m_recordVoiceView.hidden = NO;
-    
-    if ([audiocontroller isPlaying]) {
-        [audiocontroller stopPlay];
-        //对播放动画进行处理，停止按钮动画
-        [audioPlayCell stopPlayAnimation];
-    }
-    
-    if (![audiocontroller isRecording]) {
-        [audiocontroller startRecord];
-        m_recordingTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(handleRecordingTimer) userInfo:nil repeats:YES];
-    }
 }
 
 - (IBAction)stopRecord:(id)sender {
-    
-    if ([m_recordingTimer isValid]) {
-        [m_recordingTimer invalidate];
-        for (int i=0; i<10; i++) {
-            UIImageView *dotView = [m_arrAudioAnimationView objectAtIndex:i];
-            [dotView setImage:[UIImage imageNamed:UI_ImageName_RecBlackAnimation]];
-        }
-    }
-    
-    m_recordVoiceView.hidden = YES;
-    /*************end speak****************/
-    
-    int iVoiceLength = 0;
-    //封装数据，组装成可用的内容，并发送。
-    DEYChatMessage *chatMessage = [self createNewChatMessage];
-
-    NSString *filePath = chatMessage.voiceFilePath;
-    [audiocontroller stopRecord:filePath duration:&iVoiceLength];
-    NSLog(@"iVoiceLength %d",iVoiceLength);
-    if (iVoiceLength <1) {
-        //音频小于1，不发生，提醒用户
-        [chatMessage release];
-        chatMessage = nil;
-        return ;
-    }
-    
-    chatMessage.messageType = eMessageTypeSound;
-    chatMessage.strMessage = filePath;
-    chatMessage.messageData = [NSData dataWithContentsOfFile:filePath];
-    chatMessage.iVoiceLength = iVoiceLength;
-    
-    [self addChatMessageToShow:chatMessage];
-    
-    //发送语音
-    [[DEYChatManager shareChatManager] sendChatMessage:chatMessage];
-    [chatMessage release];
  
 }
 
-- (void) handleRecordingTimer
-{
-    float volume = [audiocontroller peakRecorderVolume];
-    int showNumber = 10*volume;
-    for (int i=0; i<10; i++)
-    {
-        UIImageView *dotView = [m_arrAudioAnimationView objectAtIndex:i];
-        if(i <= showNumber)
-        {
-            [dotView setImage:[UIImage imageNamed:UI_ImageName_RecWhiteAnimation]];
-        }
-        else
-        {
-            [dotView setImage:[UIImage imageNamed:UI_ImageName_RecBlackAnimation]];
-        }
-    }
-}
 
 //play audio when the message audio been click
 - (IBAction)audioPlayClick:(id)sender{
-    UIButton *btn = (UIButton *)sender;
-    DEYChatMessageTableViewCell *cell = (DEYChatMessageTableViewCell *)btn.superview.superview;
-    
-    NSIndexPath *indexPath = [chatMessagetableView indexPathForCell:cell];
-    DEYChatMessage *groupChat = (DEYChatMessage *)[groupMessagesArray objectAtIndex:indexPath.row];
-    
-    if ([audiocontroller isRecording]) {
-        return ;
-    }
-    if ([audiocontroller isPlaying]) {
-        [audiocontroller stopPlay];
-        [audioPlayCell stopPlayAnimation];
-        audioPlayCell = nil;
-        return ;
-    }
-    
-    NSFileManager *fm = [NSFileManager defaultManager];
-    //组装文件保存的路径
-    NSString *path = groupChat.voiceFilePath;
-    
-    if ([fm fileExistsAtPath:path]) {
-        audioPlayCell = cell;
-        [audiocontroller setPlayerDelegate:self];
-        [audiocontroller play:path];
-        [audioPlayCell startPlayAnimation];
-    }else{
-        //对于本地不存在的则从网络上获取
-        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view.superview];
-        
-        [self.view.superview addSubview:hud];
-        NSMutableDictionary *object = [[NSMutableDictionary alloc] initWithCapacity:0];
-        [object setValue:groupChat forKey:@"groupChat"];
-        [object setValue:cell forKey:@"cell"];
-        
-        [hud showWhileExecuting:@selector(loadVoice:) onTarget:self withObject:object animated:YES];
-        
-        [object release];
-        [hud release];
-    }
-}
-
-- (void)loadVoice:(NSMutableDictionary *)object{
-    if (object == nil) {
-        return ;
-    }
-    DEYChatMessage *groupChat = [object objectForKey:@"groupChat"];
-    
-    
-    NSData *VoiceData = nil;
-    VoiceData = [NSData dataWithContentsOfURL:[NSURL URLWithString:groupChat.originalMediaURL]];
-    
-    if ([VoiceData length]>0) {
-        [VoiceData writeToFile:groupChat.voiceFilePath atomically:YES];
-        [self performSelectorOnMainThread:@selector(btnVoicePlayClicked:) withObject:object waitUntilDone:YES];
-    }
-}
-
-- (void)btnVoicePlayClicked:(NSMutableDictionary *)object{
-    DEYChatMessage *groupChat = [object objectForKey:@"groupChat"];
-    DEYChatMessageTableViewCell *cell = [object objectForKey:@"cell"];
-    
-    NSString *filePath = groupChat.voiceFilePath;
-    NSFileManager *fm = [NSFileManager defaultManager];
-    if ([fm fileExistsAtPath:filePath]) {
-        [audiocontroller setPlayerDelegate:self];
-        [audiocontroller play:filePath];
-        audioPlayCell = cell;
-        [cell startPlayAnimation];
-    }
-}
-
-
-#pragma mark - audio delegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    [audioPlayCell stopPlayAnimation];
-    audioPlayCell = nil;
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error{
-    [audioPlayCell stopPlayAnimation];
-    audioPlayCell = nil;
 }
 
 
@@ -774,8 +614,13 @@ typedef enum{
         
         [self addChatMessageToShow:groupChat];
         
-        //发送数据
-        [[DEYChatManager shareChatManager] sendChatMessage:groupChat];
+        //发送数据 ---zhongyao
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [hud showWhileExecuting:@selector(sendMsgToServer:) onTarget:self withObject:groupChat animated:YES];
+        [self.view addSubview:hud];
+        [hud release];
+        hud = nil;
+    
         [groupChat release];
     
         return NO;
@@ -835,239 +680,6 @@ typedef enum{
 }
 
 - (IBAction)messageSelectPictureClick:(id)sender {
-    [self.view endEditing:YES];
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"图库", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
-    [actionSheet showInView:self.view];
-    [actionSheet release];
-}
-
-#pragma mark - Image Message
-#pragma mark -  actionSheet delegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 0) {
-        [self takePhotoWithCamera];
-    }
-    else if(buttonIndex == 1){
-        [self selectPhotoFromLibrary];
-    }
-    else if(buttonIndex == 2)
-    {
-        LOG(@"Cancel");
-    }
-}
-
-- (void)takePhotoWithCamera
-{
-    [self startCameraPickerFromViewController:self.navigationController usingDelegate:self];
-}
-
-- (void)selectPhotoFromLibrary
-{
-    [self startLibraryPickerFromViewController:self.navigationController usingDelegate:self];
-}
-
-- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
-    [imageViewController dismissModalViewControllerAnimated:YES];
-}
-
-- (BOOL)startCameraPickerFromViewController:(UIViewController*)controller usingDelegate:(id<UIImagePickerControllerDelegate>)delegateObject
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-    [self startPickerFromViewController:controller usingDelegate:delegateObject sourceType:UIImagePickerControllerSourceTypeCamera];
-    }
-    return YES; 
-}
-
-- (BOOL)startLibraryPickerFromViewController:(UIViewController*)controller usingDelegate:(id<UIImagePickerControllerDelegate>)delegateObject
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) 
-    {
-        [self startPickerFromViewController:controller usingDelegate:delegateObject sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    }
-    return YES;
-}
-
-- (void)startPickerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate>)delegateObject sourceType:(UIImagePickerControllerSourceType)sourceType{
-    
-    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-    picker.sourceType = sourceType;
-//    picker.allowsEditing = YES;
-    picker.delegate = self;
-    [controller presentModalViewController:picker  animated:YES];   
-    imageViewController = controller;
-    [picker release];
-    picker = nil;
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    NSURL *imageURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-    NSString *path = [imageURL absoluteString];
-    
-    NSString *tempThumbImageHome = [self reciveFilePath];
-    NSDateFormatter	* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyyMMddHHmmss"];
-    NSString *timeStamp = [formatter stringFromDate:[NSDate date]];
-    [formatter release];
-    formatter = nil;
-    
-    NSString *thumbPath = [NSString stringWithFormat:@"%@/%@.png",tempThumbImageHome,timeStamp];
-    NSString *imagePath = [NSString stringWithFormat:@"%@/%@_.png",tempThumbImageHome,timeStamp];
-    
-    if ([path hasSuffix:@"=GIF"]) {
-        [imageViewController dismissModalViewControllerAnimated:NO];
-        
-        ALAssetsLibrary *assertLibrary = [[[ALAssetsLibrary alloc] init] autorelease];
-        
-        [assertLibrary assetForURL:imageURL resultBlock:^(ALAsset *asset){
-            ALAssetRepresentation *rep = [asset defaultRepresentation];
-            Byte *buffer = (Byte *)malloc(rep.size);
-            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-            NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];  //this is NSData of the Image maybe you want
-            [data writeToFile:imagePath atomically:NO];
-            UIImage *image = [UIImage imageWithData:data];
-            UIImage *thumbImage = [self thumbImage:image toPath:thumbPath];
-            //使用获取到的图片NSData
-            [self useImage:thumbImage thumbPath:thumbPath imagePath:imagePath];
-            
-        } failureBlock:^(NSError *err){
-            LOG(@"Error:%@",[err localizedDescription]);
-        }];
-        
-    }else{
-        UIImage *image = [[info objectForKey:@"UIImagePickerControllerOriginalImage"] retain];
-        
-        [imageViewController dismissModalViewControllerAnimated:YES];
-        UIImage *scaleImage = [self scaleImage:image];
-        NSLog(@"height %f width %f",scaleImage.size.height,scaleImage.size.width);
-        NSData *imageData = UIImageJPEGRepresentation(scaleImage, 0.5f);
-//        NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
-        [imageData writeToFile:imagePath atomically:NO];
-        
-        UIImage *thumbImage = [self thumbImage:image toPath:thumbPath];
-        //使用获取到的图片NSData
-        [self useImage:thumbImage thumbPath:thumbPath imagePath:imagePath];
-        
-        [image release];
-        image = nil;
-    }
-    
-}
-
-- (void)useImage:(UIImage *)thumbImage thumbPath:(NSString *)thumbPath imagePath:(NSString *)imagePath{
-    /*这里做两件事 1.让图片显示在聊天窗口中，是缩略图，2.发送信息到服务器端*/
-//    NSData *thumbImageData = [NSData dataWithContentsOfFile:thumbPath];
-//    UIImage *thumbImage = [UIImage imageWithData:thumbImageData];
-    
-    //对数据进行封装
-    DEYChatMessage *groupChat = [self createNewChatMessage];
-    [groupChat setMessageType:eMessageTypeImage];
-    [groupChat setStrMessage:thumbPath];
-    [groupChat setStrOriginalImageMessage:imagePath];
-    [groupChat setMessageData:[NSData dataWithContentsOfFile:imagePath]];
-    DEYChatMessageImageSize newSize = {0,0};
-    newSize.width = thumbImage.size.width;
-    newSize.height = thumbImage.size.height;
-    groupChat.imageSize = newSize;
-    
-    [self addChatMessageToShow:groupChat];
-    //发送数据
-    [[DEYChatManager shareChatManager] sendChatMessage:groupChat];
-    [groupChat release];
-    
-}
-
-//对图片进行尺寸处理
--(UIImage *)scaleImage:(UIImage *)sourceImage
-{
-    int maxHeight=960;
-    int maxWidth=640;
-    int targetHeight;
-    int targetWidth;
-    Boolean bScaled = NO;
-    CGSize sourceSize = sourceImage.size;
-    
-    CGFloat srcFactor = sourceSize.height / sourceSize.width;
-    CGFloat maxFactor = (CGFloat) maxHeight / maxWidth;
-    
-    if(srcFactor > maxFactor) //Mybe too high
-    {
-        if(sourceSize.height > maxHeight)
-        {
-            bScaled = YES;
-            targetHeight = maxHeight;
-            targetWidth = sourceSize.width * (maxHeight/sourceSize.height);
-        } 
-    }
-    else //Maybe too wide
-    {
-        if(sourceSize.width > maxWidth)
-        {
-            bScaled = YES;
-            targetWidth = maxWidth;
-            targetHeight = sourceSize.height * (maxWidth/sourceSize.width);
-        }        
-    }    
-    
-    if(!bScaled)
-        return sourceImage;
-    
-    CGSize size = CGSizeMake(targetWidth, targetHeight);
-    UIGraphicsBeginImageContext(size);    
-    [sourceImage drawInRect:CGRectMake(0, 0, size.width, size.height)];    
-    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();    
-    UIGraphicsEndImageContext(); 
-    LOG(@"scaleImage %f,%f",scaledImage.size.width,scaledImage.size.height);
-    return scaledImage;    
-}
-
-//压缩图片
-- (UIImage *)thumbImage:(UIImage *)image toPath:(NSString *)thumbPath{
-    
-    CGFloat maxHeight = 137.0;
-    CGFloat maxWidth = 137.0;
-    CGFloat targetHeight = 64;
-    CGFloat targetWidth = 64;
-    
-    CGSize imageSize = image.size;
-    CGFloat imageHeight = imageSize.height;
-    CGFloat imageWidth = imageSize.width;
-    
-    if (imageHeight < maxHeight && imageWidth < maxWidth) {
-        NSData *thumbImageData = UIImageJPEGRepresentation(image, 0.5f);
-        [thumbImageData writeToFile:thumbPath atomically:NO];
-        return image;
-    }
-    
-    CGFloat sourceFactor = imageHeight / imageWidth;
-    CGFloat maxFactor = maxHeight / maxWidth;
-    
-    if (sourceFactor > maxFactor) {
-        if (imageHeight > maxHeight) {
-            targetHeight = maxHeight;
-            targetWidth = imageWidth * (maxHeight / imageHeight);
-            
-        }
-    }
-    else{
-        if (imageWidth > maxWidth) {
-            targetWidth = maxWidth;
-            targetHeight = imageHeight * (maxWidth / imageWidth);
-        }
-    }
-    
-    CGSize size = CGSizeMake(targetWidth, targetHeight);
-    UIGraphicsBeginImageContext(size);    
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];    
-    UIImage *thumbImage = UIGraphicsGetImageFromCurrentImageContext();    
-    UIGraphicsEndImageContext(); 
-    
-    NSLog(@"thumbimage:%f,%f",thumbImage.size.height,thumbImage.size.height);
-    NSData *thumbImageData = UIImageJPEGRepresentation(thumbImage, 0.5f);
-    [thumbImageData writeToFile:thumbPath atomically:NO];
-    
-    return thumbImage;
 }
 
 
@@ -1083,35 +695,6 @@ typedef enum{
     [self scrollTableToFoot:NO];
     
     [self performSelector:@selector(scrollTableToFoot:) withObject:NO afterDelay:0];
-}
-
-- (void)managerDidReceiveData:(DEYChatMessage *)data{
-    if ([self.strChatRoomID isEqualToString:data.strChatRoomID]) {
-        [self addChatMessageToShow:data];
-    }
-}
-
-- (void)managerDidSendDataSuccess:(DEYChatMessage *)data{
-    
-}
-
-- (void)managerDidSendDataFailed:(DEYChatMessage *)data{
-    [self performSelectorOnMainThread:@selector(managerSendDataFailed:) withObject:data waitUntilDone:NO];
-}
-
-- (void)managerSendDataFailed:(DEYChatMessage *)groupChat{
-    [self.view endEditing:YES];
-    if (groupChat.state == eMessageStateGroupDismiss) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"该群组已解散!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
-        alert.tag = 2012112601;
-        [alert show];
-        [alert release];
-    }else if(groupChat.state == eMessageStateShotOffGroup){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"你已不在群组!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
-        alert.tag = 2012112602;
-        [alert show];
-        [alert release];
-    }
 }
 
 #pragma mark - UIAlertDelegate
@@ -1160,29 +743,7 @@ typedef enum{
 
 - (void)getHistoryChatMessage{
     //查询数据从后台
-    int totalCount = [groupMessagesArray count];
-    if (totalCount > 0) {
-        DEYChatMessage *groupChat = [groupMessagesArray objectAtIndex:0];
-        NSString *groupChatId = groupChat.strServerMsgId ? groupChat.strServerMsgId :groupChat.strLocalMsgId;
-        
-        
-        NSArray *messagesArray  = [[DEYMessageDBManager shareDBManager] getChatMessage:self.strChatRoomID
-                                                                             fromMsgID:[groupChatId longLongValue]
-                                                                            withUserID:[self.strUserId intValue]
-                                                                         byTotalNumber:15
-                                                                              chatType:self.chatType];
-        
-        if ([messagesArray count] > 0) {
-            NSMutableArray *timeMessagesArray = [[NSMutableArray alloc] initWithArray:messagesArray];
-            timeMessagesArray = [self setMessageTimeToShow:timeMessagesArray];
-            for (int i = [timeMessagesArray count] - 1; i >= 0; i--) {
-                [groupMessagesArray insertObject:[timeMessagesArray objectAtIndex:i] atIndex:0];
-            }
-            [timeMessagesArray release];
-        }
-        
-        historyMessageNumber = [messagesArray count];
-    }
+
     
     [self performSelectorOnMainThread:@selector(endGetHistoryChatMessage) withObject:nil waitUntilDone:YES];
 }
@@ -1316,11 +877,6 @@ typedef enum{
 }
 
 - (void)addChatMessageToShow:(DEYChatMessage *)groupChat{
-
-//    [self.groupMessagesArray addObject:groupChat];
-//    NSMutableArray *timetoShowArr = [NSMutableArray arrayWithArray:self.groupMessagesArray];
-//    [self.groupMessagesArray removeAllObjects];
-//    [self.groupMessagesArray addObjectsFromArray:[self setMessageTimeToShow:timetoShowArr]];
     if ([groupMessagesArray count]==0) {
         [groupChat setTimeToShow:TRUE];
     }else{
@@ -1385,7 +941,7 @@ typedef enum{
     
     NSDate *nowTime = [NSDate date];
     
-    NSString *localMsgID = [DEYChatManager dateToString:nowTime
+    NSString *localMsgID = [[self class] dateToString:nowTime
                                           ByFormatter:@"yyyyMMddHHmmssSSS"];
     
     groupChat.strLocalMsgId = localMsgID;
@@ -1394,6 +950,19 @@ typedef enum{
     [groupChat setState:eMessageStateWaitForSend];
     
     return groupChat;
+}
+
++ (NSString *)dateToString:(NSDate *) date ByFormatter:(NSString*)strTimeFormatter {
+    NSDateFormatter	* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:strTimeFormatter];
+    return [formatter stringFromDate:date];
+}
+
+#pragma mark - hym
+-(IBAction)sendMsgToServer:(id)sender {
+//    DEYChatMessage *msg = (DEYChatMessage*) sender;
+//    ASIHTTPRequest *request = [
+    
 }
 
 @end

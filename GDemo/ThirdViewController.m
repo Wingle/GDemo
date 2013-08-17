@@ -65,57 +65,23 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 	// Do any additional setup after loading the view.
-    UIImageView *headView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
-    headView.frame = CGRectMake(0.0, 0.0, 320.0, 120.0);
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:CCRConf.image];
-    imgView.frame = CGRectMake(20.0, 40.0, 60.0, 60.0);
-    imgView.tag = IMG_TAG;
-    [headView addSubview:imgView];
-    [imgView release];
-    imgView = nil;
+    [self.imgBtn setImage:CCRConf.image forState:UIControlStateNormal];
+    [self.nameLabel setText:CCRConf.nickName];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(90.0, 70.0, 120.0, 30.0)];
-    nameLabel.tag = NAME_TAG;
-    [nameLabel setText:CCRConf.nickName];
-    [nameLabel setTextColor:[UIColor whiteColor]];
-    nameLabel.backgroundColor = [UIColor clearColor];
-    [headView addSubview:nameLabel];
-    [nameLabel release];
-    nameLabel = nil;
-    
-    self.tableView.tableHeaderView = headView;
-    [headView release];
-    headView = nil;
+    self.tableView.tableHeaderView = self.headView;
     
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.allowsSelection = NO;
 
 }
 
-//- (void) viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    
-//    for (UIView *view in [self.tableView.tableHeaderView subviews]) {
-//        if (view.tag == IMG_TAG) {
-//            UIImageView *imgview = (UIImageView *) view;
-//            [imgview setImage:CCRConf.image];
-//        }else if (view.tag == NAME_TAG) {
-//            UILabel *namelabel = (UILabel *) view;
-//            [namelabel setText:CCRConf.nickName];
-//        }
-//    }
-//    
-//    NSString *format = [NSString stringWithFormat:@"%@/dateGroupMembers.do?appId=%@&userId=%d&groupId=%@&groupType=%d&sort=1",
-//                        CR_REQUEST_URL,
-//                        APPID,
-//                        62,
-//                        @"123",
-//                        1];
-//    format = [format stringByAppendingString:@"&pageIndex=%d&pageSize=%d"];
-//    [self setRequestFormat:format requestMoreBy:RequestMoreByPageFromPage];
-//    self.numberOfDataPerPage = 20;
-//}
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.imgBtn setImage:CCRConf.image forState:UIControlStateNormal];
+    [self.nameLabel setText:CCRConf.nickName];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -177,17 +143,22 @@
     PengyouqunCellView *msgView = (PengyouqunCellView *)[cell.contentView viewWithTag:CELL_TAG];
     [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
     [msgView.nameLabel setText:model.userNickName];
+    [msgView.contentImgView setFrame:CGRectMake(msgView.contentImgView.frame.origin.x,
+                                                58.0,
+                                                msgView.contentImgView.frame.size.width,
+                                                msgView.contentImgView.frame.size.height)];
     [msgView.contentImgView setImageURL:[NSURL URLWithString:model.contentImgURL]];
-    
+    [msgView setFrame:CGRectMake(msgView.frame.origin.x, msgView.frame.origin.y, msgView.frame.size.width, 206.0)];
     UILabel *label = msgView.contentTextLabel;
-    msgView.contentTextLabel.numberOfLines = 0;  //必须定义这个属性，否则UILabel不会换行
-    msgView.contentTextLabel.textAlignment = NSTextAlignmentLeft;  //文本对齐方式
-    [msgView.contentTextLabel setBackgroundColor:[UIColor clearColor]];
+    label.numberOfLines = 0;  //必须定义这个属性，否则UILabel不会换行
+    label.textAlignment = NSTextAlignmentLeft;  //文本对齐方式
+    [label setBackgroundColor:[UIColor clearColor]];
 
     //宽度不变，根据字的多少计算label的高度
     CGSize size = [model.contentText sizeWithFont:label.font constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     //根据计算结果重新设置UILabel的尺寸
-    CGFloat apal = size.height - msgView.contentTextLabel.frame.size.height;
+    CGFloat apal = size.height - 21.0;
+    NSLog(@"apal = %f",apal);
     [msgView.contentTextLabel setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, size.height)];
     msgView.contentTextLabel.text = model.contentText;
     
@@ -314,4 +285,16 @@
     model2 = nil;
 }
 
+- (void)dealloc {
+    [_headView release];
+    [_imgBtn release];
+    [_nameLabel release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setHeadView:nil];
+    [self setImgBtn:nil];
+    [self setNameLabel:nil];
+    [super viewDidUnload];
+}
 @end

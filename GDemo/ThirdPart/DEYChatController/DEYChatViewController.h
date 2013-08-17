@@ -10,13 +10,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "HPGrowingTextView.h"
 #import "DEYChatMessageTableViewCell.h"
-#import "DEYChatManager.h"
+#import "DEYChatMessage.h"
 #import "EGORefreshTableHeaderView.h"
-#import "DEYAudioController.h"
 
 @protocol DEYChatMessageTableViewDelegate; 
 
-@interface DEYChatViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,HPGrowingTextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,DEYAVAudioPlayerDelegate,DEYChatManagerDelegate,EGORefreshTableHeaderDelegate,UIAlertViewDelegate>{
+@interface DEYChatViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,HPGrowingTextViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,EGORefreshTableHeaderDelegate, UIAlertViewDelegate>{
     NSString *userName;             //用户名
     NSMutableArray *groupMessagesArray;          //群组聊天记录
     NSString *messageInfo;                  //暂时保存聊天信息
@@ -28,7 +27,6 @@
     EGORefreshTableHeaderView *m_refreshChatListHeaderView;     //下拉更新view
     UIViewController *imageViewController;  
     
-    DEYAudioController * audiocontroller;
     DEYChatMessageTableViewCell *audioPlayCell;
     
     // up&down delegate by duanjsh
@@ -75,17 +73,6 @@
 
 - (IBAction)navigationReturn:(id)sender;
 
-- (void) takePhotoWithCamera;
-- (void) selectPhotoFromLibrary;
-- (BOOL)startCameraPickerFromViewController:(UIViewController*)controller usingDelegate:(id<UIImagePickerControllerDelegate>)delegateObject;
-- (BOOL)startLibraryPickerFromViewController:(UIViewController*)controller usingDelegate:(id<UIImagePickerControllerDelegate>)delegateObject;
-- (void)startPickerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate>)delegateObject sourceType:(UIImagePickerControllerSourceType)sourceType;
-
--(UIImage *)scaleImage:(UIImage *)sourceImage;
-
-- (UIImage *)thumbImage:(UIImage *)image toPath:(NSString *)thumbPath;   //压缩图片
-
-- (void) useImage:(UIImage *)thumbImage thumbPath:(NSString *)thumbPath imagePath:(NSString *)imagePath;
 
 - (void) chatMessagePostion:(int)originY tableViewHeight:(int)tableViewHeight animationDuration:(NSNumber*)duration animationCure:(NSNumber *)curve;
 

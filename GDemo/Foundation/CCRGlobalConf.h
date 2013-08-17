@@ -41,5 +41,7 @@
 - (NSString *) userContact;
 - (NSString *) userSign;
 - (NSString *) userCode;
+- (NSInteger) gender;
+- (NSInteger) area;
 
 @end

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -42,6 +42,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 416}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="914832853"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -63,6 +64,7 @@
 						<int key="NSvFlags">-2147483347</int>
 						<string key="NSFrame">{{87, 173}, {147, 162}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="686421206"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="248080394">
 							<int key="NSColorSpace">3</int>
@@ -84,6 +86,7 @@
 								<int key="NSvFlags">265</int>
 								<string key="NSFrameSize">{320, 45}</string>
 								<reference key="NSSuperview" ref="686421206"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="21923752"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -97,6 +100,7 @@
 								<int key="NSvFlags">-2147483383</int>
 								<string key="NSFrame">{{39, 5}, {227, 39}}</string>
 								<reference key="NSSuperview" ref="686421206"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="418877842"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -132,8 +136,9 @@
 							<object class="IBUIView" id="418877842">
 								<reference key="NSNextResponder" ref="686421206"/>
 								<int key="NSvFlags">283</int>
-								<string key="NSFrame">{{42, 5}, {220, 29}}</string>
+								<string key="NSFrame">{{4, 5}, {312, 29}}</string>
 								<reference key="NSSuperview" ref="686421206"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="217822705"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -146,9 +151,10 @@
 							</object>
 							<object class="IBUIButton" id="21923752">
 								<reference key="NSNextResponder" ref="686421206"/>
-								<int key="NSvFlags">265</int>
+								<int key="NSvFlags">-2147483383</int>
 								<string key="NSFrame">{{4, 8}, {30, 32}}</string>
 								<reference key="NSSuperview" ref="686421206"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1039981407"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">2012080901</int>
@@ -171,9 +177,10 @@
 							</object>
 							<object class="IBUIButton" id="217822705">
 								<reference key="NSNextResponder" ref="686421206"/>
-								<int key="NSvFlags">265</int>
+								<int key="NSvFlags">-2147483383</int>
 								<string key="NSFrame">{{270, 6}, {46, 36}}</string>
 								<reference key="NSSuperview" ref="686421206"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -196,6 +203,7 @@
 						</array>
 						<string key="NSFrame">{{0, 415}, {320, 45}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="778202421"/>
 						<reference key="IBUIBackgroundColor" ref="248080394"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -203,6 +211,7 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="833724772"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -448,7 +457,222 @@
 			<nil key="sourceID"/>
 			<int key="maxID">42</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">DEYChatMessageTableViewCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btnFaceImage">EGOImageButton</string>
+						<string key="m_audioButton">UIButton</string>
+						<string key="m_faceImage">EGOImageView</string>
+						<string key="m_imageButton">UIButton</string>
+						<string key="m_imgViewAudio">UIImageView</string>
+						<string key="m_labelVoiceTime">UILabel</string>
+						<string key="m_messageBubbleImageView">UIImageView</string>
+						<string key="m_messageTimeLable">UILabel</string>
+						<string key="m_messagelabel">UILabel</string>
+						<string key="m_userNameLable">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btnFaceImage">
+							<string key="name">btnFaceImage</string>
+							<string key="candidateClassName">EGOImageButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_audioButton">
+							<string key="name">m_audioButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_faceImage">
+							<string key="name">m_faceImage</string>
+							<string key="candidateClassName">EGOImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_imageButton">
+							<string key="name">m_imageButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_imgViewAudio">
+							<string key="name">m_imgViewAudio</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_labelVoiceTime">
+							<string key="name">m_labelVoiceTime</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_messageBubbleImageView">
+							<string key="name">m_messageBubbleImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_messageTimeLable">
+							<string key="name">m_messageTimeLable</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_messagelabel">
+							<string key="name">m_messagelabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_userNameLable">
+							<string key="name">m_userNameLable</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/DEYChatMessageTableViewCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">DEYChatViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="audioPlayClick:">id</string>
+						<string key="messageOfArtworkClick:">id</string>
+						<string key="messageSelectPictureClick:">id</string>
+						<string key="messageTypeClick:">id</string>
+						<string key="navigationReturn:">id</string>
+						<string key="showPersonalInfo:">id</string>
+						<string key="startRecord:">id</string>
+						<string key="stopRecord:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="audioPlayClick:">
+							<string key="name">audioPlayClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="messageOfArtworkClick:">
+							<string key="name">messageOfArtworkClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="messageSelectPictureClick:">
+							<string key="name">messageSelectPictureClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="messageTypeClick:">
+							<string key="name">messageTypeClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="navigationReturn:">
+							<string key="name">navigationReturn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showPersonalInfo:">
+							<string key="name">showPersonalInfo:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="startRecord:">
+							<string key="name">startRecord:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="stopRecord:">
+							<string key="name">stopRecord:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="chatMessageView">UIView</string>
+						<string key="chatMessagetableView">UITableView</string>
+						<string key="m_leftImageTableViewCell">DEYChatMessageTableViewCell</string>
+						<string key="m_leftMessageTableViewCell">DEYChatMessageTableViewCell</string>
+						<string key="m_leftVoiceTableViewCell">DEYChatMessageTableViewCell</string>
+						<string key="m_recordVoiceView">UIImageView</string>
+						<string key="m_rightImageTableViewCell">DEYChatMessageTableViewCell</string>
+						<string key="m_rightMessageTableViewCell">DEYChatMessageTableViewCell</string>
+						<string key="m_rightVoiceTableViewCell">DEYChatMessageTableViewCell</string>
+						<string key="messageSelectPictureButton">UIButton</string>
+						<string key="messageTextView">HPGrowingTextView</string>
+						<string key="messageTypeButton">UIButton</string>
+						<string key="messageViewbackImageView">UIImageView</string>
+						<string key="voiceMessageButton">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="chatMessageView">
+							<string key="name">chatMessageView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="chatMessagetableView">
+							<string key="name">chatMessagetableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_leftImageTableViewCell">
+							<string key="name">m_leftImageTableViewCell</string>
+							<string key="candidateClassName">DEYChatMessageTableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_leftMessageTableViewCell">
+							<string key="name">m_leftMessageTableViewCell</string>
+							<string key="candidateClassName">DEYChatMessageTableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_leftVoiceTableViewCell">
+							<string key="name">m_leftVoiceTableViewCell</string>
+							<string key="candidateClassName">DEYChatMessageTableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_recordVoiceView">
+							<string key="name">m_recordVoiceView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_rightImageTableViewCell">
+							<string key="name">m_rightImageTableViewCell</string>
+							<string key="candidateClassName">DEYChatMessageTableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_rightMessageTableViewCell">
+							<string key="name">m_rightMessageTableViewCell</string>
+							<string key="candidateClassName">DEYChatMessageTableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="m_rightVoiceTableViewCell">
+							<string key="name">m_rightVoiceTableViewCell</string>
+							<string key="candidateClassName">DEYChatMessageTableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="messageSelectPictureButton">
+							<string key="name">messageSelectPictureButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="messageTextView">
+							<string key="name">messageTextView</string>
+							<string key="candidateClassName">HPGrowingTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="messageTypeButton">
+							<string key="name">messageTypeButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="messageViewbackImageView">
+							<string key="name">messageViewbackImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="voiceMessageButton">
+							<string key="name">voiceMessageButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/DEYChatViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">EGOImageButton</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EGOImageButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">EGOImageView</string>
+					<string key="superclassName">UIImageView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EGOImageView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">HPGrowingTextView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HPGrowingTextView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
@@ -460,6 +684,6 @@
 			<string key="messageVoice.png">{30, 32}</string>
 			<string key="voicemessageBackgroup.png">{227, 39}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

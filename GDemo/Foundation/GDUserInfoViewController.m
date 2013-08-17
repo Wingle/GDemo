@@ -7,6 +7,8 @@
 //
 
 #import "GDUserInfoViewController.h"
+#import "DEYChatViewController.h"
+#import "CCRGlobalConf.h"
 
 @interface GDUserInfoViewController ()
 @property (nonatomic, assign) GDRelationShip ship;
@@ -95,7 +97,11 @@
     switch (self.ship) {
         case kRelationshipFriends:
         {
-            
+            DEYChatViewController *vc = [[DEYChatViewController alloc] initWithNibName:@"DEYChatViewController" bundle:nil UserID:[NSString stringWithFormat:@"%d",CCRConf.userId] RoomID:[NSString stringWithFormat:@"%d",self.userInfo.userID] ChatType:eChatTypeP2P];
+            vc.title = self.userInfo.nickName;
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc release];
+            vc = nil;
             break;
         }
         case kRelationshipStranger:

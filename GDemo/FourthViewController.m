@@ -209,7 +209,7 @@
                                   otherButtonTitles:@"图 库",
                                   @"拍 照",nil];
     actionSheet.tag = IMAGE_SHEET_TAG;
-    [actionSheet showInView:self.view];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
     [actionSheet release];
     actionSheet = nil;
     
@@ -351,10 +351,13 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     UIImage * img = [[info objectForKey:UIImagePickerControllerEditedImage] retain];
-    [picker dismissModalViewControllerAnimated:NO];
+//    [picker dismissModalViewControllerAnimated:NO];
     [GDUtility saveImage:img imageKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
     [self performSelectorOnMainThread:@selector(updateTableView:) withObject:nil waitUntilDone:YES];
+    [pool release];
+    pool = nil;
     
 }
 

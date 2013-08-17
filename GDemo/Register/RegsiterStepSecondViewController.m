@@ -9,6 +9,7 @@
 #import "RegsiterStepSecondViewController.h"
 #import "RegsiterStepThirdViewController.h"
 #import "AppDelegate.h"
+#import "CCRGlobalConf.h"
 
 @interface RegsiterStepSecondViewController ()
 
@@ -46,6 +47,17 @@
 }
 
 - (IBAction) nextStep:(id)sender {
+    if ([self.passwordTextFiled.text length] == 0) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"亲，设个密码吧！"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
+        return;
+    }
     if (![self.codeTextField.text isEqualToString:@"123456"]) {
         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"亲，你输入的验证码不对哦！"
@@ -57,6 +69,9 @@
         alter = nil;
         return;
     }
+    [[NSUserDefaults standardUserDefaults] setObject:self.passwordTextFiled.text forKey:gPASSWORD];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 //    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"注册成功"
 //                                                    message:@"亲，进入软件后请到“设置”里面填写详细的个人信息，以便让更多志同道合的朋友能找到你哦！"
 //                                                   delegate:self
@@ -74,10 +89,12 @@
 
 - (void)dealloc {
     [_codeTextField release];
+    [_passwordTextFiled release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setCodeTextField:nil];
+    [self setPasswordTextFiled:nil];
     [super viewDidUnload];
 }
 

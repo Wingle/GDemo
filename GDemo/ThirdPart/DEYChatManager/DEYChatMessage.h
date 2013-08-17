@@ -51,25 +51,6 @@ typedef struct {
     int32_t height;
 }DEYChatMessageImageSize;
 
-@interface DEYUnreadMessageInfo : NSObject
-
-@property (nonatomic, retain) NSString *strChatRoomID;
-@property (nonatomic, retain) NSString *userId;
-@property (nonatomic, assign) int unreadMessageNumber;
-@property (nonatomic, assign) eChatType chatType;
-
-- (id) InitUnreadMessageInfoWithRoom:(NSString *) chatRoomID andUserID:(NSString *) userID andTotalMessageNo:(int) msgNo andChatType:(eChatType) chattype;
-+ (void) saveUnreadMessage:(DEYUnreadMessageInfo *) unreadMessageInfo UseAddMode:(BOOL) addMode;
-+ (int) getAllUnreadMsgNumber:(NSString *) UserID;
-+ (int) getGroupAllUnreadMsgNum:(NSString *) UserID;
-+ (int) getP2PAllUnreadMsgNum:(NSString *) UserID;
-+ (int) getUnreadMsgNumberFromGroup:(NSString *) ChatRoomID UserID:(NSString *) UserID;
-+ (int) getUnreadMsgNumberFromP2P:(NSString *) ChatRoomID UserID:(NSString *) UserID;
-+ (NSDictionary *) getAllChatRoomUnreadMsgNumber:(NSString *) UserID;
-+ (void) deleteUnreadMsgFrom:(NSString *) chatRoomID andUserID:(NSString *) userID;
-
-@end
-
 @interface DEYChatMessage : NSObject {
     NSString * strLocalMsgId;          //聊天ID
     NSString * strServerMsgId;

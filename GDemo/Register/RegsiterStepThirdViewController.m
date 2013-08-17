@@ -12,6 +12,8 @@
 #import "FillInBlankViewController.h"
 #import "SelectViewController.h"
 #import "AppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "SBJson.h"
 
 #define IMAGE_SHEET_TAG         2013081401
 #define GENDER_SHEET_TAG        2013081402
@@ -48,6 +50,12 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.nickNameTextFiled resignFirstResponder];
+    [self.phoneTextField resignFirstResponder];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,9 +84,14 @@
 }
 #pragma mark - 
 - (IBAction) nextStep:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gHAVE_LOGIN];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [APP_DELEGATE loginSuccess];
+//    register.do?phone=12345670&name=test&gender=M&address=上海市&signature=玩游戏&password=123456
+    NSString *strURL = [[NSString stringWithFormat:@"%@/register.do?phone=%@&name=%@&gender=%d&address=%d&signature=%@&password=%@",CR_REQUEST_URL,CCRConf.loginName,CCRConf.nickName,CCRConf.gender,CCRConf.area,CCRConf.userSign,CCRConf.password] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    [request setTimeOutSeconds:5];
+    request.delegate = self;
+    [request startSynchronous];
+    
 }
 
 #pragma mark - IBAction 
@@ -224,6 +237,8 @@
 #pragma mark - fill 
 - (void) fillInBlankFinished:(UITextField *) textField {
     [self.signBtn setTitle:textField.text forState:UIControlStateNormal];
+    [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:gUSER_SIGN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - select
@@ -244,5 +259,47 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [textField resignFirstResponder];
 }
+
+#pragma mark - ASIHttp---
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSString *string = [request responseString];
+    NSMutableDictionary * dataDict = [string JSONValue];
+    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+    if (status != 0) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"亲，账号密码错误啊"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
+        return;
+    }
+    NSString *userid = [dataDict objectForKey:@"userId"];
+    if (userid) {
+        [[NSUserDefaults standardUserDefaults] setInteger:[userid integerValue] forKey:gUSER_ID];
+        [[NSUserDefaults standardUserDefaults] setObject:userid  forKey:gUSER_CODE];
+    }
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gHAVE_LOGIN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [APP_DELEGATE loginSuccess];
+    
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"亲，网络不通哦"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
+    
+}
+
 
 @end

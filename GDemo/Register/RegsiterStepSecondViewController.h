@@ -11,4 +11,5 @@
 @interface RegsiterStepSecondViewController : UIViewController <UIAlertViewDelegate>
 @property (retain, nonatomic) IBOutlet UITextField *codeTextField;
 
+@property (retain, nonatomic) IBOutlet UITextField *passwordTextFiled;
 @end

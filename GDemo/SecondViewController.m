@@ -51,6 +51,10 @@
     
 }
 
+- (void) viewDidUnload {
+    [self.dataSource removeAllObjects];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

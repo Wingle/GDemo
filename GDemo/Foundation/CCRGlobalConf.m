@@ -33,6 +33,14 @@
     return (NSInteger) [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_ID];
 }
 
+- (NSInteger) gender {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_GENDER];
+}
+
+- (NSInteger) area {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_AREA];
+}
+
 - (NSString *) loginName {
     return [[NSUserDefaults standardUserDefaults] stringForKey:gLOGIN_NAME];
 }

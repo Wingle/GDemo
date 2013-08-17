@@ -10,5 +10,9 @@
 #import "DEYRefreshTableViewController.h"
 
 @interface ThirdViewController : DEYRefreshTableViewController
+@property (retain, nonatomic) IBOutlet UIView *headView;
+@property (retain, nonatomic) IBOutlet UIButton *imgBtn;
+@property (retain, nonatomic) IBOutlet UILabel *nameLabel;
+
 
 @end

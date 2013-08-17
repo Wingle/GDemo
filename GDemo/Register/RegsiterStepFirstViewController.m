@@ -60,6 +60,9 @@
         return;
     }
     
+    [[NSUserDefaults standardUserDefaults] setObject:self.regsiterNameTextField.text forKey:gLOGIN_NAME];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     RegsiterStepSecondViewController *rsVC = [[RegsiterStepSecondViewController alloc] initWithNibName:@"RegsiterStepSecondViewController" bundle:nil];
     [self.navigationController pushViewController:rsVC animated:YES];
     [rsVC release];
