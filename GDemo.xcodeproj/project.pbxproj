@@ -63,11 +63,9 @@
 		98D6DC9817B9C1620080DAC5 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DC9717B9C1620080DAC5 /* FirstViewController.m */; };
 		98D6DC9A17B9C1620080DAC5 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DC9917B9C1620080DAC5 /* first.png */; };
 		98D6DC9C17B9C1620080DAC5 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DC9B17B9C1620080DAC5 /* first@2x.png */; };
-		98D6DC9F17B9C1620080DAC5 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DC9E17B9C1620080DAC5 /* SecondViewController.m */; };
 		98D6DCA117B9C1620080DAC5 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA017B9C1620080DAC5 /* second.png */; };
 		98D6DCA317B9C1620080DAC5 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA217B9C1620080DAC5 /* second@2x.png */; };
 		98D6DCA617B9C1620080DAC5 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA417B9C1620080DAC5 /* FirstViewController.xib */; };
-		98D6DCA917B9C1620080DAC5 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98D6DCA717B9C1620080DAC5 /* SecondViewController.xib */; };
 		98D6DCB517B9E1B80080DAC5 /* CCRGlobalConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCB417B9E1B80080DAC5 /* CCRGlobalConf.m */; };
 		98D6DCB717B9E2720080DAC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DCB617B9E2720080DAC5 /* MapKit.framework */; };
 		98D6DCC517BA04410080DAC5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D6DCC317BA04410080DAC5 /* LoginViewController.m */; };
@@ -99,6 +97,14 @@
 		98F92E4717BDEC8600D0715F /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E4517BDEC8600D0715F /* TPKeyboardAvoidingTableView.m */; };
 		98F92E4C17BDED4800D0715F /* DistrubiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E4A17BDED4800D0715F /* DistrubiteViewController.m */; };
 		98F92E4D17BDED4800D0715F /* DistrubiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98F92E4B17BDED4800D0715F /* DistrubiteViewController.xib */; };
+		98F92E5117BE108700D0715F /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E4F17BE108600D0715F /* SecondViewController.m */; };
+		98F92E5217BE108700D0715F /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98F92E5017BE108700D0715F /* SecondViewController.xib */; };
+		98F92E5617BE67FE00D0715F /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E5417BE67FD00D0715F /* FriendViewController.m */; };
+		98F92E5717BE67FE00D0715F /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98F92E5517BE67FE00D0715F /* FriendViewController.xib */; };
+		98F92E5C17BE6B7700D0715F /* FriendsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E5B17BE6B7700D0715F /* FriendsCellView.m */; };
+		98F92E5E17BE6B9400D0715F /* FriendsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98F92E5D17BE6B9400D0715F /* FriendsCellView.xib */; };
+		98F92E6317BE8B6400D0715F /* GDUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F92E6117BE8B6300D0715F /* GDUserInfoViewController.m */; };
+		98F92E6417BE8B6400D0715F /* GDUserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98F92E6217BE8B6400D0715F /* GDUserInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,12 +205,9 @@
 		98D6DC9717B9C1620080DAC5 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		98D6DC9917B9C1620080DAC5 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		98D6DC9B17B9C1620080DAC5 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		98D6DC9D17B9C1620080DAC5 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		98D6DC9E17B9C1620080DAC5 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		98D6DCA017B9C1620080DAC5 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		98D6DCA217B9C1620080DAC5 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		98D6DCA517B9C1620080DAC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
-		98D6DCA817B9C1620080DAC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
 		98D6DCB317B9E1B80080DAC5 /* CCRGlobalConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRGlobalConf.h; sourceTree = "<group>"; };
 		98D6DCB417B9E1B80080DAC5 /* CCRGlobalConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRGlobalConf.m; sourceTree = "<group>"; };
 		98D6DCB617B9E2720080DAC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -252,6 +255,18 @@
 		98F92E4917BDED4800D0715F /* DistrubiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrubiteViewController.h; sourceTree = "<group>"; };
 		98F92E4A17BDED4800D0715F /* DistrubiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrubiteViewController.m; sourceTree = "<group>"; };
 		98F92E4B17BDED4800D0715F /* DistrubiteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistrubiteViewController.xib; sourceTree = "<group>"; };
+		98F92E4E17BE108600D0715F /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		98F92E4F17BE108600D0715F /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		98F92E5017BE108700D0715F /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
+		98F92E5317BE67FD00D0715F /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
+		98F92E5417BE67FD00D0715F /* FriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
+		98F92E5517BE67FE00D0715F /* FriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
+		98F92E5A17BE6B7700D0715F /* FriendsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsCellView.h; sourceTree = "<group>"; };
+		98F92E5B17BE6B7700D0715F /* FriendsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsCellView.m; sourceTree = "<group>"; };
+		98F92E5D17BE6B9400D0715F /* FriendsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsCellView.xib; sourceTree = "<group>"; };
+		98F92E6017BE8B6300D0715F /* GDUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDUserInfoViewController.h; sourceTree = "<group>"; };
+		98F92E6117BE8B6300D0715F /* GDUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDUserInfoViewController.m; sourceTree = "<group>"; };
+		98F92E6217BE8B6400D0715F /* GDUserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDUserInfoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +456,7 @@
 		98D6DC8417B9C1620080DAC5 /* GDemo */ = {
 			isa = PBXGroup;
 			children = (
+				98F92E5817BE687600D0715F /* Friend */,
 				98F92E4817BDED0F00D0715F /* Distribute */,
 				98D6DCF917BA64260080DAC5 /* Frame */,
 				98D6DCE217BA4AF70080DAC5 /* ThirdPart */,
@@ -515,6 +531,9 @@
 				9812987917BBC6D800274C5B /* SelectViewController.h */,
 				9812987A17BBC6D800274C5B /* SelectViewController.m */,
 				9812987B17BBC6D800274C5B /* SelectViewController.xib */,
+				98F92E6017BE8B6300D0715F /* GDUserInfoViewController.h */,
+				98F92E6117BE8B6300D0715F /* GDUserInfoViewController.m */,
+				98F92E6217BE8B6400D0715F /* GDUserInfoViewController.xib */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -606,15 +625,15 @@
 				98D6DC9617B9C1620080DAC5 /* FirstViewController.h */,
 				98D6DC9717B9C1620080DAC5 /* FirstViewController.m */,
 				98D6DCA417B9C1620080DAC5 /* FirstViewController.xib */,
-				98D6DC9D17B9C1620080DAC5 /* SecondViewController.h */,
-				98D6DC9E17B9C1620080DAC5 /* SecondViewController.m */,
-				98D6DCA717B9C1620080DAC5 /* SecondViewController.xib */,
 				9812988017BBE7AB00274C5B /* FourthViewController.h */,
 				9812988117BBE7AB00274C5B /* FourthViewController.m */,
 				9812988217BBE7AB00274C5B /* FourthViewController.xib */,
 				98F92E1817BD1A1C00D0715F /* ThirdViewController.h */,
 				98F92E1917BD1A1C00D0715F /* ThirdViewController.m */,
 				98F92E1A17BD1A1C00D0715F /* ThirdViewController.xib */,
+				98F92E4E17BE108600D0715F /* SecondViewController.h */,
+				98F92E4F17BE108600D0715F /* SecondViewController.m */,
+				98F92E5017BE108700D0715F /* SecondViewController.xib */,
 			);
 			name = Frame;
 			sourceTree = "<group>";
@@ -660,6 +679,27 @@
 				98F92E4B17BDED4800D0715F /* DistrubiteViewController.xib */,
 			);
 			name = Distribute;
+			sourceTree = "<group>";
+		};
+		98F92E5817BE687600D0715F /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				98F92E5917BE6B3300D0715F /* CellView */,
+				98F92E5317BE67FD00D0715F /* FriendViewController.h */,
+				98F92E5417BE67FD00D0715F /* FriendViewController.m */,
+				98F92E5517BE67FE00D0715F /* FriendViewController.xib */,
+			);
+			name = Friend;
+			sourceTree = "<group>";
+		};
+		98F92E5917BE6B3300D0715F /* CellView */ = {
+			isa = PBXGroup;
+			children = (
+				98F92E5A17BE6B7700D0715F /* FriendsCellView.h */,
+				98F92E5B17BE6B7700D0715F /* FriendsCellView.m */,
+				98F92E5D17BE6B9400D0715F /* FriendsCellView.xib */,
+			);
+			name = CellView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -722,7 +762,6 @@
 				98D6DCA117B9C1620080DAC5 /* second.png in Resources */,
 				98D6DCA317B9C1620080DAC5 /* second@2x.png in Resources */,
 				98D6DCA617B9C1620080DAC5 /* FirstViewController.xib in Resources */,
-				98D6DCA917B9C1620080DAC5 /* SecondViewController.xib in Resources */,
 				98D6DCC617BA04410080DAC5 /* LoginViewController.xib in Resources */,
 				98D6DCD117BA10580080DAC5 /* RegsiterStepFirstViewController.xib in Resources */,
 				98D6DCD617BA108C0080DAC5 /* RegsiterStepSecondViewController.xib in Resources */,
@@ -745,6 +784,10 @@
 				98F92E1C17BD1A1C00D0715F /* ThirdViewController.xib in Resources */,
 				98F92E2117BD205F00D0715F /* PengyouqunCellView.xib in Resources */,
 				98F92E4D17BDED4800D0715F /* DistrubiteViewController.xib in Resources */,
+				98F92E5217BE108700D0715F /* SecondViewController.xib in Resources */,
+				98F92E5717BE67FE00D0715F /* FriendViewController.xib in Resources */,
+				98F92E5E17BE6B9400D0715F /* FriendsCellView.xib in Resources */,
+				98F92E6417BE8B6400D0715F /* GDUserInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +802,6 @@
 				98D6DC8B17B9C1620080DAC5 /* main.m in Sources */,
 				98D6DC8F17B9C1620080DAC5 /* AppDelegate.m in Sources */,
 				98D6DC9817B9C1620080DAC5 /* FirstViewController.m in Sources */,
-				98D6DC9F17B9C1620080DAC5 /* SecondViewController.m in Sources */,
 				98D6DCB517B9E1B80080DAC5 /* CCRGlobalConf.m in Sources */,
 				98D6DCC517BA04410080DAC5 /* LoginViewController.m in Sources */,
 				98D6DCD017BA10580080DAC5 /* RegsiterStepFirstViewController.m in Sources */,
@@ -806,6 +848,10 @@
 				98F92E4617BDEC8600D0715F /* TPKeyboardAvoidingScrollView.m in Sources */,
 				98F92E4717BDEC8600D0715F /* TPKeyboardAvoidingTableView.m in Sources */,
 				98F92E4C17BDED4800D0715F /* DistrubiteViewController.m in Sources */,
+				98F92E5117BE108700D0715F /* SecondViewController.m in Sources */,
+				98F92E5617BE67FE00D0715F /* FriendViewController.m in Sources */,
+				98F92E5C17BE6B7700D0715F /* FriendsCellView.m in Sources */,
+				98F92E6317BE8B6400D0715F /* GDUserInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,14 +872,6 @@
 				98D6DCA517B9C1620080DAC5 /* en */,
 			);
 			name = FirstViewController.xib;
-			sourceTree = "<group>";
-		};
-		98D6DCA717B9C1620080DAC5 /* SecondViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				98D6DCA817B9C1620080DAC5 /* en */,
-			);
-			name = SecondViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

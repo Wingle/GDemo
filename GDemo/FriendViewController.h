@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  FriendViewController.h
 //  GDemo
 //
 //  Created by Wingle Wong on 8/16/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UITableViewController
+@interface FriendViewController : UITableViewController
 
 @end

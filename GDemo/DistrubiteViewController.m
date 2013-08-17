@@ -8,6 +8,9 @@
 
 #import "DistrubiteViewController.h"
 
+
+#define IMAGE_SHEET_TAG         2013081701
+
 @interface DistrubiteViewController ()
 
 @end
@@ -48,6 +51,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.imgBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,6 +82,73 @@
 }
 
 - (IBAction)imgBtnClick:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"选择"
+                                  delegate:self
+                                  cancelButtonTitle:@"取 消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"图 库",
+                                  @"拍 照",nil];
+    actionSheet.tag = IMAGE_SHEET_TAG;
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+    actionSheet = nil;
+    
+}
+
+- (IBAction)updateHeadImageView:(id)sender {
+    UIImage *img = (UIImage *) sender;
+    [self.imgBtn setImage:img forState:UIControlStateNormal];
+
+}
+#pragma mark ------ UIActionSheet Delegate Methods ------
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != [actionSheet cancelButtonIndex])
+    {
+        switch (buttonIndex) {
+            case 0:
+            {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.delegate = self;
+                [self.navigationController presentModalViewController:picker animated:YES];
+                [picker release];
+                picker = nil;
+                break;
+            }
+            case 1:
+            {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                picker.delegate = self;
+                [self.navigationController presentModalViewController:picker animated:YES];
+                [picker release];
+                picker = nil;
+                break;
+            }
+            default:
+                break;
+        }
+        
+    }
+    return;
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+-(void) removePicker:(UIImagePickerController *)picker{
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage * img = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
+    [picker dismissModalViewControllerAnimated:NO];
+    [self performSelectorOnMainThread:@selector(updateHeadImageView:) withObject:img waitUntilDone:YES];
     
 }
 @end

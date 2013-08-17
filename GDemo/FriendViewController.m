@@ -1,29 +1,34 @@
 //
-//  SecondViewController.m
+//  FriendViewController.m
 //  GDemo
 //
 //  Created by Wingle Wong on 8/16/13.
 //  Copyright (c) 2013 Wingle. All rights reserved.
 //
 
-#import "SecondViewController.h"
 #import "FriendViewController.h"
+#import "ASIHTTPRequest.h"
+#import "MBProgressHUD.h"
+#import "SBJson.h"
+#import "FriendsCellView.h"
+#import "GDUserInfo.h"
+#import "GDUserInfoViewController.h"
 
-@interface SecondViewController ()
+
+#define CELL_TAG        2013081611
+
+@interface FriendViewController ()
 @property (nonatomic, retain) NSMutableArray *dataSource;
 
 @end
 
-@implementation SecondViewController
+@implementation FriendViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
     if (self) {
-        NSString *str = @"关系";
-        self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
-        self.tabBarItem.title = str;
-        
+        // Custom initialization
         _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -38,16 +43,30 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+    usrinfo.nickName = @"任志强";
+    usrinfo.gender = 0;
+    usrinfo.area = 2;
+    usrinfo.gameServer = 3;
+    usrinfo.relationship = kRelationshipFriends;
+    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+    usrinfo.userSign = @"我爱潘石屹";
+    [self.dataSource addObject:usrinfo];
+    [usrinfo release];
+    usrinfo = nil;
     
-    NSArray *s0a0 = [NSArray arrayWithObjects:@"我的好友",@"myFriendClick:", nil];
-    NSArray *s0 = [NSArray arrayWithObject:s0a0];
-    [self.dataSource addObject:s0];
+    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
+    usrinfo1.nickName = @"潘石屹";
+    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
+    usrinfo1.gender = 0;
+    usrinfo1.area = 3;
+    usrinfo1.gameServer = 2;
+    usrinfo.relationship = kRelationshipStranger;
+    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
+    [self.dataSource addObject:usrinfo1];
+    [usrinfo1 release];
+    usrinfo1 = nil;
     
-    NSArray *s1a0 = [NSArray arrayWithObjects:@"附近的人",@"nearByClick:", nil];
-    NSArray *s1 = [NSArray arrayWithObject:s1a0];
-    [self.dataSource addObject:s1];
-    
-    [self.tableView reloadData];
     
 }
 
@@ -64,16 +83,24 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//#warning Potentially incomplete method implementation.
+//    // Return the number of sections.
+//    return 0;
+//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return the number of sections.
-    return [self.dataSource count];
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
     // Return the number of rows in the section.
-    return [[self.dataSource objectAtIndex:section] count];
+    return [self.dataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,13 +109,21 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        FriendsCellView *cellView = [FriendsCellView cellView];
+        cellView.tag = CELL_TAG;
+        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cellView.frame.size.height);
+        [cell.contentView addSubview:cellView];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    NSInteger section = [indexPath section];
-    NSInteger row = [indexPath row];
     // Configure the cell...
-    cell.textLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:0];
+    FriendsCellView *fView = (FriendsCellView *) [cell.contentView viewWithTag:CELL_TAG];
+    GDUserInfo *userInfo = [self.dataSource objectAtIndex:[indexPath row]];
+    [fView.imgBtn setImageURL:[NSURL URLWithString:userInfo.imagestringURL]];
+    [fView.nameLabel setText:userInfo.nickName];
+    [fView.areaLabel setText:userInfo.stringArea];
+    [fView.gameLabel setText:userInfo.stringgameServer];
+    
     return cell;
 }
 
@@ -135,27 +170,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSArray *oneRecord = [[self.dataSource objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
-    SEL function = NSSelectorFromString([oneRecord objectAtIndex:1]);
-    [self performSelector:function];
-}
-
-#pragma mark - IBAction
-- (IBAction)myFriendClick:(id)sender {
-    FriendViewController *vc = [[FriendViewController alloc] initWithStyle:UITableViewStylePlain];
+    GDUserInfo *userInfo = [self.dataSource objectAtIndex:[indexPath row]];
+    GDUserInfoViewController *vc = [[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil];
+    vc.userInfo = userInfo;
     vc.hidesBottomBarWhenPushed = YES;
-    vc.title = @"好友";
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
-    vc = nil;
-    
-}
-
-- (IBAction)nearByClick:(id)sender {
-    FriendViewController *vc = [[FriendViewController alloc] initWithStyle:UITableViewStylePlain];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.title = @"附近的人";
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
     vc = nil;

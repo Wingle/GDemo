@@ -141,7 +141,6 @@
 {
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
-//    return 200;
 }
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -301,6 +300,18 @@
 }
 - (void)loadDataRequestFailed:(ASIHTTPRequest *)request {
     NSLog(@"kkkkkkkkkkkkkk");
+    PengyouquanDataModel *model2 = [[PengyouquanDataModel alloc] init];
+    model2.newsDate = [NSDate date];
+    model2.newsID = 100;
+    model2.newsType = 1;
+    model2.userID = 62;
+    model2.userNickName = @"每日经济新闻";
+    model2.contentText = @"多位“大佬”缺席互联网大会】马化腾、李彦宏、丁磊、陆兆禧等业界大佬均没有参加今年的互联网大会，忙于修炼“内功”。李彦宏带着刚刚高升的百度副总裁李明远等人南下与91无线签署收购协议，马化腾则在香港推广微信业务，网易刚刚投资了一家游戏开发商北京灵游坊。";
+    model2.contentImgURL = @"http://farm3.static.flickr.com/2620/4009289798_bdcf26500a_s.jpg";
+    model2.stringURLForUser = @"http://farm3.static.flickr.com/2557/4010652749_1d0c35fabd_s.jpg";
+    [self.dataArray addObject:model2];
+    [model2 release];
+    model2 = nil;
 }
 
 @end

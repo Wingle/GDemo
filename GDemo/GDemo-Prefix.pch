@@ -29,14 +29,14 @@
 
 //---------------------------------
 
-//#define	CR_URL_HOSTNAME             @"http://180.166.39.150"
-//#define CR_URL_HOSTNAME_PORT        @"10020"
-//#define CR_URL_HOSTNAME_PORT_BACKUP @"10020"
-//#define SOCKET_SERVER_IP            @"180.166.39.150"
-//#define SOCKET_SERVER_PORT          8918
-
-#define CR_URL_HOSTNAME             @"http://10.22.20.23"
-#define CR_URL_HOSTNAME_PORT        @"8080"
-#define CR_URL_HOSTNAME_PORT_BACKUP @"8080"
-#define SOCKET_SERVER_IP            @"10.22.20.23"
+#define	CR_URL_HOSTNAME             @"http://180.166.39.150"
+#define CR_URL_HOSTNAME_PORT        @"10020"
+#define CR_URL_HOSTNAME_PORT_BACKUP @"10020"
+#define SOCKET_SERVER_IP            @"180.166.39.150"
 #define SOCKET_SERVER_PORT          8918
+
+//#define CR_URL_HOSTNAME             @"http://10.22.20.23"
+//#define CR_URL_HOSTNAME_PORT        @"8080"
+//#define CR_URL_HOSTNAME_PORT_BACKUP @"8080"
+//#define SOCKET_SERVER_IP            @"10.22.20.23"
+//#define SOCKET_SERVER_PORT          8918
