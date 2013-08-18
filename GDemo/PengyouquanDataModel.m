@@ -15,6 +15,7 @@
     [_contentImgURL release];
     [_contentText release];
     [_newsDate release];
+    [_contentImg release];
     
     [_stringURLForUser release];
     [super dealloc];

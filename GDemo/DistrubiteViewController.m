@@ -7,6 +7,10 @@
 //
 
 #import "DistrubiteViewController.h"
+#import "PengyouquanDataModel.h"
+#import "ASIHTTPRequest.h"
+#import "SBJson.h"
+#import "CCRGlobalConf.h"
 
 
 #define IMAGE_SHEET_TAG         2013081701
@@ -74,6 +78,22 @@
 }
 
 - (IBAction) nextStep:(id)sender {
+    PengyouquanDataModel *model = [[PengyouquanDataModel alloc] init];
+    model.userID = CCRConf.userId;
+    model.newsID = 123;
+    model.userNickName = CCRConf.nickName;
+    model.contentText = self.contentTextField.text;
+    model.contentImg = self.imgBtn.imageView.image;
+    model.newsDate = [NSDate date];
+    model.newsType = 2;
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(FinishedDistrubite:)]) {
+        [_delegate FinishedDistrubite:model];
+    }
+    [model release];
+    model = nil;
+    
+    [self dismissModalViewControllerAnimated:YES];
     
 }
 
@@ -111,6 +131,7 @@
                 UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 picker.delegate = self;
+                picker.allowsEditing = YES;
                 [self.navigationController presentModalViewController:picker animated:YES];
                 [picker release];
                 picker = nil;
@@ -121,6 +142,7 @@
                 UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                 picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 picker.delegate = self;
+                picker.allowsEditing = YES;
                 [self.navigationController presentModalViewController:picker animated:YES];
                 [picker release];
                 picker = nil;

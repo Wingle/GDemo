@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString *contentImgURL;
 @property (nonatomic, retain) NSDate *newsDate;
 @property (nonatomic, assign) NSInteger newsType;
+@property (nonatomic, retain) UIImage *contentImg;
 
 @property (nonatomic, retain) NSString *stringURLForUser;
 

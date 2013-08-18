@@ -84,8 +84,10 @@
 								<string key="NSFrame">{{110, 83}, {100, 100}}</string>
 								<reference key="NSSuperview" ref="882077068"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUIContentMode">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -271,6 +273,30 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">DistrubiteViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="imgBtnClick:">id</string>
+						<string key="leftBtnClick:">id</string>
+						<string key="nextStep:">id</string>
+						<string key="updateHeadImageView:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="imgBtnClick:">
+							<string key="name">imgBtnClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="leftBtnClick:">
+							<string key="name">leftBtnClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="nextStep:">
+							<string key="name">nextStep:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="updateHeadImageView:">
+							<string key="name">updateHeadImageView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="contentTextField">UITextField</string>
 						<string key="imgBtn">UIButton</string>

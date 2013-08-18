@@ -92,6 +92,7 @@
 #pragma mark -
 - (IBAction)nextStep:(id)sender {
     DistrubiteViewController *distrubite = [[DistrubiteViewController alloc] initWithNibName:@"DistrubiteViewController" bundle:nil];
+    distrubite.delegate = self;
     UINavigationController *navContr = [[UINavigationController alloc] initWithRootViewController:distrubite];
     [self presentModalViewController:navContr animated:YES];
     [distrubite release];
@@ -141,13 +142,23 @@
     // Configure the cell...
     PengyouquanDataModel *model = [self.dataArray objectAtIndex:[indexPath row]];
     PengyouqunCellView *msgView = (PengyouqunCellView *)[cell.contentView viewWithTag:CELL_TAG];
-    [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
+    if (model.stringURLForUser == nil) {
+        [msgView.headImgBtn setImage:CCRConf.image forState:UIControlStateNormal];
+    }else {
+        [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
+    }
+    
     [msgView.nameLabel setText:model.userNickName];
     [msgView.contentImgView setFrame:CGRectMake(msgView.contentImgView.frame.origin.x,
                                                 58.0,
                                                 msgView.contentImgView.frame.size.width,
                                                 msgView.contentImgView.frame.size.height)];
-    [msgView.contentImgView setImageURL:[NSURL URLWithString:model.contentImgURL]];
+    if (model.contentImgURL == nil) {
+        [msgView.contentImgView setImage:model.contentImg];
+    }else {
+        [msgView.contentImgView setImageURL:[NSURL URLWithString:model.contentImgURL]];
+    }
+    
     [msgView setFrame:CGRectMake(msgView.frame.origin.x, msgView.frame.origin.y, msgView.frame.size.width, 206.0)];
     UILabel *label = msgView.contentTextLabel;
     label.numberOfLines = 0;  //必须定义这个属性，否则UILabel不会换行
@@ -300,5 +311,18 @@
     [self setImgBtn:nil];
     [self setNameLabel:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - 
+- (void) FinishedDistrubite:(PengyouquanDataModel *)model {
+    PengyouquanDataModel *news = [model retain];
+    [self.dataArray insertObject:news atIndex:0];
+//    [self.tableView insertRowsAtIndexPaths:<#(NSArray *)#> withRowAnimation:<#(UITableViewRowAnimation)#>]
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [self.tableView endUpdates];
+    [news release];
+    news = nil;
 }
 @end

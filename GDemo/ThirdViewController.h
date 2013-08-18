@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DEYRefreshTableViewController.h"
+#import "DistrubiteViewController.h"
 
-@interface ThirdViewController : DEYRefreshTableViewController
+@interface ThirdViewController : DEYRefreshTableViewController <DistrubiteDelegate>
 @property (retain, nonatomic) IBOutlet UIView *headView;
 @property (retain, nonatomic) IBOutlet UIButton *imgBtn;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
