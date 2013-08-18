@@ -9,9 +9,14 @@
 #import "GDUserInfoViewController.h"
 #import "DEYChatViewController.h"
 #import "CCRGlobalConf.h"
+#import "ASIHTTPRequest.h"
+#import "MBProgressHUD.h"
+#import "SBJson.h"
 
 @interface GDUserInfoViewController ()
 @property (nonatomic, assign) GDRelationShip ship;
+
+- (void) requestNetworkToApply;
 
 @end
 
@@ -106,6 +111,11 @@
         }
         case kRelationshipStranger:
         {
+            MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+            [hud showWhileExecuting:@selector(requestNetworkToApply) onTarget:self withObject:nil animated:YES];
+            [self.view addSubview:hud];
+            [hud release];
+            hud = nil;
             break;
         }
             
@@ -113,4 +123,49 @@
             break;
     }
 }
+
+#pragma mark -
+- (void) requestNetworkToApply {
+    NSString *strURL = [NSString stringWithFormat:@"%@/concern.do?userId=%d&friendId=%d&type=1",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    [request setTimeOutSeconds:5];
+    request.delegate = self;
+    [request startSynchronous];
+}
+
+#pragma mark - ASIHttp---
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSString *string = [request responseString];
+    NSMutableDictionary * dataDict = [string JSONValue];
+    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+    if (status != 0) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"亲，出错了"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
+        return;
+}
+    
+
+    
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"亲，网络不通哦"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
+    
+}
+
 @end

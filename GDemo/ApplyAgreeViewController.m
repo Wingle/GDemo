@@ -8,11 +8,19 @@
 
 #import "ApplyAgreeViewController.h"
 #import "ApplyAgreeCellView.h"
+#import "ASIHTTPRequest.h"
+#import "SBJson.h"
+#import "MBProgressHUD.h"
+#import "CCRGlobalConf.h"
 
 #define CELL_TAG        2130811001
+#define APPLY_AGREE     2013081801
+#define APPLY_DISAGREE  2013081802
 
 @interface ApplyAgreeViewController ()
 @property (nonatomic, retain) NSMutableArray *dataSource;
+
+- (void) handleUser:(GDUserInfo *)userInfo ActionToAgreeOrDissagreeType:(NSString *) type;
 
 @end
 
@@ -168,18 +176,75 @@
     return cell.frame.size.height;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"row=%d",[indexPath row]);
+#pragma mark - user action
+- (void) handleUser:(GDUserInfo *)userInfo ActionToAgreeOrDissagreeType:(NSString *) type {
+    NSString *strURL = [NSString stringWithFormat:@"%@/concern.do?userId=%d&friendId=%d&type=%@",CR_REQUEST_URL,CCRConf.userId,userInfo.userID,type];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    request.tag = APPLY_AGREE;
+    [request setTimeOutSeconds:5];
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *string = [request responseString];
+        NSMutableDictionary * dataDict = [string JSONValue];
+        NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+        if (status != 0) {
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"亲，出错了"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil, nil];
+            [alter show];
+            [alter release];
+            alter = nil;
+            return;
+        }
+        [self.dataSource removeObject:userInfo];
+        [self.tableView reloadData];
+        return;
+        
+    }
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"亲，网络不通哦"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
+    
 }
 
 
 #pragma mark - 
 - (void)agreeUser:(GDUserInfo *) user {
-    NSLog(@"agree, %@",user.nickName);
+    GDUserInfo *userinfo = [user retain];
+    NSLog(@"agree, %@",userinfo.nickName);
+    [self handleUser:userinfo ActionToAgreeOrDissagreeType:[NSString stringWithFormat:@"%d",0]];
+    [userinfo release];
+    userinfo = nil;
+    
 }
+
 - (void)disagreeUser:(GDUserInfo *) user {
-     NSLog(@"disagree, %@",user.nickName);
+    NSLog(@"disagree, %@",user.nickName);
+    GDUserInfo *userinfo = [user retain];
+    [self handleUser:userinfo ActionToAgreeOrDissagreeType:[NSString stringWithFormat:@"%d",2]];
+    [userinfo release];
+    userinfo = nil;
+}
+
+#pragma mark - ASIHttp---
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    
+
+    
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    
     
 }
 
