@@ -47,5 +47,6 @@
 - (NSString *) userCode;
 - (NSInteger) gender;
 - (NSInteger) area;
+- (NSInteger) game;
 
 @end

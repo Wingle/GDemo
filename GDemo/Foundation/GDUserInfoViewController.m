@@ -112,6 +112,7 @@
         case kRelationshipStranger:
         {
             MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+            self.userInfo.relationship = kRelationshipFriends;
             [hud showWhileExecuting:@selector(requestNetworkToApply) onTarget:self withObject:nil animated:YES];
             [self.view addSubview:hud];
             [hud release];
@@ -149,7 +150,8 @@
         [alter release];
         alter = nil;
         return;
-}
+    }
+    [self.navigationController popViewControllerAnimated:YES];
     
 
     

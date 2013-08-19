@@ -43,55 +43,60 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
-    usrinfo.nickName = @"任志强";
-    usrinfo.gender = 0;
-    usrinfo.area = 2;
-    usrinfo.gameServer = 3;
-    usrinfo.relationship = kRelationshipFriends;
-    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
-    usrinfo.userSign = @"我爱潘石屹";
-    [self.dataSource addObject:usrinfo];
-    [usrinfo release];
-    usrinfo = nil;
-    
-    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
-    usrinfo1.nickName = @"潘石屹";
-    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
-    usrinfo1.gender = 0;
-    usrinfo1.area = 3;
-    usrinfo1.gameServer = 2;
-    usrinfo1.relationship = kRelationshipStranger;
-    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-    [self.dataSource addObject:usrinfo1];
-    [usrinfo1 release];
-    usrinfo1 = nil;
-    
-    GDUserInfo *usrinfo2 = [[GDUserInfo alloc] init];
-    usrinfo2.nickName = @"李开复";
-    usrinfo2.userSign = @"任志强不要乱爱我，我已经有老婆了";
-    usrinfo2.gender = 0;
-    usrinfo2.area = 3;
-    usrinfo2.gameServer = 2;
-    usrinfo2.relationship = kRelationshipStranger;
-    usrinfo2.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-    [self.dataSource addObject:usrinfo2];
-    [usrinfo2 release];
-    usrinfo2 = nil;
-    
-    GDUserInfo *usrinfo3 = [[GDUserInfo alloc] init];
-    usrinfo3.nickName = @"罗永浩";
-    usrinfo3.userSign = @"任志强不要乱爱我，我已经有老婆了";
-    usrinfo3.gender = 0;
-    usrinfo3.area = 3;
-    usrinfo3.gameServer = 2;
-    usrinfo3.relationship = kRelationshipStranger;
-    usrinfo3.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-    [self.dataSource addObject:usrinfo3];
-    [usrinfo3 release];
-    usrinfo3 = nil;
-    
-    [self.tableView reloadData];
+//    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+//    usrinfo.nickName = @"任志强";
+//    usrinfo.gender = 0;
+//    usrinfo.area = 2;
+//    usrinfo.gameServer = 3;
+//    usrinfo.relationship = kRelationshipFriends;
+//    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+//    usrinfo.userSign = @"我爱潘石屹";
+//    [self.dataSource addObject:usrinfo];
+//    [usrinfo release];
+//    usrinfo = nil;
+//    
+//    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
+//    usrinfo1.nickName = @"潘石屹";
+//    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
+//    usrinfo1.gender = 0;
+//    usrinfo1.area = 3;
+//    usrinfo1.gameServer = 2;
+//    usrinfo1.relationship = kRelationshipStranger;
+//    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
+//    [self.dataSource addObject:usrinfo1];
+//    [usrinfo1 release];
+//    usrinfo1 = nil;
+//    
+//    GDUserInfo *usrinfo2 = [[GDUserInfo alloc] init];
+//    usrinfo2.nickName = @"李开复";
+//    usrinfo2.userSign = @"任志强不要乱爱我，我已经有老婆了";
+//    usrinfo2.gender = 0;
+//    usrinfo2.area = 3;
+//    usrinfo2.gameServer = 2;
+//    usrinfo2.relationship = kRelationshipStranger;
+//    usrinfo2.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
+//    [self.dataSource addObject:usrinfo2];
+//    [usrinfo2 release];
+//    usrinfo2 = nil;
+//    
+//    GDUserInfo *usrinfo3 = [[GDUserInfo alloc] init];
+//    usrinfo3.nickName = @"罗永浩";
+//    usrinfo3.userSign = @"任志强不要乱爱我，我已经有老婆了";
+//    usrinfo3.gender = 0;
+//    usrinfo3.area = 3;
+//    usrinfo3.gameServer = 2;
+//    usrinfo3.relationship = kRelationshipStranger;
+//    usrinfo3.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
+//    [self.dataSource addObject:usrinfo3];
+//    [usrinfo3 release];
+//    usrinfo3 = nil;
+//    
+//    [self.tableView reloadData];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [hud showWhileExecuting:@selector(requestNetWork) onTarget:self withObject:nil animated:YES];
+    [self.view addSubview:hud];
+    [hud release];
+    hud = nil;
     
 }
 
@@ -99,6 +104,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+- (void) requestNetWork {
+    NSString *strURL = [NSString stringWithFormat:@"%@/friends.do?userId=%d&type=1",CR_REQUEST_URL,CCRConf.userId];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    [request setTimeOutSeconds:5];
+    request.delegate = self;
+    [request startSynchronous];
+    
 }
 
 #pragma mark - Table view data source
@@ -237,15 +253,60 @@
 }
 
 #pragma mark - ASIHttp---
+#pragma mark - ASIHttp---
 - (void)requestFinished:(ASIHTTPRequest *)request {
+    NSString *string = [request responseString];
+    NSMutableDictionary * dataDict = [string JSONValue];
+    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+    if (status != 0) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"亲，出错了"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
+        return;
+    }
     
-
+    NSArray *friends = [dataDict objectForKey:@"friends"];
+    for (int i = 0; i < [friends count]; i ++) {
+        NSDictionary *friend = [friends objectAtIndex:i];
+        GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+        usrinfo.userID = [[friend objectForKey:@"userId"] integerValue];
+        usrinfo.nickName = [friend objectForKey:@"name"];
+        usrinfo.gender = [[friend objectForKey:@"gender"] integerValue];
+        usrinfo.area = [[friend objectForKey:@"address"] integerValue];
+        usrinfo.gameServer = [[friend objectForKey:@"gameServer"] integerValue];
+        usrinfo.userCode = [friend objectForKey:@"seq"];
+        usrinfo.userSign = [friend objectForKey:@"signature"];
+        usrinfo.userContact = [friend objectForKey:@"contact"];
+        //        usrinfo.relationship = self.relation;
+        usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+        [self.dataSource addObject:friend];
+        [friend release];
+        friend = nil;
+    }
+    if ([self.dataSource count]) {
+        [self.tableView reloadData];
+    }
+    
     
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
-    
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"亲，网络不通哦"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
     
 }
+
 
 @end

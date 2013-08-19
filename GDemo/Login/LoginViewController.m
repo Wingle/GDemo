@@ -12,6 +12,7 @@
 #import "ASIHTTPRequest.h"
 #import "SBJson.h"
 #import "CCRGlobalConf.h"
+#import "MBProgressHUD.h"
 
 #define LOGIN_REQUEST       10000
 #define INFO_REQUEST        20000
@@ -61,6 +62,17 @@
     [self.passwdTextField resignFirstResponder];
 }
 
+#pragma mark - 
+- (void)requestNetWork {
+    NSString *strURL = [NSString stringWithFormat:@"%@/login.do?phone=%@&password=%@",CR_REQUEST_URL,self.loginNameTextField.text,self.passwdTextField.text];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    request.tag = LOGIN_REQUEST;
+    [request setTimeOutSeconds:5];
+    request.delegate = self;
+    [request startSynchronous];
+}
+
 #pragma mark - Actions
 - (IBAction)loginClick:(id)sender {
     if ([self.loginNameTextField.text length] == 0 || [self.passwdTextField.text length] == 0) {
@@ -74,13 +86,12 @@
         alter = nil;
         return;
     }
-    NSString *strURL = [NSString stringWithFormat:@"%@/login.do?phone=%@&password=%@",CR_REQUEST_URL,self.loginNameTextField.text,self.passwdTextField.text];
-    NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
-    request.tag = LOGIN_REQUEST;
-    [request setTimeOutSeconds:5];
-    request.delegate = self;
-    [request startSynchronous];
+    
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [hud showWhileExecuting:@selector(requestNetWork) onTarget:self withObject:nil animated:YES];
+    [self.view addSubview:hud];
+    [hud release];
+    hud = nil;
     
 }
 

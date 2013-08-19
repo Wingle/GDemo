@@ -93,6 +93,10 @@
     return [gameArray objectAtIndex:game];
 }
 
+- (NSInteger) game {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_GAMESERVER];
+}
+
 - (CLLocationManager *) locationManager {
     if (_locationManager == nil) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -145,7 +149,7 @@
            fromLocation:(CLLocation *)oldLocation
 {
     CLLocationAccuracy horAccuracy = newLocation.horizontalAccuracy;
-    if (horAccuracy > 100.0) {
+    if (horAccuracy > 1000.0) {
         return;
     }
     NSTimeInterval age = [newLocation.timestamp timeIntervalSinceNow];
@@ -165,7 +169,7 @@
 //    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
 //    if (status != 0) {
 //        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
-//                                                        message:@"亲，账号密码错误啊"
+//                                                        message:@"亲，出错了"
 //                                                       delegate:nil
 //                                              cancelButtonTitle:@"确定"
 //                                              otherButtonTitles:nil, nil];

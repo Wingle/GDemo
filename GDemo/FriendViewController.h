@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GDUserInfo.h"
+
+typedef enum {
+    kFriendViewController,
+    kNearByViewControoler
+}kGDControllerType;
 
 @interface FriendViewController : UITableViewController
+@property (nonatomic, assign) kGDControllerType type;
 
 @end

@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "ASIHTTPRequest.h"
 #import "SBJson.h"
+#import "MBProgressHUD.h"
 
 #define IMAGE_SHEET_TAG         2013081401
 #define GENDER_SHEET_TAG        2013081402
@@ -84,14 +85,21 @@
 }
 #pragma mark - 
 - (IBAction) nextStep:(id)sender {
-//    register.do?phone=12345670&name=test&gender=M&address=上海市&signature=玩游戏&password=123456
-    NSString *strURL = [[NSString stringWithFormat:@"%@/register.do?phone=%@&name=%@&gender=%d&address=%d&signature=%@&password=%@",CR_REQUEST_URL,CCRConf.loginName,CCRConf.nickName,CCRConf.gender,CCRConf.area,CCRConf.userSign,CCRConf.password] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [hud showWhileExecuting:@selector(requestNetWork) onTarget:self withObject:nil animated:YES];
+    [self.view addSubview:hud];
+    [hud release];
+    hud = nil;
+   
+}
+
+- (void) requestNetWork {
+    NSString *strURL = [[NSString stringWithFormat:@"%@/register.do?phone=%@&name=%@&gender=%d&address=%d&signature=%@&password=%@&hobbyId=%d",CR_REQUEST_URL,CCRConf.loginName,CCRConf.nickName,CCRConf.gender,CCRConf.area,CCRConf.userSign,CCRConf.password,CCRConf.game] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
     [request setTimeOutSeconds:5];
     request.delegate = self;
     [request startSynchronous];
-    
 }
 
 #pragma mark - IBAction 
@@ -272,7 +280,7 @@
     NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
     if (status != 0) {
         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"亲，账号密码错误啊"
+                                                        message:@"亲，出错了"
                                                        delegate:nil
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil, nil];

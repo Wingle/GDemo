@@ -167,6 +167,7 @@
     FriendViewController *vc = [[FriendViewController alloc] initWithStyle:UITableViewStylePlain];
     vc.hidesBottomBarWhenPushed = YES;
     vc.title = @"好友";
+    vc.type = kFriendViewController;
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
     vc = nil;
@@ -177,6 +178,7 @@
     FriendViewController *vc = [[FriendViewController alloc] initWithStyle:UITableViewStylePlain];
     vc.hidesBottomBarWhenPushed = YES;
     vc.title = @"附近的人";
+    vc.type = kNearByViewControoler;
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
     vc = nil;

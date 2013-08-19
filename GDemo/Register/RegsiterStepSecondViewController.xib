@@ -71,7 +71,7 @@
 					<object class="IBUITextField" id="250753052">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 71}, {178, 30}}</string>
+						<string key="NSFrame">{{20, 71}, {93, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="785604812"/>
@@ -101,7 +101,7 @@
 					<object class="IBUILabel" id="785604812">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 131}, {114, 21}}</string>
+						<string key="NSFrame">{{168, 31}, {114, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1015526945"/>
@@ -122,7 +122,7 @@
 					<object class="IBUITextField" id="1015526945">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 175}, {178, 30}}</string>
+						<string key="NSFrame">{{165, 71}, {107, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -280,17 +280,31 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">RegsiterStepSecondViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">codeTextField</string>
-						<string key="NS.object.0">UITextField</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">nextStep:</string>
+						<string key="NS.object.0">id</string>
 					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">codeTextField</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">nextStep:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">nextStep:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="codeTextField">UITextField</string>
+						<string key="passwordTextFiled">UITextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="codeTextField">
 							<string key="name">codeTextField</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
-					</object>
+						<object class="IBToOneOutletInfo" key="passwordTextFiled">
+							<string key="name">passwordTextFiled</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/RegsiterStepSecondViewController.h</string>
