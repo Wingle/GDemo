@@ -13,6 +13,9 @@
 #import "MBProgressHUD.h"
 #import "EGORefreshTableHeaderView.h"
 #import "ASIHTTPRequest.h"
+#import "CCRGlobalConf.h"
+#import "SBJson.h"
+#import "AppDelegate.h"
 
 #define ImageViewTag 20120813
 #define kMessageFontSize    14.0f 
@@ -22,6 +25,10 @@
 #ifndef LOG
 #define LOG NSLog
 #endif
+
+#define SEND_REQUEST_TAG    2013081901
+#define GET_REQUEST_TAG     2013081902
+
 
 typedef enum{
     kDEYFingerDragActionType_begin,
@@ -142,6 +149,20 @@ typedef enum{
 
 - (void)viewDidLoad
 {
+    
+    ////聊天消息
+//http://localhost:8080/demo/chatList.do?userId=1&id=0
+    //增量获取，id为最后的chat id
+
+    NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&id=0",CR_REQUEST_URL,CCRConf.userId];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    [request setTimeOutSeconds:5];
+    request.tag = GET_REQUEST_TAG;
+    request.delegate = self;
+    [request startSynchronous];
+    
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -251,6 +272,7 @@ typedef enum{
     [m_rightVoiceTableViewCell release];
     [m_recordVoiceView release];
     [messageInfo release];
+    [_userInfo release];
 
     m_refreshChatListHeaderView.delegate = nil;
     [m_refreshChatListHeaderView release];
@@ -612,12 +634,11 @@ typedef enum{
         [groupChat setStrMessage:messageText];
         [groupChat setMessageData:[messageText dataUsingEncoding:NSUTF8StringEncoding]];
         
-        [self addChatMessageToShow:groupChat];
         
         //发送数据 ---zhongyao
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
         [hud showWhileExecuting:@selector(sendMsgToServer:) onTarget:self withObject:groupChat animated:YES];
-        [self.view addSubview:hud];
+        [APP_DELEGATE.window addSubview:hud];
         [hud release];
         hud = nil;
     
@@ -959,10 +980,68 @@ typedef enum{
 }
 
 #pragma mark - hym
--(IBAction)sendMsgToServer:(id)sender {
-//    DEYChatMessage *msg = (DEYChatMessage*) sender;
-//    ASIHTTPRequest *request = [
+-(void)sendMsgToServer:(DEYChatMessage *) message {
+    NSString *strURL = [[NSString stringWithFormat:@"%@/chatSend.do?userId=%d&toId=%d&type=0&content=%@&clientId=%@",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID,message.strMessage,message.strLocalMsgId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    [request setTimeOutSeconds:5];
+    request.tag = SEND_REQUEST_TAG;
+    [request startSynchronous];
+    
+    NSError *error = [request error];
+    if (!error) {
+        NSString *string = [request responseString];
+        NSMutableDictionary * dataDict = [string JSONValue];
+        NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+        if (status != 0) {
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"亲，没发送成功。请重发。"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil, nil];
+            [alter show];
+            [alter release];
+            alter = nil;
+            return;
+        }
+        [self addChatMessageToShow:message];
+        return;
+    }
+    NSLog(@"error = %@",[error localizedDescription]);
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"亲，网络不通哦"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
     
 }
+
+#pragma mark - ASIHttp---
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    if (request.tag == SEND_REQUEST_TAG) {
+        
+        
+    }
+    
+    
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"亲，网络不通哦"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
+    [alter show];
+    [alter release];
+    alter = nil;
+    return;
+    
+}
+
 
 @end

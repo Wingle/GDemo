@@ -14,6 +14,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel *gameLabel;
 @property (retain, nonatomic) IBOutlet UILabel *areaLabel;
+@property (retain, nonatomic) IBOutlet UILabel *distanceLabel;
 
 + (FriendsCellView *) cellView;
 

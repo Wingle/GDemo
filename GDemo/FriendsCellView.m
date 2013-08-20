@@ -47,6 +47,7 @@
     [_nameLabel release];
     [_gameLabel release];
     [_areaLabel release];
+    [_distanceLabel release];
     [super dealloc];
 }
 @end

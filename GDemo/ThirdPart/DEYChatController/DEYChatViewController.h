@@ -12,6 +12,7 @@
 #import "DEYChatMessageTableViewCell.h"
 #import "DEYChatMessage.h"
 #import "EGORefreshTableHeaderView.h"
+#import "GDUserInfo.h"
 
 @protocol DEYChatMessageTableViewDelegate; 
 
@@ -63,6 +64,7 @@
 
 @property (retain, nonatomic) IBOutlet UIImageView *m_recordVoiceView;
 @property (retain, nonatomic) EGORefreshTableHeaderView *m_refreshChatListHeaderView;
+@property (nonatomic, retain) GDUserInfo *userInfo;
 
 - (IBAction)messageSelectPictureClick:(id)sender;
 - (IBAction)messageTypeClick:(id)sender;

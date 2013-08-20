@@ -10,6 +10,7 @@
 #import "CCRGlobalConf.h"
 #import "GDUserInfo.h"
 #import "DEYChatViewController.h"
+#import "SBJson.h"
 
 @interface FirstViewController ()
 
@@ -32,12 +33,7 @@
 - (void)viewDidLoad
 {
     
-    NSString *format = [NSString stringWithFormat:@"%@/dateGroupMembers.do?appId=%@&userId=%d&groupId=%@&groupType=%d&sort=1",
-                        CR_REQUEST_URL,
-                        APPID,
-                        62,
-                        @"123",
-                        1];
+    NSString *format = [NSString stringWithFormat:@"%@/friends.do?userId=%d&type=0",CR_REQUEST_URL,CCRConf.userId];
     format = [format stringByAppendingString:@"&pageIndex=%d&pageSize=%d"];
     [self setRequestFormat:format requestMoreBy:RequestMoreByPageFromPage];
     self.numberOfDataPerPage = 20;
@@ -135,6 +131,7 @@
     GDUserInfo *userinfo = [self.dataArray objectAtIndex:[indexPath row]];
     DEYChatViewController *vc = [[DEYChatViewController alloc] initWithNibName:@"DEYChatViewController" bundle:nil UserID:[NSString stringWithFormat:@"%d",CCRConf.userId] RoomID:[NSString stringWithFormat:@"%d",userinfo.userID] ChatType:eChatTypeP2P];
     vc.title = userinfo.nickName;
+    vc.userInfo = userinfo;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
@@ -143,57 +140,94 @@
 
 #pragma mark - refrash
 - (void)loadDataRequestSuccess:(ASIHTTPRequest *)request {
-    NSLog(@"kdkd");
-    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
-    usrinfo.nickName = @"任志强";
-    usrinfo.gender = 0;
-    usrinfo.area = 2;
-    usrinfo.gameServer = 3;
-    usrinfo.relationship = kRelationshipFriends;
-    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
-    usrinfo.userSign = @"我爱潘石屹";
-    [self.dataArray addObject:usrinfo];
-    [usrinfo release];
-    usrinfo = nil;
+//    NSLog(@"kdkd");
+//    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+//    usrinfo.nickName = @"任志强";
+//    usrinfo.gender = 0;
+//    usrinfo.area = 2;
+//    usrinfo.gameServer = 3;
+//    usrinfo.relationship = kRelationshipFriends;
+//    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+//    usrinfo.userSign = @"我爱潘石屹";
+//    [self.dataArray addObject:usrinfo];
+//    [usrinfo release];
+//    usrinfo = nil;
+//    
+//    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
+//    usrinfo1.nickName = @"潘石屹";
+//    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
+//    usrinfo1.gender = 0;
+//    usrinfo1.area = 3;
+//    usrinfo1.gameServer = 2;
+//    usrinfo.relationship = kRelationshipStranger;
+//    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
+//    [self.dataArray addObject:usrinfo1];
+//    [usrinfo1 release];
+//    usrinfo1 = nil;
+    NSString *string = [request responseString];
+    NSMutableDictionary * dataDict = [string JSONValue];
+    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
+    if (status != 0) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"亲，出错了"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
+        return;
+    }
     
-    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
-    usrinfo1.nickName = @"潘石屹";
-    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
-    usrinfo1.gender = 0;
-    usrinfo1.area = 3;
-    usrinfo1.gameServer = 2;
-    usrinfo.relationship = kRelationshipStranger;
-    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-    [self.dataArray addObject:usrinfo1];
-    [usrinfo1 release];
-    usrinfo1 = nil;
+    NSArray *friends = [dataDict objectForKey:@"friends"];
+    for (int i = 0; i < [friends count]; i ++) {
+        NSDictionary *friend = [friends objectAtIndex:i];
+        GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+        usrinfo.userID = [[friend objectForKey:@"userId"] integerValue];
+        usrinfo.nickName = [friend objectForKey:@"name"];
+        usrinfo.gender = [[friend objectForKey:@"gender"] integerValue];
+        usrinfo.area = [[friend objectForKey:@"address"] integerValue];
+        usrinfo.gameServer = [[friend objectForKey:@"gameServer"] integerValue];
+        usrinfo.userCode = [friend objectForKey:@"seq"];
+        usrinfo.userSign = [friend objectForKey:@"signature"];
+        usrinfo.userContact = [friend objectForKey:@"contact"];
+        //        usrinfo.relationship = self.relation;
+        usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+        [self.dataArray addObject:usrinfo];
+        [usrinfo release];
+        usrinfo = nil;
+    }
+    if ([self.dataArray count]) {
+        [self.tableView reloadData];
+    }
+    
     
 }
 - (void)loadDataRequestFailed:(ASIHTTPRequest *)request {
-    NSLog(@"kkkkkkkkkkkkkk");
-    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
-    usrinfo.nickName = @"任志强";
-    usrinfo.gender = 0;
-    usrinfo.area = 2;
-    usrinfo.gameServer = 3;
-    usrinfo.relationship = kRelationshipFriends;
-    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
-    usrinfo.userSign = @"我爱潘石屹";
-    [self.dataArray addObject:usrinfo];
-    [usrinfo release];
-    usrinfo = nil;
-    
-    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
-    usrinfo1.nickName = @"潘石屹";
-    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
-    usrinfo1.gender = 0;
-    usrinfo1.area = 3;
-    usrinfo1.gameServer = 2;
-    usrinfo.relationship = kRelationshipStranger;
-    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-    [self.dataArray addObject:usrinfo1];
-    [usrinfo1 release];
-    usrinfo1 = nil;
+//    NSLog(@"kkkkkkkkkkkkkk");
+//    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+//    usrinfo.nickName = @"任志强";
+//    usrinfo.gender = 0;
+//    usrinfo.area = 2;
+//    usrinfo.gameServer = 3;
+//    usrinfo.relationship = kRelationshipFriends;
+//    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+//    usrinfo.userSign = @"我爱潘石屹";
+//    [self.dataArray addObject:usrinfo];
+//    [usrinfo release];
+//    usrinfo = nil;
+//    
+//    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
+//    usrinfo1.nickName = @"潘石屹";
+//    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
+//    usrinfo1.gender = 0;
+//    usrinfo1.area = 3;
+//    usrinfo1.gameServer = 2;
+//    usrinfo.relationship = kRelationshipStranger;
+//    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
+//    [self.dataArray addObject:usrinfo1];
+//    [usrinfo1 release];
+//    usrinfo1 = nil;
 }
 
 

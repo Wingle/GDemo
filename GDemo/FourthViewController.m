@@ -32,7 +32,7 @@
         // Custom initialization
         NSString *str = @"设置";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.tabBarItem.image = [UIImage imageNamed:@"four"];
         self.tabBarItem.title = str;
         
         UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"

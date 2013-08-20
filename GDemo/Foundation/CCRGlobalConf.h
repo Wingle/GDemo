@@ -22,6 +22,8 @@
 #define gUSER_CONTACT       @"userContact"
 #define gUSER_SIGN          @"userSign"
 #define gUSER_CODE          @"userCode"
+#define gGAMESERVERS   @"gameServers"
+#define gPERSON         @"gPersonalInfo"  
 
 @interface CCRGlobalConf : NSObject <CLLocationManagerDelegate>
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -48,5 +50,7 @@
 - (NSInteger) gender;
 - (NSInteger) area;
 - (NSInteger) game;
+
+- (NSString *) gameServerwithIndex:(NSInteger) index;
 
 @end

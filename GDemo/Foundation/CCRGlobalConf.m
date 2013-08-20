@@ -97,6 +97,12 @@
     return [[NSUserDefaults standardUserDefaults] integerForKey:gUSER_GAMESERVER];
 }
 
+- (NSString *) gameServerwithIndex:(NSInteger) index {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gameServer.plist"]];
+    NSArray *gameArray = [dic objectForKey:@"server"];
+    return [gameArray objectAtIndex:index];
+}
+
 - (CLLocationManager *) locationManager {
     if (_locationManager == nil) {
         _locationManager = [[CLLocationManager alloc] init];

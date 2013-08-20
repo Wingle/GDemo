@@ -18,6 +18,15 @@
 
 #define CELL_TAG        2013081611
 
+@implementation GDNearByUserInfo
+
+- (void) dealloc {
+    [_location release];
+    [super dealloc];
+}
+
+@end
+
 @interface FriendViewController ()
 @property (nonatomic, retain) NSMutableArray *dataSource;
 
@@ -142,12 +151,28 @@
     
     // Configure the cell...
     FriendsCellView *fView = (FriendsCellView *) [cell.contentView viewWithTag:CELL_TAG];
-    GDUserInfo *userInfo = [self.dataSource objectAtIndex:[indexPath row]];
+    GDNearByUserInfo *userInfo = [self.dataSource objectAtIndex:[indexPath row]];
+    if (self.type == kNearByViewControoler) {
+        fView.gameLabel.hidden = YES;
+        fView.distanceLabel.hidden = NO;
+    }else {
+        fView.gameLabel.hidden = NO;
+        fView.distanceLabel.hidden = YES;
+    }
     NSString *url = userInfo.imagestringURL;
     [fView.imgBtn setImageURL:[NSURL URLWithString:url]];
     [fView.nameLabel setText:userInfo.nickName];
     [fView.areaLabel setText:userInfo.stringArea];
     [fView.gameLabel setText:userInfo.stringgameServer];
+    CLLocationDistance distance = [userInfo.location distanceFromLocation:CCRConf.myLocation];
+    NSString *strDis = nil;
+    if (distance <= 1000.0) {
+        strDis = [NSString stringWithFormat:@"相距%d米以内",(int)distance];
+    }else {
+        strDis = [NSString stringWithFormat:@"相距%d公里以内",(int)distance/1000+1];
+    }
+    fView.distanceLabel.text = strDis;
+    
     
     return cell;
 }
@@ -224,7 +249,7 @@
     NSArray *friends = [dataDict objectForKey:@"friends"];
     for (int i = 0; i < [friends count]; i ++) {
         NSDictionary *friend = [friends objectAtIndex:i];
-        GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+        GDNearByUserInfo *usrinfo = [[GDNearByUserInfo alloc] init];
         usrinfo.userID = [[friend objectForKey:@"userId"] integerValue];
         usrinfo.nickName = [friend objectForKey:@"name"];
         usrinfo.gender = [[friend objectForKey:@"gender"] integerValue];
@@ -233,8 +258,20 @@
         usrinfo.userCode = [friend objectForKey:@"seq"];
         usrinfo.userSign = [friend objectForKey:@"signature"];
         usrinfo.userContact = [friend objectForKey:@"contact"];
-//        usrinfo.relationship = self.relation;
+        NSInteger relation = [[friend objectForKey:@"relation"] integerValue];
+        if (relation == 0) {
+            usrinfo.relationship = kRelationshipFriends;
+        }else {
+            usrinfo.relationship = kRelationshipStranger;
+        }
         usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+        usrinfo.location = [[CLLocation alloc] initWithLatitude:39.0121 longitude:120.0211];
+        double lat = [[friend objectForKey:@"lat"] doubleValue];
+        double lng = [[friend objectForKey:@"lng"] doubleValue];
+        CLLocation *loc = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        usrinfo.location = loc;
+        [loc release];
+        loc = nil;
         [self.dataSource addObject:usrinfo];
         [usrinfo release];
         usrinfo = nil;

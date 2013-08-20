@@ -104,6 +104,7 @@
         {
             DEYChatViewController *vc = [[DEYChatViewController alloc] initWithNibName:@"DEYChatViewController" bundle:nil UserID:[NSString stringWithFormat:@"%d",CCRConf.userId] RoomID:[NSString stringWithFormat:@"%d",self.userInfo.userID] ChatType:eChatTypeP2P];
             vc.title = self.userInfo.nickName;
+            vc.userInfo = self.userInfo;
             [self.navigationController pushViewController:vc animated:YES];
             [vc release];
             vc = nil;

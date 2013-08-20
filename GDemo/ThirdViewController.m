@@ -30,7 +30,7 @@
     if (self) {
         NSString *str = @"主页";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.image = [UIImage imageNamed:@"third"];
         self.tabBarItem.title = str;
         
         UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"发布"

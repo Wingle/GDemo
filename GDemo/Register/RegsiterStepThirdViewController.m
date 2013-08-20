@@ -292,7 +292,7 @@
     NSString *userid = [dataDict objectForKey:@"userId"];
     if (userid) {
         [[NSUserDefaults standardUserDefaults] setInteger:[userid integerValue] forKey:gUSER_ID];
-        [[NSUserDefaults standardUserDefaults] setObject:userid  forKey:gUSER_CODE];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"10000%@",userid]  forKey:gUSER_CODE];
     }
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gHAVE_LOGIN];

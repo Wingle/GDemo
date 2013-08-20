@@ -284,9 +284,9 @@
         usrinfo.userContact = [friend objectForKey:@"contact"];
         //        usrinfo.relationship = self.relation;
         usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
-        [self.dataSource addObject:friend];
-        [friend release];
-        friend = nil;
+        [self.dataSource addObject:usrinfo];
+        [usrinfo release];
+        usrinfo = nil;
     }
     if ([self.dataSource count]) {
         [self.tableView reloadData];
