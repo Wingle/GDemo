@@ -11,8 +11,8 @@
 @implementation GDUtility
 
 + (NSString *) imagePathForKey:(NSString *) key {
-    NSString  *docPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/"];
-    NSString *imagePath = [docPath stringByAppendingFormat:@"%@_image.png",key];
+    NSString  *docPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *imagePath = [docPath stringByAppendingFormat:@"/%@_image.jpg",key];
     return imagePath;
 }
 
@@ -26,6 +26,11 @@
     NSString *imagePath = [[self class] imagePathForKey:key];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     return image;
+}
+
++ (NSString *) getHeadImageDownLoadStringUrl:(NSInteger) userid {
+    NSString *strURL = [NSString stringWithFormat:@"%@/download.do?id=%d&type=0",CR_REQUEST_URL, userid];
+    return strURL;
 }
 
 @end

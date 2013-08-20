@@ -13,4 +13,6 @@
 + (void)saveImage:(UIImage*)image imageKey:(NSString *) key;
 + (UIImage *)loadImageForKey:(NSString *) key;
 
++ (NSString *) getHeadImageDownLoadStringUrl:(NSInteger) userid;
+
 @end

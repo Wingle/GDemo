@@ -13,6 +13,7 @@
 #import "SelectViewController.h"
 #import "AppDelegate.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "SBJson.h"
 #import "MBProgressHUD.h"
 
@@ -96,7 +97,9 @@
 - (void) requestNetWork {
     NSString *strURL = [[NSString stringWithFormat:@"%@/register.do?phone=%@&name=%@&gender=%d&address=%d&signature=%@&password=%@&hobbyId=%d",CR_REQUEST_URL,CCRConf.loginName,CCRConf.nickName,CCRConf.gender,CCRConf.area,CCRConf.userSign,CCRConf.password,CCRConf.game] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
+    NSData *imgData = UIImagePNGRepresentation(self.imageBtn.imageView.image);
+    [request setData:imgData forKey:@"img"];
     [request setTimeOutSeconds:5];
     request.delegate = self;
     [request startSynchronous];
@@ -238,7 +241,6 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     UIImage * img = [[info objectForKey:UIImagePickerControllerEditedImage] retain];
     [picker dismissModalViewControllerAnimated:NO];
-    [GDUtility saveImage:img imageKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
     [self performSelectorOnMainThread:@selector(updateHeadImageView:) withObject:img waitUntilDone:YES];
     [img release];
     img = nil;
@@ -293,6 +295,7 @@
     if (userid) {
         [[NSUserDefaults standardUserDefaults] setInteger:[userid integerValue] forKey:gUSER_ID];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"10000%@",userid]  forKey:gUSER_CODE];
+        [GDUtility saveImage:self.imageBtn.imageView.image imageKey:[NSString stringWithFormat:@"%d",CCRConf.userId]];
     }
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gHAVE_LOGIN];

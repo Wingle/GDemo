@@ -283,7 +283,7 @@
         usrinfo.userSign = [friend objectForKey:@"signature"];
         usrinfo.userContact = [friend objectForKey:@"contact"];
         //        usrinfo.relationship = self.relation;
-        usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+        usrinfo.imagestringURL = [GDUtility getHeadImageDownLoadStringUrl:usrinfo.userID];
         [self.dataSource addObject:usrinfo];
         [usrinfo release];
         usrinfo = nil;

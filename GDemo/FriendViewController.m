@@ -264,7 +264,7 @@
         }else {
             usrinfo.relationship = kRelationshipStranger;
         }
-        usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
+        usrinfo.imagestringURL = [GDUtility getHeadImageDownLoadStringUrl:usrinfo.userID];
         usrinfo.location = [[CLLocation alloc] initWithLatitude:39.0121 longitude:120.0211];
         double lat = [[friend objectForKey:@"lat"] doubleValue];
         double lng = [[friend objectForKey:@"lng"] doubleValue];
