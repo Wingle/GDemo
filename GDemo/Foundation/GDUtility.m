@@ -33,12 +33,22 @@
     return strURL;
 }
 
++ (NSString *) getWeiboImageDownLoadStringUrl:(NSInteger) newsid {
+    NSString *strURL = [NSString stringWithFormat:@"%@/download.do?id=%d&type=2",CR_REQUEST_URL, newsid];
+    return strURL;
+}
+
 + (NSString *)date:(NSDate *) time ByFormatter:(NSString*)strTimeFormatter
 {
     NSDateFormatter	* formatter = [[[NSDateFormatter alloc] init] autorelease];
     [formatter setDateFormat:strTimeFormatter];
     
     return [formatter stringFromDate:time];
+}
++ (NSString *)dateToString:(NSDate *) date ByFormatter:(NSString*)strTimeFormatter {
+    NSDateFormatter	* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:strTimeFormatter];
+    return [formatter stringFromDate:date];
 }
 
 @end

@@ -14,5 +14,7 @@
 + (UIImage *)loadImageForKey:(NSString *) key;
 
 + (NSString *) getHeadImageDownLoadStringUrl:(NSInteger) userid;
++ (NSString *) getWeiboImageDownLoadStringUrl:(NSInteger) newsid;
 + (NSString *)date:(NSDate *) time ByFormatter:(NSString*)strTimeFormatter;
++ (NSString *)dateToString:(NSDate *) date ByFormatter:(NSString*)strTimeFormatter;
 @end

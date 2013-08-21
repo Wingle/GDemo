@@ -10,7 +10,7 @@
 
 @interface PengyouquanDataModel : NSObject
 @property (nonatomic, assign) NSInteger userID;
-@property (nonatomic, assign) NSInteger newsID;
+@property (nonatomic, assign) long newsID;
 @property (nonatomic, retain) NSString *userNickName;
 @property (nonatomic, retain) NSString *contentText;
 @property (nonatomic, retain) NSString *contentImgURL;

@@ -119,7 +119,6 @@ typedef enum{
 
 - (void)viewDidAppear:(BOOL)animated{
     
-    NSArray *latestMessages = nil;
     // --- request network;
     
     // ----
@@ -995,7 +994,7 @@ typedef enum{
     
     NSDate *nowTime = [NSDate date];
     
-    NSString *localMsgID = [[self class] dateToString:nowTime
+    NSString *localMsgID = [GDUtility dateToString:nowTime
                                           ByFormatter:@"yyyyMMddHHmmssSSS"];
     
     groupChat.strLocalMsgId = localMsgID;
@@ -1006,11 +1005,7 @@ typedef enum{
     return groupChat;
 }
 
-+ (NSString *)dateToString:(NSDate *) date ByFormatter:(NSString*)strTimeFormatter {
-    NSDateFormatter	* formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setDateFormat:strTimeFormatter];
-    return [formatter stringFromDate:date];
-}
+
 
 #pragma mark - hym
 -(void)sendMsgToServer:(DEYChatMessage *) message {
@@ -1039,7 +1034,7 @@ typedef enum{
             alter = nil;
             return;
         }
-        [self addChatMessageToShow:message_];
+//        [self addChatMessageToShow:message_];
         return;
     }
     NSLog(@"error = %@",[error localizedDescription]);

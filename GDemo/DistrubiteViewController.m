@@ -9,8 +9,10 @@
 #import "DistrubiteViewController.h"
 #import "PengyouquanDataModel.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "SBJson.h"
 #import "CCRGlobalConf.h"
+#import "MBProgressHUD.h"
 
 
 #define IMAGE_SHEET_TAG         2013081701
@@ -78,23 +80,79 @@
 }
 
 - (IBAction) nextStep:(id)sender {
+    if ([self.contentTextField.text length] == 0 && self.imgBtn.imageView.image == nil) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"请填点东西"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
+        return;
+    }
+    
+    NSString *localMsgID = [GDUtility dateToString:[NSDate date]
+                                       ByFormatter:@"yyyyMMddHHmmssSSS"];
+    NSInteger type = 0;
+    if ([self.contentTextField.text length] != 0 && self.imgBtn.imageView.image != nil) {
+        type = 2;
+    }else if (self.imgBtn.imageView.image) {
+        type = 1;
+    }
+    
     PengyouquanDataModel *model = [[PengyouquanDataModel alloc] init];
     model.userID = CCRConf.userId;
-    model.newsID = 123;
+    model.newsID = [localMsgID longLongValue];
     model.userNickName = CCRConf.nickName;
     model.contentText = self.contentTextField.text;
     model.contentImg = self.imgBtn.imageView.image;
     model.newsDate = [NSDate date];
-    model.newsType = 2;
+    model.newsType = type;
+    model.stringURLForUser = [GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId];
     
-    if (_delegate && [_delegate respondsToSelector:@selector(FinishedDistrubite:)]) {
-        [_delegate FinishedDistrubite:model];
-    }
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [hud showWhileExecuting:@selector(sendWeiboToServer:) onTarget:self withObject:model animated:YES];
+    [self.view addSubview:hud];
+    [hud release];
+    hud = nil;
+    
     [model release];
     model = nil;
     
     [self dismissModalViewControllerAnimated:YES];
     
+}
+
+- (void) sendWeiboToServer:(PengyouquanDataModel *) model {
+    NSString *strURL = [[NSString stringWithFormat:@"%@/weiboSend.do?userId=%d&type=%d&content=%@&clientId=%ld",
+                         CR_REQUEST_URL,CCRConf.userId,model.newsType,model.contentText,model.newsID] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
+    NSData *imgData = UIImageJPEGRepresentation(self.imgBtn.imageView.image, 0.5);
+    [request setData:imgData forKey:@"img"];
+    [request setTimeOutSeconds:5];
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *string = [request responseString];
+        NSDictionary *dicData = [string JSONValue];
+        NSInteger msgID = [[dicData objectForKey:@"id"] integerValue];
+        if (msgID > 0) {
+            if (_delegate && [_delegate respondsToSelector:@selector(FinishedDistrubite:)]) {
+                [_delegate FinishedDistrubite:model];
+            }
+        }else {
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"没发成功"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil, nil];
+            [alter show];
+            [alter release];
+            alter = nil;
+        }
+    }
 }
 
 - (IBAction)leftBtnClick:(id)sender {

@@ -98,7 +98,7 @@
     NSString *strURL = [[NSString stringWithFormat:@"%@/register.do?phone=%@&name=%@&gender=%d&address=%d&signature=%@&password=%@&hobbyId=%d",CR_REQUEST_URL,CCRConf.loginName,CCRConf.nickName,CCRConf.gender,CCRConf.area,CCRConf.userSign,CCRConf.password,CCRConf.game] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
-    NSData *imgData = UIImagePNGRepresentation(self.imageBtn.imageView.image);
+    NSData *imgData = UIImageJPEGRepresentation(self.imageBtn.imageView.image, 0.4);
     [request setData:imgData forKey:@"img"];
     [request setTimeOutSeconds:5];
     request.delegate = self;
