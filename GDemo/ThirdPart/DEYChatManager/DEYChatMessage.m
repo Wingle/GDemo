@@ -7,6 +7,7 @@
 //
 
 #import "DEYChatMessage.h"
+#import "GDUtility.h"
 
 @interface DEYChatMessage ()
 
@@ -22,7 +23,7 @@
 @synthesize strUserId;
 
 @synthesize strUserName;
-@synthesize strTime;
+//@synthesize strTime;
 @synthesize strMessage;
 @synthesize strOriginalImageMessage;
 @synthesize messageType;
@@ -30,6 +31,7 @@
 @synthesize state;
 @synthesize msgChatTpye;
 @synthesize messageData;
+@synthesize messageTimeStamp;
 
 @synthesize iImageVersion;
 //@synthesize imageWidth;
@@ -49,7 +51,7 @@
         strChatRoomID = nil;
         strUserId = nil;
         strUserName = nil;
-        strTime = nil;
+//        strTime = nil;
         strMessage = nil;
         strOriginalImageMessage = nil;
         messageType = eMessageTypeInvalid;
@@ -72,10 +74,11 @@
     [strChatRoomID release];
     [strUserId release];
     [strUserName release];
-    [strTime release];
+//    [strTime release];
     [strMessage release];
     [strOriginalImageMessage release];
     [messageData release];
+    [messageTimeStamp release];
     
     [super dealloc];
 }
@@ -129,6 +132,10 @@
     }
     
     return directory;
+}
+
+- (NSString *) strTime {
+    return [GDUtility date:self.messageTimeStamp ByFormatter:@"yyyy/MM/dd HH:mm"];
 }
 
 @end

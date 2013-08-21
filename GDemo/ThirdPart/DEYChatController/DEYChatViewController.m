@@ -37,6 +37,9 @@ typedef enum{
 }DEYFingerDragActionType;
 
 @interface DEYChatViewController ()
+@property (nonatomic, retain) NSTimer * timer;
+@property (nonatomic, assign) NSInteger maxcharID;
+
 - (DEYChatMessage *)createNewChatMessage;
 - (void) addLatestMessageToChatViewList:(NSArray *) dataArr;
 @end
@@ -121,7 +124,7 @@ typedef enum{
     
     // ----
     
-    [self addLatestMessageToChatViewList:latestMessages];
+//    [self addLatestMessageToChatViewList:latestMessages];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -208,6 +211,16 @@ typedef enum{
     [headerView setBackgroundColor:[UIColor colorWithRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1]];
     self.chatMessagetableView.tableHeaderView = headerView;
     [headerView release];
+    
+    if (self.timer == nil) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                      target:self
+                                                    selector:@selector(detectMsgCome)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        [self.timer setFireDate:[NSDate date]];
+    }
+    
 }
 
 - (void)viewDidUnload
@@ -251,6 +264,9 @@ typedef enum{
 - (void)dealloc {
     self.strUserId = nil;
     self.strChatRoomID = nil;
+    
+    [_timer invalidate];
+    _timer = nil;
 
     
     [groupMessagesArray release];
@@ -277,6 +293,17 @@ typedef enum{
     m_refreshChatListHeaderView.delegate = nil;
     [m_refreshChatListHeaderView release];
     [super dealloc];
+}
+
+- (void) detectMsgCome {
+    NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&id=%d",CR_REQUEST_URL,CCRConf.userId,self.maxcharID];
+    NSLog(@"chatList.do = %@",strURL);
+    NSURL *URL = [NSURL URLWithString:strURL];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    [request setTimeOutSeconds:3];
+    request.delegate = self;
+    request.tag = GET_REQUEST_TAG;
+    [request startAsynchronous];
 }
 
 
@@ -402,9 +429,9 @@ typedef enum{
     }
     
     //对cell添加点击事件处理
-    [cell.btnFaceImage addTarget:self action:@selector(showPersonalInfo:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.m_audioButton addTarget:self action:@selector(audioPlayClick:) forControlEvents:UIControlEventTouchDown];
-    [cell.m_imageButton addTarget:self action:@selector(messageOfArtworkClick:) forControlEvents:UIControlEventTouchUpInside];  
+//    [cell.btnFaceImage addTarget:self action:@selector(showPersonalInfo:) forControlEvents:UIControlEventTouchUpInside];
+//    [cell.m_audioButton addTarget:self action:@selector(audioPlayClick:) forControlEvents:UIControlEventTouchDown];
+//    [cell.m_imageButton addTarget:self action:@selector(messageOfArtworkClick:) forControlEvents:UIControlEventTouchUpInside];  
     
     return cell;
 }
@@ -636,13 +663,15 @@ typedef enum{
         
         
         //发送数据 ---zhongyao
-        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-        [hud showWhileExecuting:@selector(sendMsgToServer:) onTarget:self withObject:groupChat animated:YES];
-        [APP_DELEGATE.window addSubview:hud];
-        [hud release];
-        hud = nil;
+//        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+//        [hud showWhileExecuting:@selector(sendMsgToServer:) onTarget:self withObject:groupChat animated:YES];
+//        [APP_DELEGATE.window addSubview:hud];
+//        [hud release];
+//        hud = nil;
+        [self sendMsgToServer:groupChat];
     
         [groupChat release];
+        groupChat = nil;
     
         return NO;
     }
@@ -650,7 +679,8 @@ typedef enum{
     return YES;
 }
 
-- (void)scrollTableToFoot:(BOOL)animated {  
+- (void)scrollTableToFoot:(BOOL)animated {
+    NSLog(@"scrollTableToFoot;");
     NSInteger s = [self.chatMessagetableView numberOfSections];  
     if (s<1) return;  
     NSInteger r = [self.chatMessagetableView numberOfRowsInSection:s-1];  
@@ -658,7 +688,8 @@ typedef enum{
     
     NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];  
     
-    [self.chatMessagetableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];  
+    [self.chatMessagetableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    NSLog(@"scrollTableToFoot crollToRowAtIndexPath;");
 }  
 
 - (IBAction)navigationReturn:(id)sender {
@@ -898,19 +929,21 @@ typedef enum{
 }
 
 - (void)addChatMessageToShow:(DEYChatMessage *)groupChat{
+    NSLog(@"addChatMessageToShow");
     if ([groupMessagesArray count]==0) {
         [groupChat setTimeToShow:TRUE];
     }else{
         DEYChatMessage *timeTemp = [groupMessagesArray objectAtIndex:[groupMessagesArray count]-1];
         [groupChat setTimeToShow:[self equalsWithAccuracy:timeTemp.strTime secondTime:groupChat.strTime accuracy:5]];
     }
-   
+    NSLog(@"addChatMessageToShow setTime;");
     [self.groupMessagesArray addObject:groupChat];
-    
+    NSLog(@"addChatMessageToShow addObject;");
     [self.chatMessagetableView beginUpdates];
     [chatMessagetableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:[groupMessagesArray count]-1 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     
     [self.chatMessagetableView endUpdates];
+    NSLog(@"addChatMessageToShow update;");
     
     [self scrollTableToFoot:YES];
     //*********************************************//
@@ -967,7 +1000,7 @@ typedef enum{
     
     groupChat.strLocalMsgId = localMsgID;
     
-    [groupChat setStrTime:[self getStringFromDate:nowTime]];
+//    [groupChat setStrTime:[self getStringFromDate:nowTime]];
     [groupChat setState:eMessageStateWaitForSend];
     
     return groupChat;
@@ -981,7 +1014,9 @@ typedef enum{
 
 #pragma mark - hym
 -(void)sendMsgToServer:(DEYChatMessage *) message {
-    NSString *strURL = [[NSString stringWithFormat:@"%@/chatSend.do?userId=%d&toId=%d&type=0&content=%@&clientId=%@",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID,message.strMessage,message.strLocalMsgId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"sendMsgToServer");
+    DEYChatMessage *message_ = [message retain];
+    NSString *strURL = [[NSString stringWithFormat:@"%@/chatSend.do?userId=%d&toId=%d&type=0&content=%@&clientId=%@",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID,message_.strMessage,message_.strLocalMsgId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
     [request setTimeOutSeconds:5];
@@ -1004,7 +1039,7 @@ typedef enum{
             alter = nil;
             return;
         }
-        [self addChatMessageToShow:message];
+        [self addChatMessageToShow:message_];
         return;
     }
     NSLog(@"error = %@",[error localizedDescription]);
@@ -1016,14 +1051,54 @@ typedef enum{
     [alter show];
     [alter release];
     alter = nil;
+    
+    [message_ release];
+    message_ = nil;
     return;
     
 }
 
+/*
+ @synthesize strLocalMsgId;
+ @synthesize strServerMsgId;
+ @synthesize strChatRoomID;
+ @synthesize strUserId;
+ 
+ @synthesize strUserName;
+ @synthesize strTime;
+ @synthesize strMessage;
+ @synthesize strOriginalImageMessage;
+ @synthesize messageType;
+ @synthesize resourceFormat;
+ @synthesize state;
+ @synthesize msgChatTpye;
+ @synthesize messageData;
+ */
+
 #pragma mark - ASIHttp---
 - (void)requestFinished:(ASIHTTPRequest *)request {
-    if (request.tag == SEND_REQUEST_TAG) {
-        
+    if (request.tag == GET_REQUEST_TAG) {
+        NSString *string = [request responseString];
+        NSMutableDictionary * dataDict = [string JSONValue];
+        NSArray *chatMsgs = [dataDict objectForKey:@"chats"];
+        NSInteger iCount = [chatMsgs count];
+        for (int i = 0; i < iCount; i ++) {
+            NSDictionary *msg = [chatMsgs objectAtIndex:i];
+            DEYChatMessage *message = [[DEYChatMessage alloc] init];
+            message.strServerMsgId = [msg objectForKey:@"id"];
+            message.strUserId = [msg objectForKey:@"userId"];
+            message.strChatRoomID = [msg objectForKey:@"toId"];
+            message.messageType = eMessageTypeMessage;
+            message.strMessage = [msg objectForKey:@"content"];
+            message.strLocalMsgId = [msg objectForKey:@"clientId"];
+            long long timeInterval = [[msg objectForKey:@"time"] longLongValue];
+            message.messageTimeStamp = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+            self.maxcharID = [message.strServerMsgId integerValue];
+            [self performSelectorOnMainThread:@selector(updateChatTableview:) withObject:message waitUntilDone:YES];
+            [message release];
+            message = nil;
+            
+        }
         
     }
     
@@ -1041,6 +1116,11 @@ typedef enum{
     alter = nil;
     return;
     
+}
+
+#pragma mark - -
+- (void) updateChatTableview:(DEYChatMessage *) message {
+    [self addChatMessageToShow:message];
 }
 
 

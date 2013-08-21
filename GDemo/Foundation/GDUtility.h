@@ -14,5 +14,5 @@
 + (UIImage *)loadImageForKey:(NSString *) key;
 
 + (NSString *) getHeadImageDownLoadStringUrl:(NSInteger) userid;
-
++ (NSString *)date:(NSDate *) time ByFormatter:(NSString*)strTimeFormatter;
 @end

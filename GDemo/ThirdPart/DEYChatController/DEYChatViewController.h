@@ -51,7 +51,7 @@
 @property (assign, nonatomic) id<DEYChatMessageTableViewDelegate> chatTableViewDelegate;
 
 @property (retain, nonatomic) NSString *userName;
-@property (retain, nonatomic) NSMutableArray *groupMessagesArray;  
+@property (retain, nonatomic) NSMutableArray *groupMessagesArray;
 
 @property (retain, nonatomic) IBOutlet UITableView *chatMessagetableView;
 

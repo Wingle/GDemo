@@ -35,11 +35,11 @@
         self.tabBarItem.image = [UIImage imageNamed:@"four"];
         self.tabBarItem.title = str;
         
-        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
-                                                                       style:UIBarButtonItemStylePlain target:self action:@selector(nextStep:)];
-        self.navigationItem.rightBarButtonItem = barBtnItem;
-        [barBtnItem release];
-        barBtnItem = nil;
+//        UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"保存"
+//                                                                       style:UIBarButtonItemStylePlain target:self action:@selector(nextStep:)];
+//        self.navigationItem.rightBarButtonItem = barBtnItem;
+//        [barBtnItem release];
+//        barBtnItem = nil;
         
         _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
     }
@@ -88,7 +88,8 @@
     NSArray *s1 = [NSArray arrayWithObjects:s1a0,s1a1,s1a2, nil];
     [self.dataSource addObject:s1];
     
-    NSArray *s2a0 = [NSArray arrayWithObjects:@"编号",@"codeClick:",CCRConf.userCode ? CCRConf.userCode : @"", nil];
+    
+    NSArray *s2a0 = [NSArray arrayWithObjects:@"编号",@"codeClick:",CCRConf.userCode ? CCRConf.userCode : [NSString stringWithFormat:@"10000%d",CCRConf.userId], nil];
     NSArray *s2 = [NSArray arrayWithObjects:s2a0, nil];
     [self.dataSource addObject:s2];
     
@@ -133,7 +134,7 @@
     }
     
     if (section == 0 && row == 0) {
-        [cell.imageView setImage:CCRConf.image ? CCRConf.image : [UIImage imageNamed:@"first"]];
+        [cell.imageView setImage:CCRConf.image ? CCRConf.image : [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]]]];
     }else {
         cell.detailTextLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:2];
     }

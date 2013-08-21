@@ -33,4 +33,12 @@
     return strURL;
 }
 
++ (NSString *)date:(NSDate *) time ByFormatter:(NSString*)strTimeFormatter
+{
+    NSDateFormatter	* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:strTimeFormatter];
+    
+    return [formatter stringFromDate:time];
+}
+
 @end

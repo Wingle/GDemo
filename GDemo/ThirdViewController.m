@@ -66,7 +66,11 @@
     
 	// Do any additional setup after loading the view.
     
-    [self.imgBtn setImage:CCRConf.image forState:UIControlStateNormal];
+    if (CCRConf.image) {
+        [self.imgBtn setImage:CCRConf.image forState:UIControlStateNormal];
+    }else {
+        [self.imgBtn setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
+    }
     [self.nameLabel setText:CCRConf.nickName];
     
     self.tableView.tableHeaderView = self.headView;

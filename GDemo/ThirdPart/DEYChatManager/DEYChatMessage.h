@@ -81,7 +81,7 @@ typedef struct {
 @property(nonatomic,retain) NSString * strUserId;       //发言者ID
 @property(nonatomic,retain) NSString * strUserName;
 @property(nonatomic,assign) int iImageVersion;
-@property(nonatomic,retain) NSString * strTime;
+//@property(nonatomic,retain) NSString * strTime;
 @property(nonatomic,retain) NSString * strMessage;
 @property(nonatomic, retain) NSString *strOriginalImageMessage;   //原图片地址
 @property(nonatomic,assign) eMessageType messageType;
@@ -96,6 +96,9 @@ typedef struct {
 @property(nonatomic,assign) int iVoiceLength;
 
 @property (nonatomic, assign) BOOL timeToShow;
+@property (nonatomic, retain) NSDate *messageTimeStamp;
+
+- (NSString *) strTime;
 
 - (NSString *)originalMediaURL;
 - (NSString *)thumbnailMediaURL;
