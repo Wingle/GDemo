@@ -33,9 +33,13 @@
     }
     [self.tabBarController.view removeFromSuperview];
     UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease]];
+    viewController1.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil] autorelease]];
+    viewController2.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     UINavigationController *viewController3 = [[UINavigationController alloc] initWithRootViewController:[[[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil] autorelease]];
+    viewController3.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]];
+    viewController4.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
@@ -43,6 +47,7 @@
     [viewController2 release];
     [viewController3 release];
     [viewController4 release];
+    
     self.window.rootViewController = self.tabBarController;
     
     //location update--
@@ -59,6 +64,7 @@
         UINavigationController *viewController0 = [[UINavigationController alloc] initWithRootViewController:[[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease]];
         self.navigationController = viewController0;
         [viewController0 release];
+        self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
         [self.window addSubview:self.navigationController.view];
     }
     

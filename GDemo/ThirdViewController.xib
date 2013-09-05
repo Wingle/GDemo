@@ -50,7 +50,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Default</string>
+							<string key="NSResourceName">star@2x.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="809099415">
@@ -95,7 +95,6 @@
 						<string key="NSFrame">{{126, 71}, {161, 21}}</string>
 						<reference key="NSSuperview" ref="307783520"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -138,7 +137,6 @@
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<reference key="IBUIBackgroundColor" ref="225652992"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClipsSubviews">YES</bool>
@@ -328,7 +326,7 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="headView">UIView</string>
-						<string key="imgBtn">UIButton</string>
+						<string key="imgBtn">EGOImageButton</string>
 						<string key="nameLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -338,7 +336,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="imgBtn">
 							<string key="name">imgBtn</string>
-							<string key="candidateClassName">UIButton</string>
+							<string key="candidateClassName">EGOImageButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="nameLabel">
 							<string key="name">nameLabel</string>
@@ -357,8 +355,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">Default</string>
-			<string key="NS.object.0">{16, 16}</string>
+			<string key="NS.key.0">star@2x.png</string>
+			<string key="NS.object.0">{640, 252}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
