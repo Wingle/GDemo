@@ -160,6 +160,7 @@
         fView.distanceLabel.hidden = YES;
     }
     NSString *url = userInfo.imagestringURL;
+    fView.imgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
     [fView.imgBtn setImageURL:[NSURL URLWithString:url]];
     [fView.nameLabel setText:userInfo.nickName];
     [fView.areaLabel setText:userInfo.stringArea];

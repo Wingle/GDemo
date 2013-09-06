@@ -11,6 +11,7 @@
 #import "GDUserInfo.h"
 #import "DEYChatViewController.h"
 #import "SBJson.h"
+#import "UserInfoCell.h"
 
 @interface FirstViewController ()
 
@@ -47,6 +48,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = [UIColor lightGrayColor];
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.allowsSelection = YES;
 }
@@ -67,17 +69,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"UserInfoCell";
+    UserInfoCell *cell = (UserInfoCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UserInfoCell" owner:self options:nil];
+        for (NSObject *obj in nib) {
+            if ([obj isKindOfClass:[UserInfoCell class]]) {
+                cell = (UserInfoCell *) obj;
+            }
+        }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     GDUserInfo *usrinfo = [self.dataArray objectAtIndex:[indexPath row]];
     // Configure the cell...
-    [cell.imageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:usrinfo.imagestringURL]]]];
-    [cell.textLabel setText:usrinfo.nickName];
+    cell.imgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
+    [cell.imgView setImageURL:[NSURL URLWithString:usrinfo.imagestringURL]];
+
+    cell.nameLabel.text = usrinfo.nickName;
+    cell.gameLabel.text = usrinfo.stringgameServer;
+    cell.areaLabel.text = usrinfo.stringArea;
     
     return cell;
 }

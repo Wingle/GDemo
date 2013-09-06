@@ -9,6 +9,7 @@
 #import "FourthViewController.h"
 #import "CCRGlobalConf.h"
 #import "GDUtility.h"
+#import "EGOImageView.h"
 
 #define IMAGE_SHEET_TAG         2013081401
 #define GENDER_SHEET_TAG        2013081402
@@ -116,6 +117,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    static NSString *headCellId = @"headCell";
+    
+    NSInteger section = [indexPath section];
+    NSInteger row = [indexPath row];
+    
+    if (section == 0 && row == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:headCellId];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headCellId] autorelease];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 34.0, 100.0, 22.0)];
+        label.text = @"头像";
+        label.font = [UIFont fontWithName:@".HelveticaNeueUI-Bold" size:17.0];
+        label.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:label];
+        [label release];
+        label = nil;
+        
+        EGOImageView *imgview = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"headDefault"]];
+        [imgview setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
+        [imgview setFrame:CGRectMake(195.0, 5.0, 80.0, 80.0)];
+        [cell.contentView addSubview:imgview];
+        [imgview release];
+        imgview = nil;
+        return cell;
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
@@ -124,20 +153,12 @@
         cell.detailTextLabel.numberOfLines = 2;
     }
     
-    NSInteger section = [indexPath section];
-    NSInteger row = [indexPath row];
-    
     // Configure the cell...
     cell.textLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:0];
     if (section == 2) {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
-    if (section == 0 && row == 0) {
-        [cell.imageView setImage:CCRConf.image ? CCRConf.image : [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]]]];
-    }else {
-        cell.detailTextLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:2];
-    }
+    cell.detailTextLabel.text = [[[self.dataSource objectAtIndex:section] objectAtIndex:row] objectAtIndex:2];
     
     return cell;
 }

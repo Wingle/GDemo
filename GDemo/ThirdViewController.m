@@ -74,6 +74,7 @@
     
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.allowsSelection = NO;
+    self.tableView.separatorColor = [UIColor lightGrayColor];
 
 }
 
@@ -143,24 +144,19 @@
     // Configure the cell...
     PengyouquanDataModel *model = [self.dataArray objectAtIndex:[indexPath row]];
     PengyouqunCellView *msgView = (PengyouqunCellView *)[cell.contentView viewWithTag:CELL_TAG];
-    if (model.stringURLForUser == nil) {
-        [msgView.headImgBtn setImage:CCRConf.image forState:UIControlStateNormal];
-    }else {
-        [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
-    }
+    msgView.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
+    [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
     
     [msgView.nameLabel setText:model.userNickName];
-    [msgView.contentImgView setFrame:CGRectMake(msgView.contentImgView.frame.origin.x,
-                                                58.0,
-                                                msgView.contentImgView.frame.size.width,
-                                                msgView.contentImgView.frame.size.height)];
-    if (model.contentImgURL == nil) {
-        [msgView.contentImgView setImage:model.contentImg];
-    }else {
+    
+    if (model.contentImgURL) {
         [msgView.contentImgView setImageURL:[NSURL URLWithString:model.contentImgURL]];
+        [msgView.contentImgView setFrame:CGRectMake(msgView.contentImgView.frame.origin.x,
+                                                    58.0,
+                                                    msgView.contentImgView.frame.size.width,
+                                                    msgView.contentImgView.frame.size.height)];
     }
     
-    [msgView setFrame:CGRectMake(msgView.frame.origin.x, msgView.frame.origin.y, msgView.frame.size.width, 206.0)];
     UILabel *label = msgView.contentTextLabel;
     label.numberOfLines = 0;  //必须定义这个属性，否则UILabel不会换行
     label.textAlignment = NSTextAlignmentLeft;  //文本对齐方式
