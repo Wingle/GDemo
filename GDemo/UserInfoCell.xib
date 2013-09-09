@@ -43,7 +43,7 @@
 							<object class="IBUIImageView" id="169149456">
 								<reference key="NSNextResponder" ref="793687017"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 3}, {65, 65}}</string>
+								<string key="NSFrame">{{5, 3}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="793687017"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="900941288"/>
@@ -93,7 +93,7 @@
 							<object class="IBUILabel" id="406355917">
 								<reference key="NSNextResponder" ref="793687017"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{78, 38}, {148, 21}}</string>
+								<string key="NSFrame">{{78, 31}, {148, 21}}</string>
 								<reference key="NSSuperview" ref="793687017"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="812512697"/>
@@ -124,7 +124,7 @@
 							<object class="IBUILabel" id="812512697">
 								<reference key="NSNextResponder" ref="793687017"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{246, 38}, {62, 21}}</string>
+								<string key="NSFrame">{{246, 31}, {62, 21}}</string>
 								<reference key="NSSuperview" ref="793687017"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -143,7 +143,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 69}</string>
+						<string key="NSFrameSize">{320, 55}</string>
 						<reference key="NSSuperview" ref="1014437288"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="169149456"/>
@@ -159,7 +159,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 70}</string>
+				<string key="NSFrameSize">{320, 56}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="793687017"/>
@@ -167,7 +167,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="793687017"/>
 				<string key="IBUIReuseIdentifier">UserInfoCell</string>
-				<real value="70" key="IBUIRowHeight"/>
+				<integer value="56" key="IBUIRowHeight"/>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">

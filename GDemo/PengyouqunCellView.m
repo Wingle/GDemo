@@ -29,7 +29,7 @@
 */
 
 - (void) awakeFromNib {
-    NSLog(@"hymmmmmmmm........");
+//    NSLog(@"hymmmmmmmm........");
     
 }
 

@@ -58,6 +58,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    sleep(3);
     if (CCRConf.isLogin) {
         [self loginSuccess];
     }else {

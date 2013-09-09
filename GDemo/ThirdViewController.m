@@ -148,15 +148,17 @@
     [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
     
     [msgView.nameLabel setText:model.userNickName];
-    
-    if (model.contentImgURL) {
+    [msgView.contentImgView setFrame:CGRectMake(msgView.contentImgView.frame.origin.x,
+                                                58.0,
+                                                msgView.contentImgView.frame.size.width,
+                                                msgView.contentImgView.frame.size.height)];
+    if (model.contentImgURL == nil) {
+        [msgView.contentImgView setImage:model.contentImg];
+    }else {
         [msgView.contentImgView setImageURL:[NSURL URLWithString:model.contentImgURL]];
-        [msgView.contentImgView setFrame:CGRectMake(msgView.contentImgView.frame.origin.x,
-                                                    58.0,
-                                                    msgView.contentImgView.frame.size.width,
-                                                    msgView.contentImgView.frame.size.height)];
     }
     
+    [msgView setFrame:CGRectMake(msgView.frame.origin.x, msgView.frame.origin.y, msgView.frame.size.width, 206.0)];
     UILabel *label = msgView.contentTextLabel;
     label.numberOfLines = 0;  //必须定义这个属性，否则UILabel不会换行
     label.textAlignment = NSTextAlignmentLeft;  //文本对齐方式
@@ -166,7 +168,7 @@
     CGSize size = [model.contentText sizeWithFont:label.font constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     //根据计算结果重新设置UILabel的尺寸
     CGFloat apal = size.height - 21.0;
-    NSLog(@"apal = %f",apal);
+//    NSLog(@"apal = %f",apal);
     [msgView.contentTextLabel setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, size.height)];
     msgView.contentTextLabel.text = model.contentText;
     
@@ -309,7 +311,7 @@
         if ([[userInfo objectForKey:@"userId"] integerValue] == -1) {
             model.userNickName = CCRConf.nickName;
         }else {
-            model.userNickName = [message objectForKey:@"name"];
+            model.userNickName = [userInfo objectForKey:@"name"];
         }
         [self.dataArray addObject:model];
         [model release];
