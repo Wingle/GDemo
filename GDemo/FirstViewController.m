@@ -151,30 +151,6 @@
 
 #pragma mark - refrash
 - (void)loadDataRequestSuccess:(ASIHTTPRequest *)request {
-//    NSLog(@"kdkd");
-//    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
-//    usrinfo.nickName = @"任志强";
-//    usrinfo.gender = 0;
-//    usrinfo.area = 2;
-//    usrinfo.gameServer = 3;
-//    usrinfo.relationship = kRelationshipFriends;
-//    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
-//    usrinfo.userSign = @"我爱潘石屹";
-//    [self.dataArray addObject:usrinfo];
-//    [usrinfo release];
-//    usrinfo = nil;
-//    
-//    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
-//    usrinfo1.nickName = @"潘石屹";
-//    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
-//    usrinfo1.gender = 0;
-//    usrinfo1.area = 3;
-//    usrinfo1.gameServer = 2;
-//    usrinfo.relationship = kRelationshipStranger;
-//    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-//    [self.dataArray addObject:usrinfo1];
-//    [usrinfo1 release];
-//    usrinfo1 = nil;
     NSString *string = [request responseString];
     NSMutableDictionary * dataDict = [string JSONValue];
     NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
@@ -215,30 +191,7 @@
     
 }
 - (void)loadDataRequestFailed:(ASIHTTPRequest *)request {
-//    NSLog(@"kkkkkkkkkkkkkk");
-//    GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
-//    usrinfo.nickName = @"任志强";
-//    usrinfo.gender = 0;
-//    usrinfo.area = 2;
-//    usrinfo.gameServer = 3;
-//    usrinfo.relationship = kRelationshipFriends;
-//    usrinfo.imagestringURL = @"http://farm4.static.flickr.com/3488/4020067072_7c60a7a60a_s.jpg";
-//    usrinfo.userSign = @"我爱潘石屹";
-//    [self.dataArray addObject:usrinfo];
-//    [usrinfo release];
-//    usrinfo = nil;
-//    
-//    GDUserInfo *usrinfo1 = [[GDUserInfo alloc] init];
-//    usrinfo1.nickName = @"潘石屹";
-//    usrinfo1.userSign = @"任志强不要乱爱我，我已经有老婆了";
-//    usrinfo1.gender = 0;
-//    usrinfo1.area = 3;
-//    usrinfo1.gameServer = 2;
-//    usrinfo.relationship = kRelationshipStranger;
-//    usrinfo1.imagestringURL = @"http://farm4.static.flickr.com/3524/4018550718_c4f43a83d0_s.jpg";
-//    [self.dataArray addObject:usrinfo1];
-//    [usrinfo1 release];
-//    usrinfo1 = nil;
+
 }
 
 

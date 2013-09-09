@@ -57,6 +57,10 @@
 		981C95CA17D8ACEF0041D111 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981C95C917D8ACEF0041D111 /* UserInfoCell.xib */; };
 		981C95CD17D8AEB70041D111 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 981C95CC17D8AEB70041D111 /* UserInfoCell.m */; };
 		981C95D117D8B5DF0041D111 /* headDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 981C95D017D8B5DF0041D111 /* headDefault.png */; };
+		981C962B17DDE91F0041D111 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 981C962A17DDE91F0041D111 /* TextCell.m */; };
+		981C962D17DDE9350041D111 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981C962C17DDE9350041D111 /* TextCell.xib */; };
+		981C963017DE28190041D111 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 981C962F17DE28170041D111 /* PhotoCell.m */; };
+		981C963217DE28320041D111 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981C963117DE282F0041D111 /* PhotoCell.xib */; };
 		982CE72117BFBC9300EED11E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 982CE72017BFBC9300EED11E /* CoreLocation.framework */; };
 		987A3D7517C32EAE00949F50 /* four.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7117C32EAE00949F50 /* four.png */; };
 		987A3D7617C32EAE00949F50 /* four@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7217C32EAE00949F50 /* four@2x.png */; };
@@ -252,6 +256,12 @@
 		981C95CB17D8AEB70041D111 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		981C95CC17D8AEB70041D111 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		981C95D017D8B5DF0041D111 /* headDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headDefault.png; sourceTree = "<group>"; };
+		981C962917DDE91E0041D111 /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCell.h; sourceTree = "<group>"; };
+		981C962A17DDE91F0041D111 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
+		981C962C17DDE9350041D111 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
+		981C962E17DE28140041D111 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		981C962F17DE28170041D111 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		981C963117DE282F0041D111 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		982CE72017BFBC9300EED11E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		987A3D7117C32EAE00949F50 /* four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = four.png; sourceTree = "<group>"; };
 		987A3D7217C32EAE00949F50 /* four@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "four@2x.png"; sourceTree = "<group>"; };
@@ -788,6 +798,12 @@
 				981C95C917D8ACEF0041D111 /* UserInfoCell.xib */,
 				981C95CB17D8AEB70041D111 /* UserInfoCell.h */,
 				981C95CC17D8AEB70041D111 /* UserInfoCell.m */,
+				981C962917DDE91E0041D111 /* TextCell.h */,
+				981C962A17DDE91F0041D111 /* TextCell.m */,
+				981C962C17DDE9350041D111 /* TextCell.xib */,
+				981C962E17DE28140041D111 /* PhotoCell.h */,
+				981C962F17DE28170041D111 /* PhotoCell.m */,
+				981C963117DE282F0041D111 /* PhotoCell.xib */,
 			);
 			name = CellView;
 			sourceTree = "<group>";
@@ -1074,6 +1090,8 @@
 				981C958717D850C70041D111 /* star@2x.png in Resources */,
 				981C95CA17D8ACEF0041D111 /* UserInfoCell.xib in Resources */,
 				981C95D117D8B5DF0041D111 /* headDefault.png in Resources */,
+				981C962D17DDE9350041D111 /* TextCell.xib in Resources */,
+				981C963217DE28320041D111 /* PhotoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1166,8 @@
 				98F92ED717BF5C7000D0715F /* ApplyAgreeViewController.m in Sources */,
 				98F92EDB17BF5CAB00D0715F /* ApplyAgreeCellView.m in Sources */,
 				981C95CD17D8AEB70041D111 /* UserInfoCell.m in Sources */,
+				981C962B17DDE91F0041D111 /* TextCell.m in Sources */,
+				981C963017DE28190041D111 /* PhotoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -129,7 +129,7 @@
                          CCRConf.userId,
                          self.myLocation.coordinate.latitude,
                          self.myLocation.coordinate.longitude];
-    NSLog(@"strurl = %@",strURL);
+    LOG(@"strurl = %@",strURL);
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
     [request setDelegate:self];
     [request setTimeOutSeconds:5];
@@ -170,7 +170,7 @@
 #pragma mark - ASIHttp---
 - (void)requestFinished:(ASIHTTPRequest *)request {
     NSString *string = [request responseString];
-    NSLog(@"string = %@",string);
+    LOG(@"string = %@",string);
 //    NSMutableDictionary * dataDict = [string JSONValue];
 //    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
 //    if (status != 0) {

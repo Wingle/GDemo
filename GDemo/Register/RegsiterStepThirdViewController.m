@@ -166,7 +166,8 @@
 
 #pragma mark - methods 
 - (void) updateHeadImageView:(UIImage *) image {
-    [self.imageBtn setImage:image forState:UIControlStateNormal];
+    UIImage *newImg = [GDUtility reproduceImage:image for:kImgReproduceForUserHeadIcon];
+    [self.imageBtn setImage:newImg forState:UIControlStateNormal];
 }
 
 - (void) updateGender {

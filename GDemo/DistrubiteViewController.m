@@ -13,6 +13,7 @@
 #import "SBJson.h"
 #import "CCRGlobalConf.h"
 #import "MBProgressHUD.h"
+#import "GDUtility.h"
 
 
 #define IMAGE_SHEET_TAG         2013081701
@@ -129,7 +130,8 @@
                          CR_REQUEST_URL,CCRConf.userId,model.newsType,model.contentText,model.newsID] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
-    NSData *imgData = UIImageJPEGRepresentation(self.imgBtn.imageView.image, 0.5);
+    NSData *imgData = UIImageJPEGRepresentation(self.imgBtn.imageView.image, 0.3);
+    LOG(@"img = %f k",imgData.length/1024.0);
     [request setData:imgData forKey:@"img"];
     [request setTimeOutSeconds:5];
     [request startSynchronous];
@@ -176,7 +178,8 @@
 
 - (IBAction)updateHeadImageView:(id)sender {
     UIImage *img = (UIImage *) sender;
-    [self.imgBtn setImage:img forState:UIControlStateNormal];
+    UIImage *newImg = [GDUtility reproduceImage:img for:kImgReproducePlanFullScreen];
+    [self.imgBtn setImage:newImg forState:UIControlStateNormal];
 
 }
 #pragma mark ------ UIActionSheet Delegate Methods ------
@@ -189,8 +192,7 @@
                 UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 picker.delegate = self;
-                picker.allowsEditing = YES;
-                [self.navigationController presentModalViewController:picker animated:YES];
+                [self presentModalViewController:picker animated:YES];
                 [picker release];
                 picker = nil;
                 break;
@@ -200,8 +202,7 @@
                 UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                 picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 picker.delegate = self;
-                picker.allowsEditing = YES;
-                [self.navigationController presentModalViewController:picker animated:YES];
+                [self presentModalViewController:picker animated:YES];
                 [picker release];
                 picker = nil;
                 break;
@@ -215,17 +216,10 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissModalViewControllerAnimated:YES];
-}
-
--(void) removePicker:(UIImagePickerController *)picker{
-    [picker dismissModalViewControllerAnimated:YES];
-}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [self dismissViewControllerAnimated:YES completion:NULL];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     UIImage * img = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
     [picker dismissModalViewControllerAnimated:NO];

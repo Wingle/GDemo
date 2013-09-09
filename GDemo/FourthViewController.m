@@ -388,7 +388,7 @@
 #pragma mark - fill
 - (void) fillInBlankFinished:(UITextField *) textField {
     [textField retain];
-    NSLog(@"tag = %d",textField.tag);
+    LOG(@"tag = %d",textField.tag);
     switch (textField.tag) {
         case NICKNAME_TAG:
         {

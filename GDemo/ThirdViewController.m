@@ -10,6 +10,8 @@
 #import "CCRGlobalConf.h"
 #import "PengyouquanDataModel.h"
 #import "PengyouqunCellView.h"
+#import "TextCell.h"
+#import "PhotoCell.h"
 #import "DistrubiteViewController.h"
 #import "SBJson.h"
 
@@ -108,8 +110,17 @@
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    PengyouquanDataModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    CGSize size = [model.contentText sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(236.0, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+    CGFloat apal = size.height - 21.0;
+    if (model.newsType == 0) {
+        return MAX(78.0+apal, 78.0);
+    }else if (model.newsType == 1) {
+        return 170.0;
+    }else {
+        return MAX(206.0+apal, 206.0);
+    }
+    
 }
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -129,7 +140,60 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    NSLog(@"%d",[indexPath row]);
+    static NSString *TextCellId = @"TextCell";
+    static NSString *PhotoCellId = @"PhotoCell";
+    
+    PengyouquanDataModel *model = [self.dataArray objectAtIndex:[indexPath row]];
+    
+    if (model.newsType == 0) {
+        TextCell *cell = (TextCell *)[tableView dequeueReusableCellWithIdentifier:TextCellId];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TextCell" owner:self options:nil];
+            for (NSObject *obj in nib) {
+                if ([obj isKindOfClass:[TextCell class]]) {
+                    cell = (TextCell *) obj;
+                }
+            }
+        }
+        cell.nameLabel.text = model.userNickName;
+        cell.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
+        [cell.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
+        
+        UILabel *label = cell.contentTextLabel;
+        
+        CGSize size = [model.contentText sizeWithFont:label.font constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+        CGFloat apal = size.height - 21.0;
+        [cell.contentTextLabel setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, size.height)];
+        cell.contentTextLabel.text = model.contentText;
+        [cell.newDateLabel setFrame:CGRectMake(cell.newDateLabel.frame.origin.x,
+                                                  cell.newDateLabel.frame.origin.y + apal,
+                                                  cell.newDateLabel.frame.size.width,
+                                                  cell.newDateLabel.frame.size.height)];
+        [cell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height+apal)];
+        
+        return cell;
+        
+    }else if (model.newsType == 1) {
+        PhotoCell *cell = (PhotoCell *) [tableView dequeueReusableCellWithIdentifier:PhotoCellId];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhotoCell" owner:self options:nil];
+            for (NSObject *obj in nib) {
+                if ([obj isKindOfClass:[PhotoCell class]]) {
+                    cell = (PhotoCell *) obj;
+                }
+            }
+        }
+        cell.nameLabel.text = model.userNickName;
+        cell.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
+        [cell.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
+        if (model.contentImgURL == nil) {
+            [cell.contentImgView setImage:model.contentImg];
+        }else {
+            [cell.contentImgView setImageURL:[NSURL URLWithString:model.contentImgURL]];
+        }
+        return cell;
+    }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
@@ -142,7 +206,6 @@
     }
     
     // Configure the cell...
-    PengyouquanDataModel *model = [self.dataArray objectAtIndex:[indexPath row]];
     PengyouqunCellView *msgView = (PengyouqunCellView *)[cell.contentView viewWithTag:CELL_TAG];
     msgView.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
     [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
@@ -168,7 +231,7 @@
     CGSize size = [model.contentText sizeWithFont:label.font constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     //根据计算结果重新设置UILabel的尺寸
     CGFloat apal = size.height - 21.0;
-//    NSLog(@"apal = %f",apal);
+    LOG(@"apal = %f",apal);
     [msgView.contentTextLabel setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, size.height)];
     msgView.contentTextLabel.text = model.contentText;
     
@@ -241,57 +304,7 @@
 
 #pragma mark - refrash
 - (void)loadDataRequestSuccess:(ASIHTTPRequest *)request {
-//    NSLog(@"kdkd");
-//    PengyouquanDataModel *model = [[PengyouquanDataModel alloc] init];
-//    model.newsDate = [NSDate date];
-//    model.newsID = 100;
-//    model.newsType = 1;
-//    model.userID = 62;
-//    model.userNickName = @"黄允明";
-//    model.contentText = @"我们成功了！可以更改此内容进行测试，宽度不变，高度根据内容自动调节.真的吗，来吧。快来爆。";
-//    model.contentImgURL = @"http://farm3.static.flickr.com/2436/4015786038_7b530f9cce_s.jpg";
-//    model.stringURLForUser = @"http://farm3.static.flickr.com/2643/4020492457_84c4140077_s.jpg";
-//    
-//    [self.dataArray addObject:model];
-//    [model release];
-//    model = nil;
-//    
-//    PengyouquanDataModel *model1 = [[PengyouquanDataModel alloc] init];
-//    model1.newsDate = [NSDate date];
-//    model1.newsID = 100;
-//    model1.newsType = 1;
-//    model1.userID = 62;
-//    model1.userNickName = @"潘石屹";
-//    model1.contentText = @"[李彦宏：百度是一个简单的公司] 什么叫简单，简单就是说话不绕弯子，简单就是上下级之间没有那么多的规矩，层级不那么明显。简单就是没有公司政治，不琢磨那么多乱七八糟的事，直来直去。简单就是你做的产品用户用起来上手很快，不需要学习就会用。14日，李彦宏如上表示。";
-//    model1.contentImgURL = @"http://farm3.static.flickr.com/2672/4008379269_157e86729e_s.jpg";
-//    model1.stringURLForUser = @"http://farm3.static.flickr.com/2493/4022863018_6197f81c8d_s.jpg";
-//    [self.dataArray addObject:model1];
-//    [model1 release];
-//    model1 = nil;
-//    
-//    PengyouquanDataModel *model2 = [[PengyouquanDataModel alloc] init];
-//    model2.newsDate = [NSDate date];
-//    model2.newsID = 100;
-//    model2.newsType = 1;
-//    model2.userID = 62;
-//    model2.userNickName = @"每日经济新闻";
-//    model2.contentText = @"多位“大佬”缺席互联网大会】马化腾、李彦宏、丁磊、陆兆禧等业界大佬均没有参加今年的互联网大会，忙于修炼“内功”。李彦宏带着刚刚高升的百度副总裁李明远等人南下与91无线签署收购协议，马化腾则在香港推广微信业务，网易刚刚投资了一家游戏开发商北京灵游坊。";
-//    model2.contentImgURL = @"http://farm3.static.flickr.com/2620/4009289798_bdcf26500a_s.jpg";
-//    model2.stringURLForUser = @"http://farm3.static.flickr.com/2557/4010652749_1d0c35fabd_s.jpg";
-//    [self.dataArray addObject:model2];
-//    [model2 release];
-//    model2 = nil;
-    /*
-     @property (nonatomic, assign) NSInteger userID;
-     @property (nonatomic, assign) long newsID;
-     @property (nonatomic, retain) NSString *userNickName;
-     @property (nonatomic, retain) NSString *contentText;
-     @property (nonatomic, retain) NSString *contentImgURL;
-     @property (nonatomic, retain) NSDate *newsDate;
-     @property (nonatomic, assign) NSInteger newsType;
-     @property (nonatomic, retain) UIImage *contentImg;
-     */
-    
+    [self.dataArray removeAllObjects];
     NSString *string = [request responseString];
     NSLog(@"string = %@",string);
     NSDictionary *dataDic = [string JSONValue];
@@ -302,11 +315,12 @@
         model.newsID = [[message objectForKey:@"id"] integerValue];
         model.userID = [[message objectForKey:@"userId"] integerValue];
         model.newsType = [[message objectForKey:@"type"] integerValue];
+        LOG(@"type = %d",model.newsType);
         model.contentText = [message objectForKey:@"content"];
         model.contentImgURL = [GDUtility getWeiboImageDownLoadStringUrl:model.newsID];
         model.newsDate = [NSDate dateWithTimeIntervalSince1970:[[message objectForKey:@"time"] longLongValue]];
         model.stringURLForUser = [GDUtility getHeadImageDownLoadStringUrl:model.userID];
-        
+
         NSDictionary *userInfo = [message objectForKey:@"userInfo"];
         if ([[userInfo objectForKey:@"userId"] integerValue] == -1) {
             model.userNickName = CCRConf.nickName;
@@ -320,19 +334,7 @@
     
 }
 - (void)loadDataRequestFailed:(ASIHTTPRequest *)request {
-//    NSLog(@"kkkkkkkkkkkkkk");
-//    PengyouquanDataModel *model2 = [[PengyouquanDataModel alloc] init];
-//    model2.newsDate = [NSDate date];
-//    model2.newsID = 100;
-//    model2.newsType = 1;
-//    model2.userID = 62;
-//    model2.userNickName = @"每日经济新闻";
-//    model2.contentText = @"多位“大佬”缺席互联网大会】马化腾、李彦宏、丁磊、陆兆禧等业界大佬均没有参加今年的互联网大会，忙于修炼“内功”。李彦宏带着刚刚高升的百度副总裁李明远等人南下与91无线签署收购协议，马化腾则在香港推广微信业务，网易刚刚投资了一家游戏开发商北京灵游坊。";
-//    model2.contentImgURL = @"http://farm3.static.flickr.com/2620/4009289798_bdcf26500a_s.jpg";
-//    model2.stringURLForUser = @"http://farm3.static.flickr.com/2557/4010652749_1d0c35fabd_s.jpg";
-//    [self.dataArray addObject:model2];
-//    [model2 release];
-//    model2 = nil;
+
 }
 
 - (void)dealloc {
@@ -352,7 +354,6 @@
 - (void) FinishedDistrubite:(PengyouquanDataModel *)model {
     PengyouquanDataModel *news = [model retain];
     [self.dataArray insertObject:news atIndex:0];
-//    [self.tableView insertRowsAtIndexPaths:<#(NSArray *)#> withRowAnimation:<#(UITableViewRowAnimation)#>]
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     

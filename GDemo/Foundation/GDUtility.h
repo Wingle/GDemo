@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum _ImgReproducePlan{
+    kImgReproduceForUserHeadIcon=1,
+    kImgReproducePlanFullScreen
+}ImgReproducePlan;
+
 @interface GDUtility : NSObject
 
 + (void)saveImage:(UIImage*)image imageKey:(NSString *) key;
@@ -17,4 +22,6 @@
 + (NSString *) getWeiboImageDownLoadStringUrl:(NSInteger) newsid;
 + (NSString *)date:(NSDate *) time ByFormatter:(NSString*)strTimeFormatter;
 + (NSString *)dateToString:(NSDate *) date ByFormatter:(NSString*)strTimeFormatter;
+
++ (UIImage *)reproduceImage:(UIImage *)originImg for:(ImgReproducePlan)reproducePlan;
 @end

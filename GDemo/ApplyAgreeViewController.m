@@ -196,7 +196,7 @@
 - (void) handleUser:(GDUserInfo *)userInfo ActionToAgreeOrDissagreeType:(NSString *) type {
     NSString *strURL = [NSString stringWithFormat:@"%@/concern.do?userId=%d&friendId=%d&type=%@",CR_REQUEST_URL,CCRConf.userId,userInfo.userID,type];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:URL] autorelease];
     request.tag = APPLY_AGREE;
     [request setTimeOutSeconds:5];
     [request startSynchronous];
@@ -237,7 +237,7 @@
 #pragma mark - 
 - (void)agreeUser:(GDUserInfo *) user {
     GDUserInfo *userinfo = [user retain];
-    NSLog(@"agree, %@",userinfo.nickName);
+    LOG(@"agree, %@",userinfo.nickName);
     [self handleUser:userinfo ActionToAgreeOrDissagreeType:[NSString stringWithFormat:@"%d",0]];
     [userinfo release];
     userinfo = nil;
@@ -245,7 +245,7 @@
 }
 
 - (void)disagreeUser:(GDUserInfo *) user {
-    NSLog(@"disagree, %@",user.nickName);
+    LOG(@"disagree, %@",user.nickName);
     GDUserInfo *userinfo = [user retain];
     [self handleUser:userinfo ActionToAgreeOrDissagreeType:[NSString stringWithFormat:@"%d",2]];
     [userinfo release];

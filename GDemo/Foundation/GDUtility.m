@@ -7,6 +7,9 @@
 //
 
 #import "GDUtility.h"
+#define Min_Head_Icon_Edge 60
+#define Min_Img_Short_Edge 320
+#define Max_Img_Short_Edge 480
 
 @implementation GDUtility
 
@@ -50,5 +53,60 @@
     [formatter setDateFormat:strTimeFormatter];
     return [formatter stringFromDate:date];
 }
+
+#pragma mark -
+#pragma mark img reproduce
++ (UIImage*)imageWithImage:(UIImage*)image
+              scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
++ (UIImage *)reproduceImage:(UIImage *)originImg for:(ImgReproducePlan)reproducePlan{
+    if (originImg==nil) {
+        return nil;
+    }
+    LOG(@"originImg.size.width : %f ; originImg.size.height: %f",originImg.size.width,originImg.size.height);
+    LOG(@"UIImagePNGRepresentation(contentData.contentPhoto).length : %d",UIImagePNGRepresentation(originImg).length);
+    float edgeMinLength = Min_Img_Short_Edge;
+    float edgeMaxLength = Max_Img_Short_Edge;
+    if (reproducePlan==kImgReproduceForUserHeadIcon){
+        edgeMinLength = Min_Head_Icon_Edge;
+        edgeMaxLength = Min_Head_Icon_Edge;
+    }
+    CGSize newSize;
+    float scaleFactor = 1;
+    if (originImg.size.width>originImg.size.height) {
+        if (originImg.size.height>edgeMaxLength) {
+            scaleFactor = edgeMaxLength/originImg.size.height;
+        }
+        else if(originImg.size.height<edgeMinLength){
+            scaleFactor = edgeMinLength/originImg.size.height;
+        }
+    }
+    else{
+        if (originImg.size.width>edgeMaxLength) {
+            scaleFactor = edgeMaxLength/originImg.size.width;
+        }
+        else if(originImg.size.width<edgeMinLength){
+            scaleFactor = edgeMinLength/originImg.size.width;
+        }
+    }
+    newSize = CGSizeMake(originImg.size.width*scaleFactor, originImg.size.height*scaleFactor);
+    if (scaleFactor==1) {
+        return originImg;
+    }
+    UIImage * newImage = [[self class] imageWithImage:originImg scaledToSize:newSize];
+    LOG(@"newImage.size.width : %f ; newImage.size.height: %f",newImage.size.width,newImage.size.height);
+    LOG(@"UIImagePNGRepresentation(newImage).length : %d",UIImagePNGRepresentation(newImage).length);
+    return newImage;
+}
+
+
 
 @end

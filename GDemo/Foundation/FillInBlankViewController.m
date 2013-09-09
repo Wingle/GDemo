@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.fillTextFiled becomeFirstResponder];
     self.fillTextFiled.tag = self.textTag;
-    NSLog(@"self.fill tag = %d",self.fillTextFiled.tag);
+    LOG(@"self.fill tag = %d",self.fillTextFiled.tag);
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
