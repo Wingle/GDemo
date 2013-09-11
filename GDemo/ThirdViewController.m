@@ -64,19 +64,21 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 	// Do any additional setup after loading the view.
-    
-    if (CCRConf.image) {
-        [self.imgBtn setImage:CCRConf.image forState:UIControlStateNormal];
-    }else {
-        [self.imgBtn setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
-    }
+//    self.imgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
+//    if (CCRConf.image) {
+//        [self.imgBtn setImage:CCRConf.image forState:UIControlStateNormal];
+//    }else {
+//        [self.imgBtn setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
+//    }
+    self.imgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
+    [self.imgView setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
     [self.nameLabel setText:CCRConf.nickName];
     
     self.tableView.tableHeaderView = self.headView;
     
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.allowsSelection = NO;
-    self.tableView.separatorColor = [UIColor lightGrayColor];
+    self.tableView.separatorColor = [UIColor colorWithRed:228.0/255 green:228.0/255 blue:228.0/255 alpha:1];
 
 }
 
@@ -341,12 +343,14 @@
     [_headView release];
     [_imgBtn release];
     [_nameLabel release];
+    [_imgView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setHeadView:nil];
     [self setImgBtn:nil];
     [self setNameLabel:nil];
+    [self setImgView:nil];
     [super viewDidUnload];
 }
 

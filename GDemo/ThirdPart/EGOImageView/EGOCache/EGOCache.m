@@ -234,6 +234,7 @@ static EGOCache* __instance;
 #if TARGET_OS_IPHONE
 
 - (UIImage*)imageForKey:(NSString*)key {
+    NSLog(@"cachePathForKey  = %@",cachePathForKey(key));
 	return [UIImage imageWithContentsOfFile:cachePathForKey(key)];
 }
 

@@ -156,7 +156,7 @@ typedef enum{
 //http://localhost:8080/demo/chatList.do?userId=1&id=0
     //增量获取，id为最后的chat id
 
-    NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&id=0",CR_REQUEST_URL,CCRConf.userId];
+    NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&fId=%d&id=0",CR_REQUEST_URL,CCRConf.userId,[self.strChatRoomID integerValue]];
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
     [request setTimeOutSeconds:5];
@@ -295,7 +295,7 @@ typedef enum{
 }
 
 - (void) detectMsgCome {
-    NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&id=%d",CR_REQUEST_URL,CCRConf.userId,self.maxcharID];
+    NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&fId=%d&id=%d",CR_REQUEST_URL,CCRConf.userId,[self.strChatRoomID integerValue],self.maxcharID];
     LOG(@"chatList.do = %@",strURL);
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
@@ -1012,6 +1012,7 @@ typedef enum{
     LOG(@"sendMsgToServer");
     DEYChatMessage *message_ = [message retain];
     NSString *strURL = [[NSString stringWithFormat:@"%@/chatSend.do?userId=%d&toId=%d&type=0&content=%@&clientId=%@",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID,message_.strMessage,message_.strLocalMsgId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    LOG(@"strURL = %@",strURL);
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
     [request setTimeOutSeconds:5];
@@ -1074,6 +1075,7 @@ typedef enum{
 - (void)requestFinished:(ASIHTTPRequest *)request {
     if (request.tag == GET_REQUEST_TAG) {
         NSString *string = [request responseString];
+        LOG(@"string = %@",string);
         NSMutableDictionary * dataDict = [string JSONValue];
         NSArray *chatMsgs = [dataDict objectForKey:@"chats"];
         NSInteger iCount = [chatMsgs count];
