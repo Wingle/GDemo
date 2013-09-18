@@ -15,6 +15,7 @@
 #import "GDUserInfoViewController.h"
 #import "CCRGlobalConf.h"
 #import "FriendViewController.h"
+#import "GroupCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define CELL_TAG        2013081611
@@ -206,15 +207,24 @@
         fView.distanceLabel.text = strDis;
         return cell;
     }
-    static NSString *groupCellIdentifier = @"groupCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:groupCellIdentifier];
+    static NSString *groupCellIdentifier = @"GroupCell";
+    GroupCell *cell = [tableView dequeueReusableCellWithIdentifier:groupCellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:groupCellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"GroupCell" owner:self options:nil];
+        for (NSObject *obj in nib) {
+            if ([obj isKindOfClass:[GroupCell class]]) {
+                cell = (GroupCell *) obj;
+                cell.headImgView.layer.masksToBounds = YES;
+                cell.headImgView.layer.cornerRadius = 5.0;
+            }
+        }
     }
     
     GDGroupInfo *groupInfo = [self.groupDataSource objectAtIndex:indexPath.row];
-    cell.textLabel.text = groupInfo.groupName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"群主:%@      群人数:%d",groupInfo.groupFounder,groupInfo.memberCount];
+    cell.headImgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"group%d",indexPath.row+1]];
+    cell.nameLabel.text = groupInfo.groupName;
+    cell.founderLabel.text = [NSString stringWithFormat:@"群主:%@",groupInfo.groupFounder];
+    cell.memberCountLabel.text = [NSString stringWithFormat:@"群人数:%d",groupInfo.memberCount];
     return cell;
 
 }
