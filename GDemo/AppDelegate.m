@@ -12,6 +12,7 @@
 #import "ThirdViewController.h"
 #import "FourthViewController.h"
 #import "LoginViewController.h"
+#import "V2FirstViewController.h"
 
 #import "CCRGlobalConf.h"
 
@@ -32,7 +33,7 @@
         _navigationController =nil;
     }
     [self.tabBarController.view removeFromSuperview];
-    UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease]];
+    UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[V2FirstViewController alloc] initWithNibName:@"V2FirstViewController" bundle:nil] autorelease]];
     viewController1.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil] autorelease]];
     viewController2.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];

@@ -71,6 +71,8 @@
 		98A2DF5A17DF1EDA0032CC7D /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A2DF5217DF1EDA0032CC7D /* EGOImageLoadConnection.m */; };
 		98A2DF5B17DF1EDA0032CC7D /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A2DF5417DF1EDA0032CC7D /* EGOImageLoader.m */; };
 		98A2DF5C17DF1EDA0032CC7D /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A2DF5717DF1EDA0032CC7D /* EGOImageView.m */; };
+		98B505B017E9507A00CFA59A /* V2FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B505AE17E9507A00CFA59A /* V2FirstViewController.m */; };
+		98B505B117E9507A00CFA59A /* V2FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */; };
 		98D6DC7F17B9C1620080DAC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC7E17B9C1620080DAC5 /* UIKit.framework */; };
 		98D6DC8117B9C1620080DAC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8017B9C1620080DAC5 /* Foundation.framework */; };
 		98D6DC8317B9C1620080DAC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8217B9C1620080DAC5 /* CoreGraphics.framework */; };
@@ -276,6 +278,9 @@
 		98A2DF5417DF1EDA0032CC7D /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
 		98A2DF5617DF1EDA0032CC7D /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 		98A2DF5717DF1EDA0032CC7D /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		98B505AD17E9507A00CFA59A /* V2FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V2FirstViewController.h; sourceTree = "<group>"; };
+		98B505AE17E9507A00CFA59A /* V2FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V2FirstViewController.m; sourceTree = "<group>"; };
+		98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = V2FirstViewController.xib; sourceTree = "<group>"; };
 		98D6DC7B17B9C1620080DAC5 /* GDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98D6DC7E17B9C1620080DAC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		98D6DC8017B9C1620080DAC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -602,6 +607,16 @@
 			path = EGOImageView;
 			sourceTree = "<group>";
 		};
+		98B505A717E94F8100CFA59A /* V2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				98B505AD17E9507A00CFA59A /* V2FirstViewController.h */,
+				98B505AE17E9507A00CFA59A /* V2FirstViewController.m */,
+				98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */,
+			);
+			name = V2.0;
+			sourceTree = "<group>";
+		};
 		98D6DC7217B9C1610080DAC5 = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +656,7 @@
 		98D6DC8417B9C1620080DAC5 /* GDemo */ = {
 			isa = PBXGroup;
 			children = (
+				98B505A717E94F8100CFA59A /* V2.0 */,
 				98F92ED317BF5BF700D0715F /* Apply&Agree */,
 				98F92E5817BE687600D0715F /* Friend */,
 				98F92E4817BDED0F00D0715F /* Distribute */,
@@ -1088,6 +1104,7 @@
 				981C95D117D8B5DF0041D111 /* headDefault.png in Resources */,
 				981C962D17DDE9350041D111 /* TextCell.xib in Resources */,
 				981C963217DE28320041D111 /* PhotoCell.xib in Resources */,
+				98B505B117E9507A00CFA59A /* V2FirstViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,6 +1181,7 @@
 				98A2DF5A17DF1EDA0032CC7D /* EGOImageLoadConnection.m in Sources */,
 				98A2DF5B17DF1EDA0032CC7D /* EGOImageLoader.m in Sources */,
 				98A2DF5C17DF1EDA0032CC7D /* EGOImageView.m in Sources */,
+				98B505B017E9507A00CFA59A /* V2FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
