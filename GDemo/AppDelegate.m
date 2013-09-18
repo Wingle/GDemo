@@ -35,7 +35,7 @@
     [self.tabBarController.view removeFromSuperview];
     UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[V2FirstViewController alloc] initWithNibName:@"V2FirstViewController" bundle:nil] autorelease]];
     viewController1.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
-    UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil] autorelease]];
+    UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease]];
     viewController2.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     UINavigationController *viewController3 = [[UINavigationController alloc] initWithRootViewController:[[[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil] autorelease]];
     viewController3.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
@@ -64,9 +64,9 @@
         [self loginSuccess];
     }else {
         UINavigationController *viewController0 = [[UINavigationController alloc] initWithRootViewController:[[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease]];
+        viewController0.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
         self.navigationController = viewController0;
         [viewController0 release];
-        self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
         [self.window addSubview:self.navigationController.view];
     }
     

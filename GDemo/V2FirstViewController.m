@@ -15,6 +15,7 @@
 #import "GDUserInfoViewController.h"
 #import "CCRGlobalConf.h"
 #import "FriendViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define CELL_TAG        2013081611
 
@@ -43,6 +44,10 @@
         // Custom initialization
         _peopleDataSource = [[NSMutableArray alloc] initWithCapacity:0];
         _groupDataSource = [[NSMutableArray alloc] initWithCapacity:0];
+        NSString *str = @"附近";
+        self.title = str;
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.title = str;
     }
     return self;
 }
@@ -52,6 +57,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.segmentController addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
+    self.view.backgroundColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor lightGrayColor];
     
     GDGroupInfo *group1 = [[[GDGroupInfo alloc] init] autorelease];
     group1.groupFounder = @"陈崐";
@@ -117,7 +125,8 @@
     switch (index) {
         case 0:
         {
-            [self.tableView reloadData];
+            [self requestNetWork];
+//            [self.tableView reloadData];
             break;
         }
         case 1:
@@ -128,6 +137,10 @@
         default:
             break;
     }
+}
+
+- (void) rightBarItemClick:(UIBarButtonItem *) barItem {
+    
 }
 
 #pragma mark tableView delegte -
@@ -150,9 +163,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.segmentController.selectedSegmentIndex == 0) {
-        return 70.0;
+        return 65.0;
     }else {
-        return 52.0;
+        return 65.0;
     }
 }
 
@@ -176,6 +189,8 @@
         fView.gameLabel.hidden = YES;
         fView.distanceLabel.hidden = NO;
         NSString *url = userInfo.imagestringURL;
+        fView.imgBtn.layer.masksToBounds = YES;
+        fView.imgBtn.layer.cornerRadius = 5.0;
         fView.imgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
         [fView.imgBtn setImageURL:[NSURL URLWithString:url]];
         [fView.nameLabel setText:userInfo.nickName];
@@ -236,6 +251,8 @@
         return;
     }
     
+    [self.peopleDataSource removeAllObjects];
+    
     NSArray *friends = [dataDict objectForKey:@"friends"];
     for (int i = 0; i < [friends count]; i ++) {
         NSDictionary *friend = [friends objectAtIndex:i];
@@ -285,4 +302,13 @@
     
 }
 
+- (IBAction)creatNewGroup:(id)sender {
+    MBProgressHUD *hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
+    hud.labelText = @"友情提示";
+    hud.detailsLabelText = @"此功能即将推出，敬请期待!";
+    hud.mode = MBProgressHUDModeText;
+    [self.view addSubview:hud];
+    [hud show:YES];
+    [hud hide:YES afterDelay:2];
+}
 @end

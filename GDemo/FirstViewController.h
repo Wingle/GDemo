@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DEYRefreshTableViewController.h"
+#import "GDUserInfo.h"
+
+@interface UserMsgInfo : GDUserInfo
+@property (nonatomic, retain) NSString *latestMsg;
+@end
 
 @interface FirstViewController : DEYRefreshTableViewController
 

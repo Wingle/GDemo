@@ -11,7 +11,16 @@
 #import "GDUserInfo.h"
 #import "DEYChatViewController.h"
 #import "SBJson.h"
-#import "UserInfoCell.h"
+#import "UserMsgCell.h"
+#import <QuartzCore/QuartzCore.h>
+
+@implementation UserMsgInfo
+
+- (void) dealloc {
+    [_latestMsg release];
+    [super dealloc];
+}
+@end
 
 @interface FirstViewController ()
 
@@ -53,6 +62,16 @@
     self.tableView.allowsSelection = YES;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    for (int i = 0; i < [self.dataArray count]; i++) {
+        UserMsgInfo *userinfo = [self.dataArray objectAtIndex:i];
+        userinfo.latestMsg = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%d",userinfo.userID]];
+    }
+    if ([self.dataArray count]) {
+        [self.tableView reloadData];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -69,26 +88,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"UserInfoCell";
-    UserInfoCell *cell = (UserInfoCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"UserMsgCell";
+    UserMsgCell *cell = (UserMsgCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UserInfoCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UserMsgCell" owner:self options:nil];
         for (NSObject *obj in nib) {
-            if ([obj isKindOfClass:[UserInfoCell class]]) {
-                cell = (UserInfoCell *) obj;
+            if ([obj isKindOfClass:[UserMsgCell class]]) {
+                cell = (UserMsgCell *) obj;
+                cell.headView.layer.masksToBounds = YES;
+                cell.headView.layer.cornerRadius = 5.0;
             }
         }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    GDUserInfo *usrinfo = [self.dataArray objectAtIndex:[indexPath row]];
+    UserMsgInfo *usrinfo = [self.dataArray objectAtIndex:[indexPath row]];
     // Configure the cell...
-    cell.imgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
-    [cell.imgView setImageURL:[NSURL URLWithString:usrinfo.imagestringURL]];
+    cell.headView.placeholderImage = [UIImage imageNamed:@"headDefault"];
+    [cell.headView setImageURL:[NSURL URLWithString:usrinfo.imagestringURL]];
 
     cell.nameLabel.text = usrinfo.nickName;
-    cell.gameLabel.text = usrinfo.stringgameServer;
-    cell.areaLabel.text = usrinfo.stringArea;
+    cell.msgLabel.text = usrinfo.latestMsg;
     
     return cell;
 }
@@ -134,12 +154,12 @@
 
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 56.0;
+    return 65.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GDUserInfo *userinfo = [self.dataArray objectAtIndex:[indexPath row]];
+    UserMsgInfo *userinfo = [self.dataArray objectAtIndex:[indexPath row]];
     DEYChatViewController *vc = [[DEYChatViewController alloc] initWithNibName:@"DEYChatViewController" bundle:nil UserID:[NSString stringWithFormat:@"%d",CCRConf.userId] RoomID:[NSString stringWithFormat:@"%d",userinfo.userID] ChatType:eChatTypeP2P];
     vc.title = userinfo.nickName;
     vc.userInfo = userinfo;
@@ -169,7 +189,7 @@
     NSArray *friends = [dataDict objectForKey:@"friends"];
     for (int i = 0; i < [friends count]; i ++) {
         NSDictionary *friend = [friends objectAtIndex:i];
-        GDUserInfo *usrinfo = [[GDUserInfo alloc] init];
+        UserMsgInfo *usrinfo = [[UserMsgInfo alloc] init];
         usrinfo.userID = [[friend objectForKey:@"userId"] integerValue];
         usrinfo.nickName = [friend objectForKey:@"name"];
         usrinfo.gender = [[friend objectForKey:@"gender"] integerValue];
@@ -180,6 +200,7 @@
         usrinfo.userContact = [friend objectForKey:@"contact"];
         //        usrinfo.relationship = self.relation;
         usrinfo.imagestringURL = [GDUtility getHeadImageDownLoadStringUrl:usrinfo.userID];
+        usrinfo.latestMsg = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%d",usrinfo.userID]];
         [self.dataArray addObject:usrinfo];
         [usrinfo release];
         usrinfo = nil;

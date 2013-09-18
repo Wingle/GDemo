@@ -18,5 +18,6 @@
 @interface V2FirstViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (retain, nonatomic) IBOutlet UISegmentedControl *segmentController;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)creatNewGroup:(id)sender;
 
 @end

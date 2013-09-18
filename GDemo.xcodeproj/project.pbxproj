@@ -73,6 +73,16 @@
 		98A2DF5C17DF1EDA0032CC7D /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A2DF5717DF1EDA0032CC7D /* EGOImageView.m */; };
 		98B505B017E9507A00CFA59A /* V2FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B505AE17E9507A00CFA59A /* V2FirstViewController.m */; };
 		98B505B117E9507A00CFA59A /* V2FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */; };
+		98B505B417E9987B00CFA59A /* UserMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B505B317E9987B00CFA59A /* UserMsgCell.m */; };
+		98B505B617E998BA00CFA59A /* UserMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98B505B517E998BA00CFA59A /* UserMsgCell.xib */; };
+		98B505B917E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B505B817E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.m */; };
+		98B505BC17E9BF8900CFA59A /* PengyouquanHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B505BB17E9BF8900CFA59A /* PengyouquanHeadCell.m */; };
+		98B505BE17E9BF9F00CFA59A /* PengyouquanHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98B505BD17E9BF9E00CFA59A /* PengyouquanHeadCell.xib */; };
+		98B505C217E9F29800CFA59A /* group3.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B505BF17E9F29800CFA59A /* group3.png */; };
+		98B505C317E9F29800CFA59A /* group2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B505C017E9F29800CFA59A /* group2.png */; };
+		98B505C417E9F29800CFA59A /* group1.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B505C117E9F29800CFA59A /* group1.png */; };
+		98B505C717E9F51F00CFA59A /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B505C517E9F51E00CFA59A /* home.png */; };
+		98B505C817E9F51F00CFA59A /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B505C617E9F51E00CFA59A /* home@2x.png */; };
 		98D6DC7F17B9C1620080DAC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC7E17B9C1620080DAC5 /* UIKit.framework */; };
 		98D6DC8117B9C1620080DAC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8017B9C1620080DAC5 /* Foundation.framework */; };
 		98D6DC8317B9C1620080DAC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D6DC8217B9C1620080DAC5 /* CoreGraphics.framework */; };
@@ -281,6 +291,19 @@
 		98B505AD17E9507A00CFA59A /* V2FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V2FirstViewController.h; sourceTree = "<group>"; };
 		98B505AE17E9507A00CFA59A /* V2FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V2FirstViewController.m; sourceTree = "<group>"; };
 		98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = V2FirstViewController.xib; sourceTree = "<group>"; };
+		98B505B217E9987B00CFA59A /* UserMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMsgCell.h; sourceTree = "<group>"; };
+		98B505B317E9987B00CFA59A /* UserMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMsgCell.m; sourceTree = "<group>"; };
+		98B505B517E998BA00CFA59A /* UserMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMsgCell.xib; sourceTree = "<group>"; };
+		98B505B717E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEYRefreshMutiSectionTableViewController.h; sourceTree = "<group>"; };
+		98B505B817E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEYRefreshMutiSectionTableViewController.m; sourceTree = "<group>"; };
+		98B505BA17E9BF8800CFA59A /* PengyouquanHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PengyouquanHeadCell.h; sourceTree = "<group>"; };
+		98B505BB17E9BF8900CFA59A /* PengyouquanHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PengyouquanHeadCell.m; sourceTree = "<group>"; };
+		98B505BD17E9BF9E00CFA59A /* PengyouquanHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PengyouquanHeadCell.xib; sourceTree = "<group>"; };
+		98B505BF17E9F29800CFA59A /* group3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group3.png; sourceTree = "<group>"; };
+		98B505C017E9F29800CFA59A /* group2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group2.png; sourceTree = "<group>"; };
+		98B505C117E9F29800CFA59A /* group1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group1.png; sourceTree = "<group>"; };
+		98B505C517E9F51E00CFA59A /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		98B505C617E9F51E00CFA59A /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
 		98D6DC7B17B9C1620080DAC5 /* GDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98D6DC7E17B9C1620080DAC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		98D6DC8017B9C1620080DAC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -430,6 +453,8 @@
 		980EA72217BD01EF000C80EC /* EGOTableViewPullRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				98B505B717E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.h */,
+				98B505B817E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.m */,
 				98F92E2217BD285C00D0715F /* DEYRefreshTableFooterView.h */,
 				98F92E2317BD285C00D0715F /* DEYRefreshTableFooterView.m */,
 				980EA78717BD0FAA000C80EC /* DEYRefreshTableViewController.m */,
@@ -710,6 +735,11 @@
 		98D6DCB117B9DFB90080DAC5 /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				98B505C517E9F51E00CFA59A /* home.png */,
+				98B505C617E9F51E00CFA59A /* home@2x.png */,
+				98B505BF17E9F29800CFA59A /* group3.png */,
+				98B505C017E9F29800CFA59A /* group2.png */,
+				98B505C117E9F29800CFA59A /* group1.png */,
 				981C95D017D8B5DF0041D111 /* headDefault.png */,
 				981C958617D850C70041D111 /* star@2x.png */,
 				987A3D7117C32EAE00949F50 /* four.png */,
@@ -817,6 +847,12 @@
 				981C962E17DE28140041D111 /* PhotoCell.h */,
 				981C962F17DE28170041D111 /* PhotoCell.m */,
 				981C963117DE282F0041D111 /* PhotoCell.xib */,
+				98B505B217E9987B00CFA59A /* UserMsgCell.h */,
+				98B505B317E9987B00CFA59A /* UserMsgCell.m */,
+				98B505B517E998BA00CFA59A /* UserMsgCell.xib */,
+				98B505BA17E9BF8800CFA59A /* PengyouquanHeadCell.h */,
+				98B505BB17E9BF8900CFA59A /* PengyouquanHeadCell.m */,
+				98B505BD17E9BF9E00CFA59A /* PengyouquanHeadCell.xib */,
 			);
 			name = CellView;
 			sourceTree = "<group>";
@@ -1105,6 +1141,13 @@
 				981C962D17DDE9350041D111 /* TextCell.xib in Resources */,
 				981C963217DE28320041D111 /* PhotoCell.xib in Resources */,
 				98B505B117E9507A00CFA59A /* V2FirstViewController.xib in Resources */,
+				98B505B617E998BA00CFA59A /* UserMsgCell.xib in Resources */,
+				98B505BE17E9BF9F00CFA59A /* PengyouquanHeadCell.xib in Resources */,
+				98B505C217E9F29800CFA59A /* group3.png in Resources */,
+				98B505C317E9F29800CFA59A /* group2.png in Resources */,
+				98B505C417E9F29800CFA59A /* group1.png in Resources */,
+				98B505C717E9F51F00CFA59A /* home.png in Resources */,
+				98B505C817E9F51F00CFA59A /* home@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1182,6 +1225,9 @@
 				98A2DF5B17DF1EDA0032CC7D /* EGOImageLoader.m in Sources */,
 				98A2DF5C17DF1EDA0032CC7D /* EGOImageView.m in Sources */,
 				98B505B017E9507A00CFA59A /* V2FirstViewController.m in Sources */,
+				98B505B417E9987B00CFA59A /* UserMsgCell.m in Sources */,
+				98B505B917E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.m in Sources */,
+				98B505BC17E9BF8900CFA59A /* PengyouquanHeadCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

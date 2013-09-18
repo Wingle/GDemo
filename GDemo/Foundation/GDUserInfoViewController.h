@@ -22,6 +22,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *signLabel;
 @property (nonatomic, retain) GDUserInfo *userInfo;
 @property (retain, nonatomic) IBOutlet UIButton *sendMsgBtn;
+@property (retain, nonatomic) IBOutlet UILabel *codeLabel;
 
 
 

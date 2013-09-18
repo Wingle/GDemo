@@ -14,6 +14,10 @@
 #import "PhotoCell.h"
 #import "DistrubiteViewController.h"
 #import "SBJson.h"
+#import "GDUserInfo.h"
+#import "PengyouquanHeadCell.h"
+#import "GDUserInfoViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define IMG_TAG         2012081501
 #define NAME_TAG        2012081502
@@ -33,7 +37,7 @@
     if (self) {
         NSString *str = @"主页";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"third"];
+        self.tabBarItem.image = [UIImage imageNamed:@"home"];
         self.tabBarItem.title = str;
         
         UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"发布"
@@ -48,13 +52,14 @@
 
 - (void)viewDidLoad
 {
-//    http://localhost:8080/demo/weiboList.do?userId=1&id=0
+    
     NSString *format = [NSString stringWithFormat:@"%@/weiboList.do?userId=%d&id=0",
                         CR_REQUEST_URL,CCRConf.userId];
     format = [format stringByAppendingString:@"&pageIndex=%d&pageSize=%d"];
     [self setRequestFormat:format requestMoreBy:RequestMoreByPageFromPage];
     self.numberOfDataPerPage = 20;
     
+        
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -70,15 +75,16 @@
 //    }else {
 //        [self.imgBtn setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
 //    }
-    self.imgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
-    [self.imgView setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
-    [self.nameLabel setText:CCRConf.nickName];
-    
-    self.tableView.tableHeaderView = self.headView;
+//    self.imgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
+//    [self.imgView setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId]]];
+//    [self.nameLabel setText:CCRConf.nickName];
+//    
+//    self.tableView.tableHeaderView = self.headView;
     
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.allowsSelection = NO;
+    self.tableView.allowsSelection = YES;
     self.tableView.separatorColor = [UIColor colorWithRed:228.0/255 green:228.0/255 blue:228.0/255 alpha:1];
+    
 
 }
 
@@ -112,7 +118,11 @@
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PengyouquanDataModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 84.0;
+    }
+    NSArray *sourceArray = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+    PengyouquanDataModel *model = [sourceArray objectAtIndex:indexPath.row];
     CGSize size = [model.contentText sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(236.0, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     CGFloat apal = size.height - 21.0;
     if (model.newsType == 0) {
@@ -125,27 +135,55 @@
     
 }
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return [self.dataDict count];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSInteger rows = [self.dataArray count];
-    return rows;
+    NSArray *array = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",section]];
+    return [array count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        static NSString *headCellId = @"PengyouquanHeadCell";
+        
+        PengyouquanHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:headCellId];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PengyouquanHeadCell" owner:self options:nil];
+            for (NSObject *obj in nib) {
+                if ([obj isKindOfClass:[PengyouquanHeadCell class]]) {
+                    cell = (PengyouquanHeadCell *) obj;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.headImgView.layer.masksToBounds = YES;
+                    cell.headImgView.layer.cornerRadius = 5.0;
+                    break;
+                }
+            }
+        }
+        
+        
+        NSArray *dataArr = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+        GDUserInfo *userinfo = [dataArr objectAtIndex:indexPath.row];
+        cell.headImgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
+        [cell.headImgView setImageURL:[NSURL URLWithString:[GDUtility getHeadImageDownLoadStringUrl:userinfo.userID]]];
+        
+        cell.nameLabel.text = userinfo.nickName;
+        cell.gameLabel.text = userinfo.stringgameServer;
+        return cell;
+        
+    }
     static NSString *CellIdentifier = @"Cell";
     static NSString *TextCellId = @"TextCell";
     static NSString *PhotoCellId = @"PhotoCell";
     
-    PengyouquanDataModel *model = [self.dataArray objectAtIndex:[indexPath row]];
+    NSArray *sourceArray = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+    PengyouquanDataModel *model = [sourceArray objectAtIndex:[indexPath row]];
     
     if (model.newsType == 0) {
         TextCell *cell = (TextCell *)[tableView dequeueReusableCellWithIdentifier:TextCellId];
@@ -157,6 +195,8 @@
                 }
             }
         }
+        cell.headImgBtn.layer.masksToBounds = YES;
+        cell.headImgBtn.layer.cornerRadius = 5.0;
         cell.nameLabel.text = model.userNickName;
         cell.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
         [cell.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
@@ -185,6 +225,8 @@
                 }
             }
         }
+        cell.headImgBtn.layer.masksToBounds = YES;
+        cell.headImgBtn.layer.cornerRadius = 5.0;
         cell.nameLabel.text = model.userNickName;
         cell.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
         [cell.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
@@ -209,6 +251,8 @@
     
     // Configure the cell...
     PengyouqunCellView *msgView = (PengyouqunCellView *)[cell.contentView viewWithTag:CELL_TAG];
+    msgView.headImgBtn.layer.masksToBounds = YES;
+    msgView.headImgBtn.layer.cornerRadius = 5.0;
     msgView.headImgBtn.placeholderImage = [UIImage imageNamed:@"headDefault"];
     [msgView.headImgBtn setImageURL:[NSURL URLWithString:model.stringURLForUser]];
     
@@ -301,12 +345,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        NSArray *array = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
+        GDUserInfoViewController *vc = [[[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil] autorelease];
+        vc.userInfo = [array objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - refrash
 - (void)loadDataRequestSuccess:(ASIHTTPRequest *)request {
-    [self.dataArray removeAllObjects];
+    NSMutableArray *array = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
     NSString *string = [request responseString];
     NSLog(@"string = %@",string);
     NSDictionary *dataDic = [string JSONValue];
@@ -329,9 +378,23 @@
         }else {
             model.userNickName = [userInfo objectForKey:@"name"];
         }
-        [self.dataArray addObject:model];
+        [array addObject:model];
         [model release];
         model = nil; 
+    }
+    if (array.count) {
+        [self.dataDict setObject:array forKey:@"1"];
+        GDUserInfo *userinfo = [[GDUserInfo alloc] init];
+        userinfo.nickName = CCRConf.nickName;
+        userinfo.userID = CCRConf.userId;
+        userinfo.gameServer = CCRConf.game;
+        userinfo.area = CCRConf.area;
+        userinfo.gender = CCRConf.gender;
+        userinfo.userContact = CCRConf.userContact;
+        userinfo.userCode = CCRConf.userCode;
+        userinfo.imagestringURL = [GDUtility getHeadImageDownLoadStringUrl:userinfo.userID];
+        NSArray *array = [NSArray arrayWithObject:userinfo];
+        [self.dataDict setObject:array forKey:@"0"];
     }
     
 }

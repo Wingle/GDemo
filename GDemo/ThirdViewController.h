@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "DEYRefreshTableViewController.h"
+#import "DEYRefreshMutiSectionTableViewController.h"
 #import "DistrubiteViewController.h"
 #import "EGOImageButton.h"
 #import "EGOImageView.h"
 
-@interface ThirdViewController : DEYRefreshTableViewController <DistrubiteDelegate>
+@interface ThirdViewController : DEYRefreshMutiSectionTableViewController <DistrubiteDelegate>
 @property (retain, nonatomic) IBOutlet UIView *headView;
 @property (retain, nonatomic) IBOutlet EGOImageButton *imgBtn;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;

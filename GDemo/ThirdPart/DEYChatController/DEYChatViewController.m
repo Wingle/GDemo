@@ -16,6 +16,7 @@
 #import "CCRGlobalConf.h"
 #import "SBJson.h"
 #import "AppDelegate.h"
+#import "CCRGlobalConf.h"
 
 #define ImageViewTag 20120813
 #define kMessageFontSize    14.0f 
@@ -144,7 +145,7 @@ typedef enum{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super viewDidDisappear:animated];
-    self.tabBarController.selectedIndex = 0;
+    self.tabBarController.selectedIndex = 1;
     
 }
 
@@ -1091,10 +1092,14 @@ typedef enum{
             long long timeInterval = [[msg objectForKey:@"time"] longLongValue];
             message.messageTimeStamp = [NSDate dateWithTimeIntervalSince1970:timeInterval];
             self.maxcharID = [message.strServerMsgId integerValue];
+            NSDictionary *userInfo = [msg objectForKey:@"userInfo"];
+            message.strUserName = [userInfo objectForKey:@"name"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@：%@",message.strUserName ? message.strUserName : CCRConf.nickName ,message.strMessage] forKey:self.strChatRoomID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSelectorOnMainThread:@selector(updateChatTableview:) withObject:message waitUntilDone:YES];
             [message release];
             message = nil;
-            
         }
         
     }

@@ -36,6 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = NO;
+    self.view.backgroundColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
     if (self.userInfo == nil) {
         return;
     }
@@ -44,11 +45,16 @@
         [self.sendMsgBtn setTitle:@"加为好友" forState:UIControlStateNormal];
         self.ship = kRelationshipStranger;
     }
+    if (self.userInfo.userID == CCRConf.userId) {
+        self.sendMsgBtn.hidden = YES;
+    }
+    self.imgView.placeholderImage = [UIImage imageNamed:@"headDefault"];
     [self.imgView setImageURL:[NSURL URLWithString:self.userInfo.imagestringURL]];
     [self.nameLabel setText:self.userInfo.nickName];
     [self.genderLabel setText:self.userInfo.strGender];
     [self.areaLabel setText:self.userInfo.stringArea];
     [self.gameLabel setText:self.userInfo.stringgameServer];
+    [self.codeLabel setText:self.userInfo.userCode];
     
     UILabel *label = self.signLabel;
     label.numberOfLines = 0;  //必须定义这个属性，否则UILabel不会换行
@@ -85,6 +91,7 @@
     [_signLabel release];
     [_userInfo release];
     [_sendMsgBtn release];
+    [_codeLabel release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -97,6 +104,7 @@
     [self setGameLabel:nil];
     [self setSignLabel:nil];
     [self setSendMsgBtn:nil];
+    [self setCodeLabel:nil];
     [super viewDidUnload];
 }
 - (IBAction)sendMsgBtnClick:(id)sender {
