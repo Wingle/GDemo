@@ -110,7 +110,7 @@
 - (void) requestNetWork {
     NSString *strURL = [NSString stringWithFormat:@"%@/friends.do?userId=%d&type=1",CR_REQUEST_URL,CCRConf.userId];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:5];
     request.delegate = self;
     [request startSynchronous];
@@ -196,7 +196,7 @@
 - (void) handleUser:(GDUserInfo *)userInfo ActionToAgreeOrDissagreeType:(NSString *) type {
     NSString *strURL = [NSString stringWithFormat:@"%@/concern.do?userId=%d&friendId=%d&type=%@",CR_REQUEST_URL,CCRConf.userId,userInfo.userID,type];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:URL] autorelease];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     request.tag = APPLY_AGREE;
     [request setTimeOutSeconds:5];
     [request startSynchronous];

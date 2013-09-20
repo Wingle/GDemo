@@ -107,7 +107,7 @@
         strURL = [NSString stringWithFormat:@"%@/search.do?userId=%d&lat=%.6f&lng=%.6f",CR_REQUEST_URL,CCRConf.userId,CCRConf.myLocation.coordinate.latitude,CCRConf.myLocation.coordinate.longitude];
     }
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:5];
     request.delegate = self;
     [request startSynchronous];

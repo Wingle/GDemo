@@ -130,7 +130,7 @@
                          self.myLocation.coordinate.latitude,
                          self.myLocation.coordinate.longitude];
     LOG(@"strurl = %@",strURL);
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:strURL]];
     [request setDelegate:self];
     [request setTimeOutSeconds:5];
     [request startAsynchronous];

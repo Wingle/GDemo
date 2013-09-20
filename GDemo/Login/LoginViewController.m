@@ -68,7 +68,7 @@
 - (void)requestNetWork {
     NSString *strURL = [NSString stringWithFormat:@"%@/login.do?phone=%@&password=%@",CR_REQUEST_URL,self.loginNameTextField.text,self.passwdTextField.text];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     request.tag = LOGIN_REQUEST;
     [request setTimeOutSeconds:5];
     request.delegate = self;
@@ -129,7 +129,7 @@
         
         NSString *strURL = [NSString stringWithFormat:@"%@/userInfo.do?userId=%d",CR_REQUEST_URL,userid];
         NSURL *URL = [NSURL URLWithString:strURL];
-        ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
         request.tag = INFO_REQUEST;
         [request setTimeOutSeconds:5];
         request.delegate = self;

@@ -139,7 +139,7 @@
 - (void) requestNetworkToApply {
     NSString *strURL = [NSString stringWithFormat:@"%@/concern.do?userId=%d&friendId=%d&type=1",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:5];
     request.delegate = self;
     [request startSynchronous];

@@ -159,7 +159,7 @@ typedef enum{
 
     NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&fId=%d&id=0",CR_REQUEST_URL,CCRConf.userId,[self.strChatRoomID integerValue]];
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:5];
     request.tag = GET_REQUEST_TAG;
     request.delegate = self;
@@ -299,7 +299,7 @@ typedef enum{
     NSString *strURL = [NSString stringWithFormat:@"%@/chatList.do?userId=%d&fId=%d&id=%d",CR_REQUEST_URL,CCRConf.userId,[self.strChatRoomID integerValue],self.maxcharID];
     LOG(@"chatList.do = %@",strURL);
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:3];
     request.delegate = self;
     request.tag = GET_REQUEST_TAG;
@@ -1015,7 +1015,7 @@ typedef enum{
     NSString *strURL = [[NSString stringWithFormat:@"%@/chatSend.do?userId=%d&toId=%d&type=0&content=%@&clientId=%@",CR_REQUEST_URL,CCRConf.userId,self.userInfo.userID,message_.strMessage,message_.strLocalMsgId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     LOG(@"strURL = %@",strURL);
     NSURL *URL = [NSURL URLWithString:strURL];
-    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:URL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:5];
     request.tag = SEND_REQUEST_TAG;
     [request startSynchronous];
