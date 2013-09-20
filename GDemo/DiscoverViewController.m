@@ -24,7 +24,7 @@
         // Custom initialization
         NSString *str = @"发现";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.image = [UIImage imageNamed:@"discovery"];
         self.tabBarItem.title = str;
         
         _dataDic = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -143,7 +143,7 @@
         ForumViewController *vc = [[[ForumViewController alloc] initWithNibName:@"ForumViewController" bundle:nil] autorelease];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (section == 1 && row == 0) {
-        GoupListViewController *vc = [[[GoupListViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+        GoupListViewController *vc = [[[GoupListViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

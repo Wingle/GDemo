@@ -38,7 +38,7 @@
         _groupDataSource = [[NSMutableArray alloc] initWithCapacity:0];
         NSString *str = @"附近";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.image = [UIImage imageNamed:@"nearby"];
         self.tabBarItem.title = str;
     }
     return self;
@@ -302,8 +302,6 @@
     [alter show];
     [alter release];
     alter = nil;
-    
-    self.segmentController.selectedSegmentIndex = 1;
     return;
     
 }

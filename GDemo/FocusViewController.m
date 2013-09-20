@@ -40,7 +40,7 @@
         _groupDataSource = [[NSMutableArray alloc] initWithCapacity:0];
         NSString *str = @"关注";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.image = [UIImage imageNamed:@"second"];
         self.tabBarItem.title = str;
     }
     return self;
@@ -305,7 +305,6 @@
     [alter release];
     alter = nil;
     
-    self.segController.selectedSegmentIndex = 1;
     return;
     
 }

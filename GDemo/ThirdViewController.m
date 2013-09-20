@@ -84,7 +84,7 @@
     
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.allowsSelection = YES;
-    self.tableView.separatorColor = [UIColor colorWithRed:228.0/255 green:228.0/255 blue:228.0/255 alpha:1];
+    self.tableView.separatorColor = [UIColor lightGrayColor];;
     
 
 }
@@ -107,6 +107,7 @@
     DistrubiteViewController *distrubite = [[DistrubiteViewController alloc] initWithNibName:@"DistrubiteViewController" bundle:nil];
     distrubite.delegate = self;
     UINavigationController *navContr = [[UINavigationController alloc] initWithRootViewController:distrubite];
+    navContr.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     [self presentModalViewController:navContr animated:YES];
     [distrubite release];
     distrubite = nil;
