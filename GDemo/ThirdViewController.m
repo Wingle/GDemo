@@ -18,6 +18,7 @@
 #import "PengyouquanHeadCell.h"
 #import "GDUserInfoViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FuntionSeletedViewController.h"
 
 #define IMG_TAG         2012081501
 #define NAME_TAG        2012081502
@@ -347,8 +348,9 @@
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
         NSArray *array = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
-        GDUserInfoViewController *vc = [[[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil] autorelease];
+        FuntionSeletedViewController *vc = [[[FuntionSeletedViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
         vc.userInfo = [array objectAtIndex:indexPath.row];
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

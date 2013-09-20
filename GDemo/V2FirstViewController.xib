@@ -61,8 +61,8 @@
 								<int key="IBNumberOfSegments">2</int>
 								<int key="IBSelectedSegmentIndex">0</int>
 								<array key="IBSegmentTitles">
-									<string>人</string>
-									<string>群</string>
+									<string>玩家</string>
+									<string>群组</string>
 								</array>
 								<array class="NSMutableArray" key="IBSegmentWidths">
 									<real value="0.0"/>
@@ -93,7 +93,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<reference key="IBUITintColor" ref="915699716"/>
-						<array class="NSMutableArray" key="IBUIItems">
+						<array key="IBUIItems">
 							<object class="IBUINavigationItem" id="307733421">
 								<reference key="IBUINavigationBar" ref="399047779"/>
 								<reference key="IBUITitleView" ref="607381821"/>
@@ -113,6 +113,7 @@
 						<string key="NSFrame">{{0, 44}, {320, 416}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -298,6 +299,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">V2FirstViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">creatNewGroup:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">creatNewGroup:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">creatNewGroup:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="segmentController">UISegmentedControl</string>
 						<string key="tableView">UITableView</string>

@@ -62,6 +62,10 @@
 		981C963017DE28190041D111 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 981C962F17DE28170041D111 /* PhotoCell.m */; };
 		981C963217DE28320041D111 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981C963117DE282F0041D111 /* PhotoCell.xib */; };
 		982CE72117BFBC9300EED11E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 982CE72017BFBC9300EED11E /* CoreLocation.framework */; };
+		9840F1FF17EBFB2C00D5DD27 /* FuntionSeletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F1FD17EBFB2C00D5DD27 /* FuntionSeletedViewController.m */; };
+		9840F20017EBFB2C00D5DD27 /* FuntionSeletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F1FE17EBFB2C00D5DD27 /* FuntionSeletedViewController.xib */; };
+		9840F20417EBFF7800D5DD27 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F20217EBFF7800D5DD27 /* SettingViewController.m */; };
+		9840F20517EBFF7800D5DD27 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F20317EBFF7800D5DD27 /* SettingViewController.xib */; };
 		987A3D7517C32EAE00949F50 /* four.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7117C32EAE00949F50 /* four.png */; };
 		987A3D7617C32EAE00949F50 /* four@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7217C32EAE00949F50 /* four@2x.png */; };
 		987A3D7717C32EAE00949F50 /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7317C32EAE00949F50 /* third.png */; };
@@ -276,6 +280,12 @@
 		981C962F17DE28170041D111 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		981C963117DE282F0041D111 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		982CE72017BFBC9300EED11E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9840F1FC17EBFB2C00D5DD27 /* FuntionSeletedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuntionSeletedViewController.h; sourceTree = "<group>"; };
+		9840F1FD17EBFB2C00D5DD27 /* FuntionSeletedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuntionSeletedViewController.m; sourceTree = "<group>"; };
+		9840F1FE17EBFB2C00D5DD27 /* FuntionSeletedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FuntionSeletedViewController.xib; sourceTree = "<group>"; };
+		9840F20117EBFF7800D5DD27 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		9840F20217EBFF7800D5DD27 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		9840F20317EBFF7800D5DD27 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		987A3D7117C32EAE00949F50 /* four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = four.png; sourceTree = "<group>"; };
 		987A3D7217C32EAE00949F50 /* four@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "four@2x.png"; sourceTree = "<group>"; };
 		987A3D7317C32EAE00949F50 /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = third.png; sourceTree = "<group>"; };
@@ -833,6 +843,12 @@
 				98F92ECE17BF50F100D0715F /* FirstViewController.h */,
 				98F92ECF17BF50F200D0715F /* FirstViewController.m */,
 				98F92ED017BF50F700D0715F /* FirstViewController.xib */,
+				9840F1FC17EBFB2C00D5DD27 /* FuntionSeletedViewController.h */,
+				9840F1FD17EBFB2C00D5DD27 /* FuntionSeletedViewController.m */,
+				9840F1FE17EBFB2C00D5DD27 /* FuntionSeletedViewController.xib */,
+				9840F20117EBFF7800D5DD27 /* SettingViewController.h */,
+				9840F20217EBFF7800D5DD27 /* SettingViewController.m */,
+				9840F20317EBFF7800D5DD27 /* SettingViewController.xib */,
 			);
 			name = Frame;
 			sourceTree = "<group>";
@@ -1157,6 +1173,8 @@
 				98B505C717E9F51F00CFA59A /* home.png in Resources */,
 				98B505C817E9F51F00CFA59A /* home@2x.png in Resources */,
 				98B505CA17E9FA0200CFA59A /* GroupCell.xib in Resources */,
+				9840F20017EBFB2C00D5DD27 /* FuntionSeletedViewController.xib in Resources */,
+				9840F20517EBFF7800D5DD27 /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,6 +1256,8 @@
 				98B505B917E9BAA100CFA59A /* DEYRefreshMutiSectionTableViewController.m in Sources */,
 				98B505BC17E9BF8900CFA59A /* PengyouquanHeadCell.m in Sources */,
 				98B505CE17E9FAE300CFA59A /* GroupCell.m in Sources */,
+				9840F1FF17EBFB2C00D5DD27 /* FuntionSeletedViewController.m in Sources */,
+				9840F20417EBFF7800D5DD27 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
