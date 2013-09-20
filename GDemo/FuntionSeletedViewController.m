@@ -9,6 +9,7 @@
 #import "FuntionSeletedViewController.h"
 #import "GDUserInfoViewController.h"
 #import "SettingViewController.h"
+#import "FourthViewController.h"
 
 @interface FuntionSeletedViewController ()
 @property (nonatomic, retain) NSMutableDictionary *dataDic;
@@ -131,8 +132,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        GDUserInfoViewController *vc = [[[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil] autorelease];
-        vc.userInfo = self.userInfo;
+        FourthViewController *vc = [[[FourthViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+//        GDUserInfoViewController *vc = [[[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil] autorelease];
+//        vc.userInfo = self.userInfo;
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }

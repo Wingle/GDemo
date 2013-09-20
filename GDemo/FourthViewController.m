@@ -231,7 +231,8 @@
                                   otherButtonTitles:@"图 库",
                                   @"拍 照",nil];
     actionSheet.tag = IMAGE_SHEET_TAG;
-    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+//    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    [actionSheet showInView:self.view];
     [actionSheet release];
     actionSheet = nil;
     
