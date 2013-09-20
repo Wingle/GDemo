@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "V2FirstViewController.h"
 #import "FocusViewController.h"
+#import "DiscoverViewController.h"
 
 #import "CCRGlobalConf.h"
 
@@ -46,7 +47,7 @@
     UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FocusViewController alloc] initWithNibName:@"FocusViewController" bundle:nil] autorelease]];
     viewController4.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     
-    UINavigationController *viewController5 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]];
+    UINavigationController *viewController5 = [[UINavigationController alloc] initWithRootViewController:[[[DiscoverViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]];
     viewController5.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];

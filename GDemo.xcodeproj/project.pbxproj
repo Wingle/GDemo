@@ -68,6 +68,14 @@
 		9840F20517EBFF7800D5DD27 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F20317EBFF7800D5DD27 /* SettingViewController.xib */; };
 		9840F20917EC10BD00D5DD27 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F20717EC10BC00D5DD27 /* FocusViewController.m */; };
 		9840F20A17EC10BD00D5DD27 /* FocusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F20817EC10BD00D5DD27 /* FocusViewController.xib */; };
+		9840F20F17EC190500D5DD27 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F20D17EC190500D5DD27 /* DiscoverViewController.m */; };
+		9840F21017EC190500D5DD27 /* DiscoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F20E17EC190500D5DD27 /* DiscoverViewController.xib */; };
+		9840F21417EC1B9300D5DD27 /* ForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F21217EC1B9300D5DD27 /* ForumViewController.m */; };
+		9840F21517EC1B9300D5DD27 /* ForumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F21317EC1B9300D5DD27 /* ForumViewController.xib */; };
+		9840F21917EC229A00D5DD27 /* GoupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F21717EC229A00D5DD27 /* GoupListViewController.m */; };
+		9840F21A17EC229A00D5DD27 /* GoupListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F21817EC229A00D5DD27 /* GoupListViewController.xib */; };
+		9840F21E17EC23E300D5DD27 /* GoupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F21C17EC23E200D5DD27 /* GoupDetailViewController.m */; };
+		9840F21F17EC23E300D5DD27 /* GoupDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F21D17EC23E300D5DD27 /* GoupDetailViewController.xib */; };
 		987A3D7517C32EAE00949F50 /* four.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7117C32EAE00949F50 /* four.png */; };
 		987A3D7617C32EAE00949F50 /* four@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7217C32EAE00949F50 /* four@2x.png */; };
 		987A3D7717C32EAE00949F50 /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7317C32EAE00949F50 /* third.png */; };
@@ -291,6 +299,18 @@
 		9840F20617EC10BC00D5DD27 /* FocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusViewController.h; sourceTree = "<group>"; };
 		9840F20717EC10BC00D5DD27 /* FocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusViewController.m; sourceTree = "<group>"; };
 		9840F20817EC10BD00D5DD27 /* FocusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FocusViewController.xib; sourceTree = "<group>"; };
+		9840F20C17EC190500D5DD27 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		9840F20D17EC190500D5DD27 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
+		9840F20E17EC190500D5DD27 /* DiscoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverViewController.xib; sourceTree = "<group>"; };
+		9840F21117EC1B9200D5DD27 /* ForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumViewController.h; sourceTree = "<group>"; };
+		9840F21217EC1B9300D5DD27 /* ForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumViewController.m; sourceTree = "<group>"; };
+		9840F21317EC1B9300D5DD27 /* ForumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForumViewController.xib; sourceTree = "<group>"; };
+		9840F21617EC229A00D5DD27 /* GoupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoupListViewController.h; sourceTree = "<group>"; };
+		9840F21717EC229A00D5DD27 /* GoupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoupListViewController.m; sourceTree = "<group>"; };
+		9840F21817EC229A00D5DD27 /* GoupListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoupListViewController.xib; sourceTree = "<group>"; };
+		9840F21B17EC23E200D5DD27 /* GoupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoupDetailViewController.h; sourceTree = "<group>"; };
+		9840F21C17EC23E200D5DD27 /* GoupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoupDetailViewController.m; sourceTree = "<group>"; };
+		9840F21D17EC23E300D5DD27 /* GoupDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoupDetailViewController.xib; sourceTree = "<group>"; };
 		987A3D7117C32EAE00949F50 /* four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = four.png; sourceTree = "<group>"; };
 		987A3D7217C32EAE00949F50 /* four@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "four@2x.png"; sourceTree = "<group>"; };
 		987A3D7317C32EAE00949F50 /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = third.png; sourceTree = "<group>"; };
@@ -672,6 +692,18 @@
 				98B505AD17E9507A00CFA59A /* V2FirstViewController.h */,
 				98B505AE17E9507A00CFA59A /* V2FirstViewController.m */,
 				98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */,
+				9840F20C17EC190500D5DD27 /* DiscoverViewController.h */,
+				9840F20D17EC190500D5DD27 /* DiscoverViewController.m */,
+				9840F20E17EC190500D5DD27 /* DiscoverViewController.xib */,
+				9840F21117EC1B9200D5DD27 /* ForumViewController.h */,
+				9840F21217EC1B9300D5DD27 /* ForumViewController.m */,
+				9840F21317EC1B9300D5DD27 /* ForumViewController.xib */,
+				9840F21617EC229A00D5DD27 /* GoupListViewController.h */,
+				9840F21717EC229A00D5DD27 /* GoupListViewController.m */,
+				9840F21817EC229A00D5DD27 /* GoupListViewController.xib */,
+				9840F21B17EC23E200D5DD27 /* GoupDetailViewController.h */,
+				9840F21C17EC23E200D5DD27 /* GoupDetailViewController.m */,
+				9840F21D17EC23E300D5DD27 /* GoupDetailViewController.xib */,
 			);
 			name = V2.0;
 			sourceTree = "<group>";
@@ -1192,6 +1224,10 @@
 				9840F20017EBFB2C00D5DD27 /* FuntionSeletedViewController.xib in Resources */,
 				9840F20517EBFF7800D5DD27 /* SettingViewController.xib in Resources */,
 				9840F20A17EC10BD00D5DD27 /* FocusViewController.xib in Resources */,
+				9840F21017EC190500D5DD27 /* DiscoverViewController.xib in Resources */,
+				9840F21517EC1B9300D5DD27 /* ForumViewController.xib in Resources */,
+				9840F21A17EC229A00D5DD27 /* GoupListViewController.xib in Resources */,
+				9840F21F17EC23E300D5DD27 /* GoupDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1276,6 +1312,10 @@
 				9840F1FF17EBFB2C00D5DD27 /* FuntionSeletedViewController.m in Sources */,
 				9840F20417EBFF7800D5DD27 /* SettingViewController.m in Sources */,
 				9840F20917EC10BD00D5DD27 /* FocusViewController.m in Sources */,
+				9840F20F17EC190500D5DD27 /* DiscoverViewController.m in Sources */,
+				9840F21417EC1B9300D5DD27 /* ForumViewController.m in Sources */,
+				9840F21917EC229A00D5DD27 /* GoupListViewController.m in Sources */,
+				9840F21E17EC23E300D5DD27 /* GoupDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -304,6 +304,8 @@
     [alter show];
     [alter release];
     alter = nil;
+    
+    self.segController.selectedSegmentIndex = 1;
     return;
     
 }

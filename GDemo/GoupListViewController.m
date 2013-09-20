@@ -1,34 +1,32 @@
 //
-//  FuntionSeletedViewController.m
+//  GoupListViewController.m
 //  GDemo
 //
 //  Created by Wingle Wong on 9/20/13.
 //  Copyright (c) 2013 Wingle. All rights reserved.
 //
 
-#import "FuntionSeletedViewController.h"
-#import "GDUserInfoViewController.h"
-#import "SettingViewController.h"
+#import "GoupListViewController.h"
+#import "GoupDetailViewController.h"
 
-@interface FuntionSeletedViewController ()
+@interface GoupListViewController ()
 @property (nonatomic, retain) NSMutableDictionary *dataDic;
 
 @end
 
-@implementation FuntionSeletedViewController
+@implementation GoupListViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        _dataDic = [[NSMutableDictionary alloc] initWithCapacity:0];
+        _dataDic = [[NSMutableDictionary alloc] initWithCapacity:1];
     }
     return self;
 }
 
 - (void) dealloc {
-    [_userInfo release];
     [_dataDic release];
     [super dealloc];
 }
@@ -42,13 +40,15 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //,@"热门群组",@"查找群组",
+    NSArray *array0 = [NSArray arrayWithObject:@"我的群组"];
+    [self.dataDic setObject:array0 forKey:@"0"];
     
-    NSArray *array = [NSArray arrayWithObjects:@"个人中心", nil];
-    [self.dataDic setObject:array forKey:@"0"];
-    
-    NSArray *array1 = [NSArray arrayWithObject:@"设置"];
+    NSArray *array1 = [NSArray arrayWithObject:@"热门群组"];
     [self.dataDic setObject:array1 forKey:@"1"];
     
+    NSArray *array2 = [NSArray arrayWithObject:@"查找群组"];
+    [self.dataDic setObject:array2 forKey:@"2"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,9 +59,7 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.dataDic count];
 }
 
@@ -77,12 +75,18 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Configure the cell...
-    NSArray *array = [self.dataDic objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
-    cell.textLabel.text = [array objectAtIndex:indexPath.row];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    
+    NSArray *array = [self.dataDic objectForKey:[NSString stringWithFormat:@"%d",section]];
+    NSString *content = [array objectAtIndex:row];
+    
+    cell.textLabel.text = content;
     
     return cell;
 }
@@ -130,14 +134,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        GDUserInfoViewController *vc = [[[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil] autorelease];
-        vc.userInfo = self.userInfo;
-        [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSInteger section = indexPath.section;    
+    if (section == 2) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"此功能即将推出，敬请期待"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alter show];
+        [alter release];
+        alter = nil;
         return;
     }
-    
-    SettingViewController *vc = [[[SettingViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+    GoupDetailViewController *vc = [[[GoupDetailViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    if (section == 0) {
+        vc.type = kMyGroup;
+    }else {
+        vc.type = kHotGroup;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 
 }

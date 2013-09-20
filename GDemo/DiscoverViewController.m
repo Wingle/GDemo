@@ -1,36 +1,37 @@
 //
-//  FuntionSeletedViewController.m
+//  DiscoverViewController.m
 //  GDemo
 //
 //  Created by Wingle Wong on 9/20/13.
 //  Copyright (c) 2013 Wingle. All rights reserved.
 //
 
-#import "FuntionSeletedViewController.h"
-#import "GDUserInfoViewController.h"
-#import "SettingViewController.h"
+#import "DiscoverViewController.h"
+#import "ForumViewController.h"
+#import "GoupListViewController.h"
 
-@interface FuntionSeletedViewController ()
+@interface DiscoverViewController ()
 @property (nonatomic, retain) NSMutableDictionary *dataDic;
 
 @end
 
-@implementation FuntionSeletedViewController
+@implementation DiscoverViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        NSString *str = @"发现";
+        self.title = str;
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.title = str;
+        
         _dataDic = [[NSMutableDictionary alloc] initWithCapacity:0];
+        
+        
     }
     return self;
-}
-
-- (void) dealloc {
-    [_userInfo release];
-    [_dataDic release];
-    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -43,10 +44,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSArray *array = [NSArray arrayWithObjects:@"个人中心", nil];
-    [self.dataDic setObject:array forKey:@"0"];
+    NSArray *array0 = [NSArray arrayWithObject:@"游戏论坛"];
+    [self.dataDic setObject:array0 forKey:@"0"];
     
-    NSArray *array1 = [NSArray arrayWithObject:@"设置"];
+    NSArray *array1 = [NSArray arrayWithObject:@"游戏群组"];
     [self.dataDic setObject:array1 forKey:@"1"];
     
 }
@@ -78,11 +79,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Configure the cell...
-    NSArray *array = [self.dataDic objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
-    cell.textLabel.text = [array objectAtIndex:indexPath.row];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    
+    NSArray *array = [self.dataDic objectForKey:[NSString stringWithFormat:@"%d",section]];
+    NSString *content = [array objectAtIndex:row];
+    
+    cell.textLabel.text = content;
     
     return cell;
 }
@@ -130,16 +137,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        GDUserInfoViewController *vc = [[[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil] autorelease];
-        vc.userInfo = self.userInfo;
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if (section == 0 && row == 0) {
+        ForumViewController *vc = [[[ForumViewController alloc] initWithNibName:@"ForumViewController" bundle:nil] autorelease];
         [self.navigationController pushViewController:vc animated:YES];
-        return;
+    }else if (section == 1 && row == 0) {
+        GoupListViewController *vc = [[[GoupListViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    SettingViewController *vc = [[[SettingViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 @end
