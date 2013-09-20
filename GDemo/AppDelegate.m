@@ -13,6 +13,7 @@
 #import "FourthViewController.h"
 #import "LoginViewController.h"
 #import "V2FirstViewController.h"
+#import "FocusViewController.h"
 
 #import "CCRGlobalConf.h"
 
@@ -35,19 +36,26 @@
     [self.tabBarController.view removeFromSuperview];
     UINavigationController *viewController1 = [[UINavigationController alloc] initWithRootViewController:[[[V2FirstViewController alloc] initWithNibName:@"V2FirstViewController" bundle:nil] autorelease]];
     viewController1.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
+    
     UINavigationController *viewController2 = [[UINavigationController alloc] initWithRootViewController:[[[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil] autorelease]];
     viewController2.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
+    
     UINavigationController *viewController3 = [[UINavigationController alloc] initWithRootViewController:[[[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil] autorelease]];
     viewController3.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
-    UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]];
+    
+    UINavigationController *viewController4 = [[UINavigationController alloc] initWithRootViewController:[[[FocusViewController alloc] initWithNibName:@"FocusViewController" bundle:nil] autorelease]];
     viewController4.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
     
+    UINavigationController *viewController5 = [[UINavigationController alloc] initWithRootViewController:[[[FourthViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease]];
+    viewController5.navigationBar.tintColor = [UIColor colorWithRed:0 green:129.0/255 blue:190.0/255 alpha:1.0];
+    
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
+    self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4,viewController5];
     [viewController1 release];
     [viewController2 release];
     [viewController3 release];
     [viewController4 release];
+    [viewController5 release];
     
     self.window.rootViewController = self.tabBarController;
     

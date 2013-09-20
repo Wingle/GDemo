@@ -30,6 +30,12 @@ typedef enum {
 - (NSString *) stringgameServer;
 - (UIImage *) image;
 
+@end
 
+
+@interface GDGroupInfo : NSObject
+@property (nonatomic, retain) NSString *groupName;
+@property (nonatomic, retain) NSString *groupFounder;
+@property (nonatomic, assign) NSInteger memberCount;
 
 @end

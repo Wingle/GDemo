@@ -1,12 +1,12 @@
 //
-//  V2FirstViewController.m
+//  FocusViewController.m
 //  GDemo
 //
-//  Created by Wingle Wong on 9/18/13.
+//  Created by Wingle Wong on 9/20/13.
 //  Copyright (c) 2013 Wingle. All rights reserved.
 //
 
-#import "V2FirstViewController.h"
+#import "FocusViewController.h"
 #import "ASIHTTPRequest.h"
 #import "MBProgressHUD.h"
 #import "SBJson.h"
@@ -20,23 +20,25 @@
 
 #define CELL_TAG        2013081611
 
-@interface V2FirstViewController ()
+@interface FocusViewController ()
 @property (nonatomic, retain) NSMutableArray *peopleDataSource;
 @property (nonatomic, retain) NSMutableArray *groupDataSource;
+
 - (void) requestNetworkAnimation:(BOOL) animated;
 
 @end
 
-@implementation V2FirstViewController
+@implementation FocusViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        // Custom initialization
         _peopleDataSource = [[NSMutableArray alloc] initWithCapacity:0];
         _groupDataSource = [[NSMutableArray alloc] initWithCapacity:0];
-        NSString *str = @"附近";
+        NSString *str = @"关注";
         self.title = str;
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         self.tabBarItem.title = str;
@@ -48,36 +50,37 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.segmentController addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.segController addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
     self.view.backgroundColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor lightGrayColor];
     
     GDGroupInfo *group1 = [[[GDGroupInfo alloc] init] autorelease];
     group1.groupFounder = @"陈崐";
-    group1.groupName = @"附近群1";
-    group1.memberCount = 29;
+    group1.groupName = @"我的群1";
+    group1.memberCount = 9;
     [self.groupDataSource addObject:group1];
     
     GDGroupInfo *group2 = [[[GDGroupInfo alloc] init] autorelease];
     group2.groupFounder = @"方钦";
-    group2.groupName = @"附近群2";
-    group2.memberCount = 19;
+    group2.groupName = @"我的群2";
+    group2.memberCount = 10;
     [self.groupDataSource addObject:group2];
     
     GDGroupInfo *group3 = [[[GDGroupInfo alloc] init] autorelease];
     group3.groupFounder = @"黄允明";
-    group3.groupName = @"附近群3";
-    group3.memberCount = 15;
+    group3.groupName = @"我的群3";
+    group3.memberCount = 6;
     [self.groupDataSource addObject:group3];
     
     [self requestNetworkAnimation:YES];
-    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = YES;
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -85,17 +88,16 @@
 }
 
 - (void)dealloc {
-    [_segmentController release];
+    [_segController release];
     [_tableView release];
-    [_groupDataSource release];
-    [_peopleDataSource release];
     [super dealloc];
 }
 - (void)viewDidUnload {
-    [self setSegmentController:nil];
+    [self setSegController:nil];
     [self setTableView:nil];
     [super viewDidUnload];
 }
+
 #pragma mark -
 #pragma mark -
 - (void) requestNetworkAnimation:(BOOL) animated {
@@ -107,7 +109,7 @@
 }
 
 - (void) requestNetWork {
-    NSString *strURL = [NSString stringWithFormat:@"%@/search.do?userId=%d&lat=%.6f&lng=%.6f",CR_REQUEST_URL,CCRConf.userId,CCRConf.myLocation.coordinate.latitude,CCRConf.myLocation.coordinate.longitude];
+    NSString *strURL = [NSString stringWithFormat:@"%@/friends.do?userId=%d&type=0",CR_REQUEST_URL,CCRConf.userId];
     NSURL *URL = [NSURL URLWithString:strURL];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     [request setTimeOutSeconds:5];
@@ -122,14 +124,14 @@
         case 0:
         {
             [self requestNetworkAnimation:YES];
-//            [self.tableView reloadData];
+            //            [self.tableView reloadData];
             break;
         }
         case 1:
         {
             [self.tableView reloadData];
             break;
-        }    
+        }
         default:
             break;
     }
@@ -141,7 +143,7 @@
 
 #pragma mark tableView delegte -
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger tag = self.segmentController.selectedSegmentIndex;
+    NSInteger tag = self.segController.selectedSegmentIndex;
     NSInteger rows = 0;
     switch (tag) {
         case 0:
@@ -158,7 +160,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.segmentController.selectedSegmentIndex == 0) {
+    if (self.segController.selectedSegmentIndex == 0) {
         return 65.0;
     }else {
         return 65.0;
@@ -166,7 +168,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger tag = self.segmentController.selectedSegmentIndex;
+    NSInteger tag = self.segController.selectedSegmentIndex;
     if (tag == 0) {
         static NSString *peopleCellIdentifier = @"peopleCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:peopleCellIdentifier];
@@ -181,8 +183,8 @@
         // Configure the cell...
         FriendsCellView *fView = (FriendsCellView *) [cell.contentView viewWithTag:CELL_TAG];
         GDNearByUserInfo *userInfo = [self.peopleDataSource objectAtIndex:[indexPath row]];
-        fView.gameLabel.hidden = YES;
-        fView.distanceLabel.hidden = NO;
+        fView.gameLabel.hidden = NO;
+        fView.distanceLabel.hidden = YES;
         NSString *url = userInfo.imagestringURL;
         fView.imgBtn.layer.masksToBounds = YES;
         fView.imgBtn.layer.cornerRadius = 5.0;
@@ -220,13 +222,13 @@
     cell.founderLabel.text = [NSString stringWithFormat:@"群主:%@",groupInfo.groupFounder];
     cell.memberCountLabel.text = [NSString stringWithFormat:@"群人数:%d",groupInfo.memberCount];
     return cell;
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (self.segmentController.selectedSegmentIndex == 0) {
+    if (self.segController.selectedSegmentIndex == 0) {
         GDUserInfo *userInfo = [self.peopleDataSource objectAtIndex:[indexPath row]];
         GDUserInfoViewController *vc = [[GDUserInfoViewController alloc] initWithNibName:@"GDUserInfoViewController" bundle:nil];
         vc.userInfo = userInfo;
@@ -290,7 +292,7 @@
     if ([self.peopleDataSource count]) {
         [self.tableView reloadData];
     }
- 
+    
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
@@ -306,13 +308,4 @@
     
 }
 
-- (IBAction)creatNewGroup:(id)sender {
-    MBProgressHUD *hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
-    hud.labelText = @"友情提示";
-    hud.detailsLabelText = @"此功能即将推出，敬请期待!";
-    hud.mode = MBProgressHUDModeText;
-    [self.view addSubview:hud];
-    [hud show:YES];
-    [hud hide:YES afterDelay:2];
-}
 @end

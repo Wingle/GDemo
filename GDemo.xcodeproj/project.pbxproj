@@ -66,6 +66,8 @@
 		9840F20017EBFB2C00D5DD27 /* FuntionSeletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F1FE17EBFB2C00D5DD27 /* FuntionSeletedViewController.xib */; };
 		9840F20417EBFF7800D5DD27 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F20217EBFF7800D5DD27 /* SettingViewController.m */; };
 		9840F20517EBFF7800D5DD27 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F20317EBFF7800D5DD27 /* SettingViewController.xib */; };
+		9840F20917EC10BD00D5DD27 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840F20717EC10BC00D5DD27 /* FocusViewController.m */; };
+		9840F20A17EC10BD00D5DD27 /* FocusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840F20817EC10BD00D5DD27 /* FocusViewController.xib */; };
 		987A3D7517C32EAE00949F50 /* four.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7117C32EAE00949F50 /* four.png */; };
 		987A3D7617C32EAE00949F50 /* four@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7217C32EAE00949F50 /* four@2x.png */; };
 		987A3D7717C32EAE00949F50 /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = 987A3D7317C32EAE00949F50 /* third.png */; };
@@ -286,6 +288,9 @@
 		9840F20117EBFF7800D5DD27 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		9840F20217EBFF7800D5DD27 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		9840F20317EBFF7800D5DD27 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		9840F20617EC10BC00D5DD27 /* FocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusViewController.h; sourceTree = "<group>"; };
+		9840F20717EC10BC00D5DD27 /* FocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusViewController.m; sourceTree = "<group>"; };
+		9840F20817EC10BD00D5DD27 /* FocusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FocusViewController.xib; sourceTree = "<group>"; };
 		987A3D7117C32EAE00949F50 /* four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = four.png; sourceTree = "<group>"; };
 		987A3D7217C32EAE00949F50 /* four@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "four@2x.png"; sourceTree = "<group>"; };
 		987A3D7317C32EAE00949F50 /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = third.png; sourceTree = "<group>"; };
@@ -598,6 +603,16 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		9840F20B17EC11BA00D5DD27 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				98B505C917E9FA0200CFA59A /* GroupCell.xib */,
+				98B505CC17E9FAE300CFA59A /* GroupCell.h */,
+				98B505CD17E9FAE300CFA59A /* GroupCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		98A2DF4917DF1EDA0032CC7D /* EGOImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,12 +665,13 @@
 		98B505A717E94F8100CFA59A /* V2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				9840F20B17EC11BA00D5DD27 /* Cell */,
+				9840F20617EC10BC00D5DD27 /* FocusViewController.h */,
+				9840F20717EC10BC00D5DD27 /* FocusViewController.m */,
+				9840F20817EC10BD00D5DD27 /* FocusViewController.xib */,
 				98B505AD17E9507A00CFA59A /* V2FirstViewController.h */,
 				98B505AE17E9507A00CFA59A /* V2FirstViewController.m */,
 				98B505AF17E9507A00CFA59A /* V2FirstViewController.xib */,
-				98B505C917E9FA0200CFA59A /* GroupCell.xib */,
-				98B505CC17E9FAE300CFA59A /* GroupCell.h */,
-				98B505CD17E9FAE300CFA59A /* GroupCell.m */,
 			);
 			name = V2.0;
 			sourceTree = "<group>";
@@ -1175,6 +1191,7 @@
 				98B505CA17E9FA0200CFA59A /* GroupCell.xib in Resources */,
 				9840F20017EBFB2C00D5DD27 /* FuntionSeletedViewController.xib in Resources */,
 				9840F20517EBFF7800D5DD27 /* SettingViewController.xib in Resources */,
+				9840F20A17EC10BD00D5DD27 /* FocusViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1258,6 +1275,7 @@
 				98B505CE17E9FAE300CFA59A /* GroupCell.m in Sources */,
 				9840F1FF17EBFB2C00D5DD27 /* FuntionSeletedViewController.m in Sources */,
 				9840F20417EBFF7800D5DD27 /* SettingViewController.m in Sources */,
+				9840F20917EC10BD00D5DD27 /* FocusViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

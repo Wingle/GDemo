@@ -36,9 +36,9 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSString *str = @"主页";
+        NSString *str = @"我";
         self.title = str;
-        self.tabBarItem.image = [UIImage imageNamed:@"home"];
+        self.tabBarItem.image = [UIImage imageNamed:@"third"];
         self.tabBarItem.title = str;
         
         UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"发布"

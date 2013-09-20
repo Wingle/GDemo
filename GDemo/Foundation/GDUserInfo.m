@@ -49,3 +49,13 @@
 }
 
 @end
+
+@implementation GDGroupInfo
+
+- (void) dealloc {
+    [_groupName release];
+    [_groupFounder release];
+    [super dealloc];
+}
+
+@end
