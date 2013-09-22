@@ -60,14 +60,14 @@
     
     self.window.rootViewController = self.tabBarController;
     
-    //location update--
-    [CCRConf startLocationManagerService];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    //location update--
+    [CCRConf startLocationManagerService];
     sleep(2);
     if (CCRConf.isLogin) {
         [self loginSuccess];

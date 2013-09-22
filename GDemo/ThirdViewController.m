@@ -347,6 +347,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0 && indexPath.row == 0) {
         NSArray *array = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.section]];
         FuntionSeletedViewController *vc = [[[FuntionSeletedViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
@@ -423,9 +424,11 @@
 #pragma mark - 
 - (void) FinishedDistrubite:(PengyouquanDataModel *)model {
     PengyouquanDataModel *news = [model retain];
-    [self.dataArray insertObject:news atIndex:0];
+//    [self.dataArray insertObject:news atIndex:0];
+    NSMutableArray *array = [self.dataDict objectForKey:@"1"];
+    [array insertObject:news atIndex:0];
     [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
     
     [self.tableView endUpdates];
     [news release];

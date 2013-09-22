@@ -169,8 +169,8 @@
 
 #pragma mark - ASIHttp---
 - (void)requestFinished:(ASIHTTPRequest *)request {
-    NSString *string = [request responseString];
-    LOG(@"string = %@",string);
+//    NSString *string = [request responseString];
+//    LOG(@"string = %@",string);
 //    NSMutableDictionary * dataDict = [string JSONValue];
 //    NSInteger status = [[dataDict objectForKey:@"status"] integerValue];
 //    if (status != 0) {

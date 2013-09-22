@@ -17,6 +17,7 @@
 #import "FriendViewController.h"
 #import "GroupCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ApplyAgreeViewController.h"
 
 #define CELL_TAG        2013081611
 
@@ -309,4 +310,10 @@
     
 }
 
+- (IBAction)noticeBtnClicked:(id)sender {
+    ApplyAgreeViewController *vc = [[[ApplyAgreeViewController alloc] initWithNibName:@"ApplyAgreeViewController" bundle:nil] autorelease];
+    vc.title = @"通知";
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

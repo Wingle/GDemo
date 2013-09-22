@@ -92,6 +92,7 @@
         alter = nil;
         return;
     }
+    [self.contentTextField resignFirstResponder];
     
     NSString *localMsgID = [GDUtility dateToString:[NSDate date]
                                        ByFormatter:@"yyyyMMddHHmmssSSS"];
@@ -102,7 +103,7 @@
         type = 1;
     }
     
-    PengyouquanDataModel *model = [[PengyouquanDataModel alloc] init];
+    PengyouquanDataModel *model = [[[PengyouquanDataModel alloc] init] autorelease];
     model.userID = CCRConf.userId;
     model.newsID = [localMsgID longLongValue];
     model.userNickName = CCRConf.nickName;
@@ -113,19 +114,16 @@
     model.stringURLForUser = [GDUtility getHeadImageDownLoadStringUrl:CCRConf.userId];
     
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    hud.labelText = @"发布中...";
     [hud showWhileExecuting:@selector(sendWeiboToServer:) onTarget:self withObject:model animated:YES];
     [self.view addSubview:hud];
     [hud release];
     hud = nil;
     
-    [model release];
-    model = nil;
-    
-    [self dismissModalViewControllerAnimated:YES];
-    
 }
 
 - (void) sendWeiboToServer:(PengyouquanDataModel *) model {
+    [model retain];
     NSString *strURL = [[NSString stringWithFormat:@"%@/weiboSend.do?userId=%d&type=%d&content=%@&clientId=%ld",
                          CR_REQUEST_URL,CCRConf.userId,model.newsType,model.contentText,model.newsID] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString:strURL];
@@ -144,6 +142,8 @@
             if (_delegate && [_delegate respondsToSelector:@selector(FinishedDistrubite:)]) {
                 [_delegate FinishedDistrubite:model];
             }
+            [self dismissModalViewControllerAnimated:YES];
+            
         }else {
             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:@"没发成功"
@@ -155,6 +155,8 @@
             alter = nil;
         }
     }
+    [model release];
+    model = nil;
 }
 
 - (IBAction)leftBtnClick:(id)sender {

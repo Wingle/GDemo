@@ -11,5 +11,6 @@
 @interface FocusViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (retain, nonatomic) IBOutlet UISegmentedControl *segController;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)noticeBtnClicked:(id)sender;
 
 @end
