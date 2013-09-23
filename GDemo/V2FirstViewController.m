@@ -53,6 +53,8 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor lightGrayColor];
     
+    [self.groupDataSource removeAllObjects];
+    
     GDGroupInfo *group1 = [[[GDGroupInfo alloc] init] autorelease];
     group1.groupFounder = @"陈崐";
     group1.groupName = @"附近群1";
